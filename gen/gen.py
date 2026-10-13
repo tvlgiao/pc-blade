@@ -87,8 +87,8 @@ X0 = -W / 2 + PF; sledW = PITCH * N + 4; cols = max(1, int(sledW // 120))
 fx0 = X0 + sledW / 2 - (cols - 1) * 60
 FANS = []  # front is solid now: the fans moved to the bottom panel (covers.py), air exits through the rear mesh
 psuX = X0 + 4 + PITCH * N + 46 + W / 2
-BTN = [(psuX, 255 - i * 28) for i in range(N)]
-SW = (psuX, 140)
+BTN = []  # buttons moved to the top panel (covers.py)
+SW = None
 MOUNT = [(10, 10), (W / 2, 10), (W - 10, 10), (10, H / 2), (W - 10, H / 2), (10, H - 10), (W / 2, H - 10), (W - 10, H - 10)]
 
 def acr_dxf(path):
@@ -103,8 +103,7 @@ def acr_dxf(path):
     for i, (x, y) in enumerate(BTN):
         msp.add_circle((x, y), 8.1, dxfattribs={"layer": "CUT"})
         msp.add_text(str(i + 1), height=8, dxfattribs={"layer": "ENGRAVE"}).set_placement((x - 22, y), align=ezdxf.enums.TextEntityAlignment.MIDDLE_CENTER)
-    msp.add_circle(SW, 3.1, dxfattribs={"layer": "CUT"})
-    msp.add_text("POWER", height=5, dxfattribs={"layer": "ENGRAVE"}).set_placement((SW[0], SW[1] - 14), align=ezdxf.enums.TextEntityAlignment.MIDDLE_CENTER)
+
     doc.saveas(path)
 
 # ---------- PDF drawings ----------
@@ -178,7 +177,7 @@ def plate_pdf(path):
 def acr_pdf(path):
     with PdfPages(path) as pdf:
         fig = plt.figure(figsize=(11.69, 8.27))
-        ax = fig.add_axes([0.03, 0.1, 0.6, 0.82]); setup(ax, f"MẶT TRƯỚC – mica đen trong 3 mm – SL: 1 (bản {N} máy, nhôm 2020)", W, H)
+        ax = fig.add_axes([0.03, 0.1, 0.6, 0.82]); setup(ax, f"HÔNG PHẢI – mica đen trong 3 mm – SL: 1, kín (bản {N} máy, nhôm 2020)", W, H)
         draw_pl(ax, acr_outline)
         for x, y in MOUNT: ax.add_patch(Circle((x, y), 2.75, fill=False, lw=0.8))
         for i, (x, y) in enumerate(FANS):
@@ -187,20 +186,20 @@ def acr_pdf(path):
                 for dy in (-52.5, 52.5): ax.add_patch(Circle((x + dx, y + dy), 2.25, fill=False, lw=0.6))
         for i, (x, y) in enumerate(BTN):
             ax.add_patch(Circle((x, y), 8.1, fill=False, lw=0.8)); ax.text(x - 22, y, str(i + 1), ha="center", va="center", fontsize=8, color="r")
-        ax.add_patch(Circle(SW, 3.1, fill=False, lw=0.8)); ax.text(SW[0], SW[1] - 14, "POWER", ha="center", fontsize=6, color="r")
+
         dim(ax, (0, 0), (W, 0), -14, f"{W}"); dim(ax, (0, 0), (0, H), -14, f"{H}", vert=True)
         ax2 = fig.add_axes([0.65, 0.1, 0.33, 0.82])
         rows = [[f"M{i+1}", f"{x:.0f}", f"{y:.0f}", "Ø5,5"] for i, (x, y) in enumerate(MOUNT)]
         rows += [[f"F{i+1}", f"{x:.0f}", f"{y:.0f}", "Ø116 + 4 lỗ Ø4,5 (vuông 105)"] for i, (x, y) in enumerate(FANS)]
         rows += [[f"B{i+1}", f"{x:.0f}", f"{y:.0f}", "Ø16,2"] for i, (x, y) in enumerate(BTN)]
-        rows += [["S", f"{SW[0]:.0f}", f"{SW[1]:.0f}", "Ø6,2"]]
+
         table(ax2, rows, ["Lỗ", "X", "Y", "Kích thước (mm)"], [0.12, 0.13, 0.13, 0.62])
         ax2.text(0, 0.2, "\n".join([
-            "Gốc: góc dưới‑trái, nhìn từ phía trước.",
+            "Gốc: góc dưới‑trái, nhìn từ ngoài hông phải.",
             "Lớp CUT = cắt xuyên. Lớp ENGRAVE (đỏ) = khắc chữ.",
             "M1–M8: vít M5 × 10 vào con trượt T (thanh 2020).",
-            "Mặt trước kín: quạt nằm ở tấm đáy, hút gió từ dưới lên.",
-            "B: nút nhấn 16 mm có LED. S: CÔNG TẮC TỔNG (gạt, nối PS_ON nguồn).",
+            "Tấm kín: quạt ở nắp và đáy; nút ở nắp.",
+            
             "Bo góc R6. Dung sai ±0,3 mm.",
         ]), fontsize=8, va="top", transform=ax2.transAxes)
         pdf.savefig(fig); plt.close(fig)
@@ -228,7 +227,7 @@ def comb_stl(path, hole_y=30.0, lead_both=False):
     return tm.volume
 
 plate_dxf(f"{OUT}/tam-do-bo_nhom-2mm_x5.dxf"); plate_pdf(f"{OUT}/tam-do-bo_nhom-2mm.pdf")
-acr_dxf(f"{OUT}/mat-truoc_mica-3mm_x1.dxf"); acr_pdf(f"{OUT}/mat-truoc_mica-3mm.pdf")
+acr_dxf(f"{OUT}/hong-phai_mica-3mm_x1.dxf"); acr_pdf(f"{OUT}/hong-phai_mica-3mm.pdf")
 vol = comb_stl(f"{OUT}/luoc_PETG_x16.stl", hole_y=10.0, lead_both=True)  # on the front + ear-stop bars, top and bottom, 2 per bay each
 print("W", W, "fans", FANS, "btn", BTN, "SW", SW)
 print("standoffs", SO)

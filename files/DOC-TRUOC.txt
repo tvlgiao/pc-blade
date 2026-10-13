@@ -6,9 +6,9 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
    PDF kèm: trang 1 có kích thước + bảng toạ độ lỗ; trang 2 là mẫu 1:1 (in A3, 100 %)
    để đặt bo mạch lên kiểm tra lỗ TRƯỚC khi đặt cắt.
 
-2) mat-truoc_mica-3mm_x1.dxf  -> xưởng cắt laser mica
-   Mica đen trong (mica khói) 3 mm, SL 1. Lớp CUT = cắt xuyên, lớp ENGRAVE = khắc chữ (số 1–4, POWER).
-   Lỗ S Ø6,2 = công tắc tổng (gạt MTS-102 nối PS_ON + COM của nguồn).
+2) HƯỚNG CASE: mặt trước = tấm kín (mat-truoc); mặt sau = lưới quạt nguồn + RJ45 (mat-sau);
+   hông trái = bắt nguồn, ổ cắm AC (hong-trai); hông phải = kín (hong-phai);
+   4 nút + công tắc tổng nằm trên NẮP, phía khoang nguồn.
 
 3) luoc_PETG_x16.stl  -> dịch vụ in 3D
    SL 16 (cùng một mẫu: trước + sau, trên + dưới, 4 khoang). PETG, 3 vách, 40 % infill,
@@ -18,14 +18,14 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
    SL 1. PETG, in úp mặt bích xuống bàn, 3 vách, 30 % infill, ~82 g. Dài 114 mm,
    treo dưới thanh dọc nóc bằng 2 vít M5 trên đường tâm. Ôm vừa TP-Link TL-SG105.
 
-5) Hộp kín 6 mặt (mica đen trong / mica khói 3 mm) -> cùng xưởng cắt mica mặt trước
-   nap-tren_mica-3mm_x1.dxf   424 x 290, 3 vùng đục lỗ Ø6 (tổ ong) cho quạt 92 mm HÚT VÀO
-   day_mica-3mm_x1.dxf        424 x 290, 3 vùng đục lỗ Ø6 cho quạt 92 mm ĐẨY RA, 4 lỗ chân
-   hong-trai_mica-3mm_x1.dxf  290 x 300, kín
-   hong-phai_mica-3mm_x1.dxf  290 x 300, 1 vùng đục lỗ Ø6 cho quạt nguồn
-   mat-sau_mica-3mm_x1.dxf    424 x 300, kín: 6 lỗ vít nguồn 6-32 (chuẩn ATX), ô hở 62 x 126
-                              cho ổ cắm AC/công tắc nguồn, lỗ RJ45 keystone
-   mat-truoc_mica-3mm_x1.dxf  424 x 300, kín: chỉ lỗ nút bấm + công tắc
+5) Mica đen trong (mica khói) 3 mm, 6 tấm -> xưởng cắt laser mica
+   nap-tren_mica-3mm_x1.dxf   424 x 290: 3 vùng đục lỗ Ø6 (quạt HÚT VÀO), 4 lỗ nút Ø16,2,
+                              1 lỗ công tắc tổng Ø6,2; lớp ENGRAVE khắc số 1–4 + POWER
+   day_mica-3mm_x1.dxf        424 x 290: 3 vùng đục lỗ Ø6 (quạt ĐẨY RA), 4 lỗ chân
+   mat-truoc_mica-3mm_x1.dxf  290 x 300: kín
+   mat-sau_mica-3mm_x1.dxf    290 x 300: vùng đục lỗ cho quạt nguồn + lỗ RJ45 keystone
+   hong-trai_mica-3mm_x1.dxf  424 x 300: 6 lỗ vít nguồn 6-32 (chuẩn ATX), ô hở 62 x 126 ổ cắm AC
+   hong-phai_mica-3mm_x1.dxf  424 x 300: kín (PDF riêng hong-phai_mica-3mm.pdf)
    PDF: tam-che-bui_mica-3mm.pdf. Lưới lọc màu đen đặt PHÍA TRONG, sau vùng đục lỗ.
    Vùng đục lỗ nhiều lỗ nhỏ: báo xưởng tính giá theo chiều dài đường cắt.
 

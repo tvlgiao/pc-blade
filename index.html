@@ -166,7 +166,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><th>Phần</th><th>Khi đổi số máy</th></tr>
         <tr><td>Khoang máy 72 mm: tấm đỡ, mảnh lược 72 mm (trên + dưới), 1 nhánh cầu chì, 1 nút có đèn, 1 cáp LAN</td><td>Thêm/bớt nguyên khoang. Lược in rời từng khoang, bắt vào thanh trước và thanh chặn sau.</td></tr>
         <tr><td>4 cột 300 mm, 4 thanh dọc 250 mm, khoang nguồn 92 mm, nguồn ATX</td><td>Giữ nguyên.</td></tr>
-        <tr><td>8 thanh ngang (dài <code>96 + 72 × số máy</code>) và tấm mica mặt trước</td><td>Thay bộ mới. Chỉ 8 thanh nhôm thẳng, cắt sẵn ở tiệm.</td></tr>
+        <tr><td>8 thanh ngang (dài <code>96 + 72 × số máy</code>) và tấm mica nắp, đáy, 2 hông</td><td>Thay bộ mới. Chỉ 8 thanh nhôm thẳng, cắt sẵn ở tiệm.</td></tr>
         <tr><td>Thu hẹp không muốn cắt lại</td><td>Giữ khung cũ, để trống khoang, che bằng tấm nhôm trơn.</td></tr>
         <tr><td>Trên 6 máy</td><td>Lắp khung thứ hai với nguồn riêng. Đặt cạnh nhau hoặc chồng lên nhau, nối cột bằng tấm nối 2020.</td></tr>
       </table>
@@ -184,8 +184,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td>Ke góc <span class="prof">2020</span> + T‑nut</td><td class="n" id="c-ke">≈ 32 bộ</td></tr>
         <tr><td id="c-plate-name">Tấm đỡ bo, nhôm 2 mm (khoan theo lỗ của bo)</td><td class="n" id="c-plate">4 × 210 × 255</td></tr>
         <tr><td id="c-comb-name">Mảnh lược in PETG (1 mẫu), bắt vào thanh trước + chặn sau</td><td class="n" id="c-comb">16 mảnh</td></tr>
-        <tr><td>Mica 3 mm bắt ngoài mặt trước, cắt theo file DXF (lỗ quạt Ø116, nút Ø16,2, công tắc Ø6,2, 8 lỗ M5)</td><td class="n" id="c-acr">384 × 260</td></tr>
-        <tr><td>Hộp kín 6 mặt, mica đen trong (mica khói) 3 mm: nắp + đáy (mỗi tấm 3 lỗ quạt 92 mm + lưới), 2 hông, mặt sau kín</td><td class="n" id="c-cov">2 × 424 × 290, 2 × 290 × 300, 1 × 424 × 300</td></tr>
+        <tr><td>Hộp kín 6 mặt, mica đen trong (mica khói) 3 mm: nắp (3 vùng quạt + 4 nút + công tắc tổng), đáy (3 vùng quạt), mặt trước kín, mặt sau (lưới quạt nguồn + RJ45), hông trái (bắt nguồn), hông phải kín</td><td class="n" id="c-cov">2 × 424 × 290, 2 × 290 × 300, 1 × 424 × 300</td></tr>
         <tr><td>Chân in PETG cao 25 mm, vít M5 × 30 xuyên tấm đáy vào đầu cột (taro M5 lỗ tâm đầu cột)</td><td class="n">4</td></tr>
       </table>
     </section>
@@ -198,7 +197,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td>DC‑ATX 160 W, vào 12 V, đường 12 V ra 8 A (nên đặt PL2 ≈ 80 W trong BIOS)</td><td class="n" id="e-pico">4</td></tr>
         <tr><td>Hộp cầu chì ô tô 6 ngả + cầu chì 15 A</td><td class="n" id="e-fuse">1 + 4</td></tr>
         <tr><td>Dây 12 V chính AWG 10, nhánh AWG 14</td><td class="n">—</td></tr>
-        <tr><td>Công tắc tổng ở mặt trước: MTS‑102 nối PS_ON (chân 16, xanh lá) ↔ COM (đen) của 24‑pin nguồn; công tắc ở đuôi nguồn để luôn ON</td><td class="n">1</td></tr>
+        <tr><td>Công tắc tổng trên nắp: MTS‑102 nối PS_ON (chân 16, xanh lá) ↔ COM (đen) của 24‑pin nguồn; công tắc ở đuôi nguồn để luôn ON</td><td class="n">1</td></tr>
         <tr><td>Nút nhấn nhả 16 mm có đèn 5 V (dây tới F_PANEL) + công tắc gạt MTS‑102</td><td class="n" id="e-btn">4 + 1</td></tr>
         <tr><td>Switch TP‑Link TL‑SG105 (5 V) trong giá in PETG, điện 5 V từ cáp Molex → SATA nối jack DC</td><td class="n">1</td></tr>
         <tr><td>Quạt 92 mm PWM: 3 trên nóc hút vào + 3 dưới đáy đẩy ra, hub quạt (PWM từ SYS_FAN máy 1)</td><td class="n" id="e-fan">3 + 3 + 1</td></tr>
@@ -213,7 +212,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td>Tải nặng (PL2 89 W + bo, RAM, SSD)</td><td class="n">≈ 110 W</td><td class="n" id="p-peak">≈ 440 W</td></tr>
         <tr><td>Dòng 12 V đỉnh</td><td class="n">≈ 9 A</td><td class="n" id="p-amp">≈ 37 A</td></tr>
       </table>
-      <p class="warn">Hộp kín cả 6 mặt. Gió đi <b>từ trên xuống</b>: 3 quạt 92 mm trên nóc hút gió qua lưới lọc, thổi xuống theo khe dọc giữa các bo, 3 quạt dưới đáy đẩy gió nóng ra qua lưới lọc. Lấy gió ở nóc vì không khí trên cao ít bụi hơn sát mặt bàn. Mặt trước, mặt sau, 2 hông là mica kín; chỉ hông phải có 1 lưới cho quạt hút của nguồn. Nguồn bắt 4 vít 6‑32 vào mặt sau như case thường, ổ cắm AC + công tắc lộ ra qua ô hở; cáp mạng ra router qua đầu nối RJ45. Quạt nằm trong thùng, mặt ngoài bằng mặt thanh nhôm. Chỗ có gió, mica đục lỗ tròn Ø6 xếp tổ ong; lưới lọc màu đen đặt phía trong, nhìn ngoài chỉ thấy mặt mica đen trong đục lỗ. Chân cao 25 mm chừa khe ≈ 20 mm cho gió ra ở đáy. Tấm đỡ bo khoét lõm 4–5 mm mép trên và dưới ở vùng quạt. Vệ sinh lưới nóc 1 lần/tháng.</p>
+      <p class="warn">Hộp kín cả 6 mặt. Gió đi <b>từ trên xuống</b>: 3 quạt 92 mm trên nóc hút gió qua lưới lọc, thổi xuống theo khe dọc giữa các bo, 3 quạt dưới đáy đẩy gió nóng ra qua lưới lọc. Lấy gió ở nóc vì không khí trên cao ít bụi hơn sát mặt bàn. Mặt trước, hông phải là mica kín; mặt sau có 1 lưới cho quạt hút của nguồn và đầu nối RJ45. Mặt trước kín; 4 nút + công tắc tổng nằm trên nắp phía khoang nguồn. Nguồn bắt 4 vít 6‑32 vào hông trái, ổ cắm AC + công tắc đuôi lộ ra qua ô hở; quạt nguồn hút gió qua lưới ở mặt sau; cáp mạng ra router qua đầu nối RJ45. Quạt nằm trong thùng, mặt ngoài bằng mặt thanh nhôm. Chỗ có gió, mica đục lỗ tròn Ø6 xếp tổ ong; lưới lọc màu đen đặt phía trong, nhìn ngoài chỉ thấy mặt mica đen trong đục lỗ. Chân cao 25 mm chừa khe ≈ 20 mm cho gió ra ở đáy. Tấm đỡ bo khoét lõm 4–5 mm mép trên và dưới ở vùng quạt. Vệ sinh lưới nóc 1 lần/tháng.</p>
     </section>
 
     <section>
@@ -223,10 +222,10 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td id="w-sled-desc">Máy: bo ≈ 500 g, CPU 30 g, tản RM1 350 g, RAM 70 g, SSD 10 g, DC‑ATX 91 g, tấm nhôm 290 g, lược và nút 80 g</td><td class="n" id="w-sled">4 × 1,42</td></tr>
         <tr><td id="w-alu-desc">Nhôm 2020 (0,5 kg/m)</td><td class="n" id="w-alu">2,58</td></tr>
         <tr><td>Ke góc, T‑nut, ốc</td><td class="n" id="w-ke">0,64</td></tr>
-        <tr><td>Mica mặt trước, 6 quạt 92 mm (≈ 90 g/cái), hub</td><td class="n" id="w-front">0,78</td></tr>
+        <tr><td>Mica hông phải, 6 quạt 92 mm (≈ 90 g/cái), hub</td><td class="n" id="w-front">0,78</td></tr>
         <tr><td>Nguồn ATX</td><td class="n" id="w-psu">1,60</td></tr>
         <tr><td>Hộp cầu chì, dây 12 V, chân cao su, switch + giá in</td><td class="n">0,65</td></tr>
-        <tr><td>Tấm che bụi mica 3 mm (nắp, đáy, 2 hông, mặt sau)</td><td class="n" id="w-cov">1,34</td></tr>
+        <tr><td>Tấm che bụi mica 3 mm (nắp, đáy, mặt trước, mặt sau, hông trái)</td><td class="n" id="w-cov">1,34</td></tr>
         <tr><td><b>Tổng</b></td><td class="n"><b id="w-total">≈ 11,6</b></td></tr>
       </table>
       <p class="warn">Sai số khoảng ±10%. Số đo từ nguồn: tản RM1 347–350 g, picoPSU‑160‑XT 91 g, nhôm 2020 0,5 kg/m. Bo, RAM, nguồn ATX và ke là ước tính, cân thực tế để chốt.</p>
@@ -238,11 +237,11 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <li>Bắt 7 cột đồng 6 mm vào tấm nhôm đã cắt sẵn lỗ (lót long đền M3 dưới đầu vít), đặt bo lên, bắt vít M3 × 5.</li>
         <li>Cắm DC‑ATX vào 24‑pin, dây 4‑pin vào nửa cổng CPU 8‑pin.</li>
         <li>Ráp khung 2020 (không có ray giữa). Bắt 2 thanh dọc giữa: dưới đáy ở mép trái khoang nguồn, trên nóc giữa khoang nguồn. Bắt 16 mảnh lược vào thanh trước và thanh chặn sau, trên và dưới, bằng vít M5 × 10 + long đền.</li>
-        <li>Đặt nguồn ATX dựng đứng vào khoang phải, quạt nguồn ra hông phải, đuôi nguồn (ổ cắm AC) quay ra sau. Nối 2 dây PS_ON (xanh lá) + COM (đen) từ 24‑pin của nguồn (cắt từ cáp nối dài 24‑pin) ra công tắc gạt MTS‑102 ở mặt trước; công tắc ở đuôi nguồn gạt ON và để nguyên. Treo giá switch dưới thanh dọc nóc (2 vít M5), luồn switch vào từ phía sau.</li>
+        <li>Đặt nguồn ATX dựng đứng vào khoang nguồn (phía mặt sau), quạt nguồn quay ra mặt sau, đuôi nguồn (ổ cắm AC) quay ra hông trái. Nối 2 dây PS_ON (xanh lá) + COM (đen) từ 24‑pin của nguồn (cắt từ cáp nối dài 24‑pin) lên công tắc gạt MTS‑102 trên nắp; công tắc ở đuôi nguồn gạt ON và để nguyên. Treo giá switch dưới thanh dọc nóc (2 vít M5).</li>
         <li>Đi dây 12 V: nguồn → hộp cầu chì → từng nhánh, dọc mép trên phía trước.</li>
-        <li>Trượt từng tấm bo vào lược từ phía sau đến khi tai sau áp vào mặt sau thanh chặn, cổng I/O ra sau. Khóa bằng 2 ke góc 2020 (trên + dưới): mỗi ke 1 vít M5 + con trượt T vào thanh, 1 vít M5 + đai ốc qua lỗ ở tai. Cắm cáp LAN 30 cm vào switch. Muốn rút máy sau này: tháo tấm sau, mở 2 vít bắt ke vào thanh (ke vẫn gắn trên tai), kéo tấm ra bằng lỗ tay kéo.</li>
-        <li>Bắt mica ra ngoài mặt trước bằng 8 vít M5. Quạt + lưới lọc bắt xuyên mica bằng vít M4 × 40. Nối nút có đèn vào F_PANEL từng máy.</li>
-        <li>Bắt tấm đáy (bắt 4 chân in 25 mm bằng vít M5 × 30 xuyên tấm vào đầu cột), 2 tấm hông, nắp trên, rồi mặt sau (bắt nguồn vào mặt sau bằng 4 vít 6‑32 trước): vít M5 × 10 + long đền. Bắt 3 quạt 92 mm sát dưới tấm nóc (thổi xuống) và 3 quạt sát trên tấm đáy (thổi ra ngoài), nằm trong thùng; lưới lọc 9 cm đen kẹp giữa mica và quạt (phía trong); vít M4 × 12 + đai ốc kẹp mica + lưới + bích quạt. Lưới 12 cm ở hông phải đặt phía trong: vít M4 × 10. Cắm đầu nối RJ45 keystone, nối cáp 30 cm từ cổng 5 của switch.</li>
+        <li>Trượt từng tấm bo vào lược từ phía hông trái đến khi tai áp vào thanh chặn, cổng I/O quay ra hông trái. Khóa bằng 2 ke góc 2020 (trên + dưới): mỗi ke 1 vít M5 + con trượt T vào thanh, 1 vít M5 + đai ốc qua lỗ ở tai. Cắm cáp LAN 30 cm vào switch. Muốn rút máy sau này: tháo tấm hông trái, mở 2 vít bắt ke vào thanh (ke vẫn gắn trên tai), kéo tấm ra bằng lỗ tay kéo.</li>
+        <li>Lắp 4 nút có đèn + công tắc tổng vào nắp. Dây mỗi nút (PWR + LED, 4 sợi dupont) đi qua khe 8 mm trước các tấm đỡ tới header F_PANEL của máy tương ứng.</li>
+        <li>Bắt tấm đáy (bắt 4 chân in 25 mm bằng vít M5 × 30 xuyên tấm vào đầu cột), mặt trước, mặt sau, hông phải, nắp, rồi hông trái (bắt nguồn vào hông trái bằng 4 vít 6‑32 trước): vít M5 × 10 + long đền. Bắt 3 quạt 92 mm sát dưới tấm nóc (thổi xuống) và 3 quạt sát trên tấm đáy (thổi ra ngoài), nằm trong thùng; lưới lọc 9 cm đen kẹp giữa mica và quạt (phía trong); vít M4 × 12 + đai ốc kẹp mica + lưới + bích quạt. Lưới 12 cm của quạt nguồn ở mặt sau, đặt phía trong: vít M4 × 10. Cắm đầu nối RJ45 keystone, nối cáp 30 cm từ cổng 5 của switch tới đầu nối RJ45 ở mặt sau.</li>
         <li>BIOS từng máy: <code>Restore on AC Power Loss = Power On</code>, bật Wake‑on‑LAN.</li>
       </ol>
     </section>
@@ -272,7 +271,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td class="thumb"><a href="https://shopee.vn/product/120139494/44424996827" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mh23y88slfym31_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/120139494/44424996827" target="_blank" rel="noopener">Cáp nối dài PCIe 8‑pin 25 cm</a></td><td>1, chọn 8‑pin VGA</td><td class="n">59k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/1033330712/19490785453" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134201-7qukw-lj7xaaby21akf8_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/1033330712/19490785453" target="_blank" rel="noopener">Jack DC 5,5 × 2,1 đực có dây</a></td><td>1</td><td class="n">12k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/238879861/4548917504" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/8e5d28d71bf02dda88f9d82b69aac8e4_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/238879861/4548917504" target="_blank" rel="noopener">Cos pin rỗng, túi 100</a></td><td>1</td><td class="n">15k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/333151953/18513528585" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/18e50cfeac0478474e3015313eedfc20_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/333151953/18513528585" target="_blank" rel="noopener">Công tắc gạt MTS‑102, gói 5</a></td><td>1 gói (1 cái làm công tắc tổng mặt trước)</td><td class="n">15k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/333151953/18513528585" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/18e50cfeac0478474e3015313eedfc20_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/333151953/18513528585" target="_blank" rel="noopener">Công tắc gạt MTS‑102, gói 5</a></td><td>1 gói (1 cái làm công tắc tổng trên nắp)</td><td class="n">15k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/68721481/17389446702" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/sg-11134201-22110-7jckqpdm6ojvbd_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/68721481/17389446702" target="_blank" rel="noopener">Nút nhấn nhả 16 mm có đèn</a></td><td>4, chọn 5 V nhấn nhả</td><td class="n">35k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/494330825/9381418486" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/6a982955d694b6ad62579d768713ab92_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/494330825/9381418486" target="_blank" rel="noopener">Dây dupont 40 sợi</a></td><td>1 bó, cái–cái 40 cm</td><td class="n">25k</td></tr>
         <tr class="grp"><td colspan="4">Quạt và mạng</td></tr>
@@ -290,7 +289,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td class="thumb"><a href="https://shopee.vn/product/49207665/23475983346" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lrgm7m8j14n8f4_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/49207665/23475983346" target="_blank" rel="noopener">Nắp bịt đầu nhôm combo 10</a></td><td>1, cỡ 20×20</td><td class="n">—</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/120746030/55414655516" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mqzzom3fiolo74_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/120746030/55414655516" target="_blank" rel="noopener">Băng dán gai 5 m × 12 mm (bó dây gọn)</a></td><td>1</td><td class="n">—</td></tr>
         <tr class="grp"><td colspan="4">Dịch vụ gia công</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/961147852/22676249970" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11110105-7r98o-lujiu7k2tuez42_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/961147852/22676249970" target="_blank" rel="noopener">Cắt laser mica theo file (gửi mat-truoc + nap-tren + day + hong-trai + hong-phai + mat-sau)</a></td><td>6 tấm mica đen trong 3 mm</td><td class="n">báo giá</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/961147852/22676249970" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11110105-7r98o-lujiu7k2tuez42_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/961147852/22676249970" target="_blank" rel="noopener">Cắt laser mica theo file (gửi nap-tren + day + mat-truoc + mat-sau + hong-trai + hong-phai)</a></td><td>6 tấm mica đen trong 3 mm</td><td class="n">báo giá</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/66748910/17164097346" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/bbf87dbfcd0a2cc8ddfe7afedc07bd69_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/66748910/17164097346" target="_blank" rel="noopener">In 3D PETG (gửi luoc_PETG_x16.stl + gia-switch_PETG_x1.stl + chan-cao_PETG_x4.stl)</a></td><td>16 lược + 1 giá + 4 chân</td><td class="n">báo giá</td></tr>
         <tr><td class="thumb"><img src="files/tam-do-bo_xem-truoc.png" alt="" width="56" height="56"></td><td>Cắt laser nhôm 2 mm (gửi tam-do-bo_nhom-2mm_x5.dxf, tấm phẳng, không chấn)</td><td>5 tấm; Shopee không có, tìm xưởng gần nhà: “gia công cắt laser nhôm tấm”</td><td class="n">báo giá</td></tr>
       </table>
@@ -303,8 +302,8 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><th>File</th><th>Gửi cho</th><th class="r">SL</th></tr>
         <tr><td><a href="files/khung-4pc-gia-cong.zip" download><b>khung-4pc-gia-cong.zip</b></a></td><td>Tải trọn bộ: DXF, STL, PDF, hướng dẫn.</td><td class="n">—</td></tr>
         <tr><td><a href="files/tam-do-bo_nhom-2mm_x5.dxf" download>tam-do-bo_nhom-2mm_x5.dxf</a> · <a href="files/tam-do-bo_nhom-2mm.pdf" target="_blank">PDF</a></td><td>Xưởng cắt laser nhôm 2 mm (5052/6061), tấm phẳng không chấn. PDF trang 2 là mẫu 1:1: in A3 100 %, đặt bo lên kiểm lỗ trước khi cắt.</td><td class="n">5</td></tr>
-        <tr><td><a href="files/mat-truoc_mica-3mm_x1.dxf" download>mat-truoc_mica-3mm_x1.dxf</a> · <a href="files/mat-truoc_mica-3mm.pdf" target="_blank">PDF</a></td><td>Cắt laser mica đen trong 3 mm. Lớp CUT cắt xuyên, ENGRAVE khắc chữ.</td><td class="n">1</td></tr>
-        <tr><td><a href="files/nap-tren_mica-3mm_x1.dxf" download>nap-tren_mica-3mm_x1.dxf</a>, <a href="files/day_mica-3mm_x1.dxf" download>day_mica-3mm_x1.dxf</a>, <a href="files/hong-trai_mica-3mm_x1.dxf" download>hong-trai_mica-3mm_x1.dxf</a>, <a href="files/hong-phai_mica-3mm_x1.dxf" download>hong-phai_mica-3mm_x1.dxf</a>, <a href="files/mat-sau_mica-3mm_x1.dxf" download>mat-sau_mica-3mm_x1.dxf</a> · <a href="files/tam-che-bui_mica-3mm.pdf" target="_blank">PDF</a></td><td>Hộp kín 6 mặt, mica đen trong 3 mm, cùng tiệm cắt mặt trước. Nắp và đáy mỗi tấm 3 vùng đục lỗ Ø6 cho quạt 92 mm (lưới 9 cm đen phía trong); hông phải 1 vùng đục lỗ cho quạt nguồn (lưới 12 cm phía trong); mặt trước, mặt sau, hông trái kín. Mặt sau: 6 lỗ vít nguồn 6‑32 (chuẩn ATX), ô hở ổ cắm AC, lỗ RJ45 keystone.</td><td class="n">1 + 1 + 1 + 1 + 1</td></tr>
+        <tr><td><a href="files/hong-phai_mica-3mm_x1.dxf" download>hong-phai_mica-3mm_x1.dxf</a> · <a href="files/hong-phai_mica-3mm.pdf" target="_blank">PDF</a></td><td>Hông phải, mica đen trong 3 mm, kín (chỉ 8 lỗ M5).</td><td class="n">1</td></tr>
+        <tr><td><a href="files/nap-tren_mica-3mm_x1.dxf" download>nap-tren_mica-3mm_x1.dxf</a>, <a href="files/day_mica-3mm_x1.dxf" download>day_mica-3mm_x1.dxf</a>, <a href="files/mat-truoc_mica-3mm_x1.dxf" download>mat-truoc_mica-3mm_x1.dxf</a>, <a href="files/mat-sau_mica-3mm_x1.dxf" download>mat-sau_mica-3mm_x1.dxf</a>, <a href="files/hong-trai_mica-3mm_x1.dxf" download>hong-trai_mica-3mm_x1.dxf</a> · <a href="files/tam-che-bui_mica-3mm.pdf" target="_blank">PDF</a></td><td>Mica đen trong 3 mm. Nắp: 3 vùng đục lỗ quạt + 4 lỗ nút Ø16,2 + công tắc tổng Ø6,2, khắc số 1–4 và POWER. Đáy: 3 vùng đục lỗ quạt + 4 lỗ chân. Mặt trước kín. Mặt sau: vùng đục lỗ quạt nguồn + lỗ RJ45. Hông trái: 6 lỗ vít nguồn + ô hở ổ cắm AC.</td><td class="n">5</td></tr>
         <tr><td><a href="files/luoc_PETG_x16.stl" download>luoc_PETG_x16.stl</a></td><td>In 3D PETG, 3 vách, 40 % infill, mặt phẳng úp xuống. 1 mẫu cho cả 16 mảnh (trước/sau, trên/dưới).</td><td class="n">16</td></tr>
         <tr><td><a href="files/chan-cao_PETG_x4.stl" download>chan-cao_PETG_x4.stl</a></td><td>In 3D PETG, 4 vách, 40 % infill, đứng thẳng. Chân cao 25 mm, vít M5 × 30 từ dưới lên xuyên tấm đáy vào đầu cột; dán chân cao su dưới đáy.</td><td class="n">4</td></tr>
         <tr><td><a href="files/gia-switch_PETG_x1.stl" download>gia-switch_PETG_x1.stl</a> · <a href="files/gia-switch_xem-truoc.png" target="_blank">ảnh</a></td><td>In 3D PETG, mặt bích úp xuống, 30 % infill. Dài 114 mm, treo dưới thanh dọc nóc bằng 2 lỗ M5 trên đường tâm (cách 70 mm).</td><td class="n">1</td></tr>
@@ -318,7 +317,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
 <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js" integrity="sha384-I0DMsfimAPIqWT8lF+oA997gRgdUi3jhidoTq3fN0zmn35smXZukD01FLnsPRU9i" crossorigin="anonymous"></script>
 <script>
 (() => {
-  const H = 300, D = 260, DF = 20, DR = 50, PITCH = 72, BAY = 92, FEET = 25;   // DR: rear bay behind the ear-stop bars; DF: front trimmed 20 mm (empty space)
+  const H = 300, D = 260, DF = 20, DR = 50, LEAD = 4, PITCH = 72, BAY = 92, FEET = 25;   // DR: rear bay behind the ear-stop bars; DF: front trimmed 20 mm (empty space)
   const ZF = D / 2 - DF;            // outer front face of the frame (z 110)
   const viewer = document.getElementById('viewer');
   const canvas = document.getElementById('c');
@@ -466,10 +465,10 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     const prof = PF === 15 ? '1515' : '2020';
     const rails = [];            // no centre rails: the top and bottom fan rows need that space
     const combD = 60;
-    W = 96 + 2 * PF + PITCH * N;                 // 2 posts + 4 lead + 72N bays + 92 PSU bay
+    W = LEAD + BAY + 2 * PF + PITCH * N;         // 2 posts + 4 lead + 72N bays + 92 PSU bay
     const X0 = -W / 2 + PF;
-    const slotX = Array.from({ length: N }, (_, i) => X0 + 4 + i * PITCH);
-    const bayStart = X0 + 4 + PITCH * N;
+    const slotX = Array.from({ length: N }, (_, i) => X0 + LEAD + i * PITCH);
+    const bayStart = X0 + LEAD + PITCH * N;
     const psuX = bayStart + BAY / 2;
     /* Switch holder (gen/switch.py): sleeve 30.6 × 107.1 × 114, flange on top, Z = 0 at rear z −128 */
     const HX = psuX - 1.3, HY = H - PF - 107.1, swX = HX + 2.5 + 0.3 + 12.5;
@@ -612,10 +611,9 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     CAT = 'psu';
     B(86, 150, 160, mat.psu, psuX, 95, -100, 'Nguồn ATX đang có – bắt 4 vít 6‑32 vào mặt sau như case thường, hút gió qua lưới hông phải', model);
     C(55, 1.5, mat.grille, 'x', psuX + 43.8, 95, -100, 'Quạt nguồn ATX – hút gió từ hông khung', model, 48);
-    B(28, 20, 2, mat.black, psuX - 10, 140, -181, 'Ổ cắm AC 220 V của nguồn – cắm dây từ ngoài mặt sau', model);
-    B(10, 14, 2, mat.ramTop, psuX + 22, 140, -181, 'Công tắc ở đuôi nguồn – để luôn ON (bật/tắt bằng công tắc mặt trước)', model);
+    B(28, 20, 2, mat.black, psuX - 10, 140, -181, 'Ổ cắm AC 220 V của nguồn – cắm dây ở hông trái', model);
+    B(10, 14, 2, mat.ramTop, psuX + 22, 140, -181, 'Công tắc ở đuôi nguồn (hông trái) – để luôn ON, bật/tắt bằng công tắc mặt trước', model);
     B(24, 10, 34, mat.black, psuX - 18, 175, -10, '24‑pin của nguồn: lấy 2 dây PS_ON (chân 16, xanh lá) + COM (đen) ra công tắc mặt trước', model);
-    for (const [dx, m] of [[-1.2, mat.wireG], [1.2, mat.wireK]]) tube([[psuX - 18 + dx, 175, 8], [psuX - 22 + dx, 160, 60], [psuX - 8 + dx, 145, 90], [psuX + dx, 140, 108]], m, 1, 'Dây PS_ON + COM → công tắc tổng mặt trước', model);
     B(56, 26, 70, mat.fuse, psuX, 215, 40, `Hộp cầu chì 12 V 6 ngả có đèn – dùng ${N} nhánh × 15 A`, model);
     CAT = 'cable';
     for (const [dx, m] of [[-6, mat.wireY], [6, mat.wireK]]) tube([[psuX + 20 + dx, 160, -16], [psuX + 20 + dx, 185, 10], [psuX + 20 + dx, 203, 40]], m, 3.2, 'Dây 12 V chính AWG 10 (nguồn → hộp cầu chì)', model);
@@ -631,7 +629,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     B(54.6, 4, 114, mat.comb, HX + 15.3, H - PF - 2, hz, hl, model);
     for (const y of [HY + 4.75, HY + 103.1 - 2]) B(25.6, y === HY + 4.75 ? 4.5 : 4, 3, mat.comb, HX + 15.3, y, -128 + 112.5, hl, model);
     for (const z of [-98, -28]) C(4.5, 3, mat.ihs, 'y', HX + 15.3, H - PF - 5.5, z, 'Vít M5 bắt giá switch vào thanh dọc nóc', model, 16);
-    B(25, 99.8, 98, mat.ihs, swX, HY + 2.9 + 49.9, -17 - 49, 'Switch TP‑Link TL‑SG105 – 5 cổng gigabit, 5 V 0,6 A, cổng hướng ra sau', model);
+    B(25, 99.8, 98, mat.ihs, swX, HY + 2.9 + 49.9, -17 - 49, 'Switch TP‑Link TL‑SG105 – 5 cổng gigabit, 5 V 0,6 A, cổng hướng ra hông trái', model);
     for (let k = 0; k < 5; k++) B(14, 12, 1, mat.black, swX, swPortY(k), -115.6, `Cổng LAN ${k + 1}${k === 4 ? ' – nối ra router' : ''}`, model);
 
     /* Front: fans behind the acrylic, acrylic mounted on the outside face of the frame (z 130–133) */
@@ -640,7 +638,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     const fans = [];   // front and rear are solid now
     CAT = 'fan';
     for (const fx of ROW) { makeFan(fx, H - 13.5, 0, true); makeFan(fx, 13.5, 0, false); }   // inside the box, outer face flush with the bars
-    CAT = 'front';
+    CAT = 'cover';   // old front (z+) is now the plain right side panel
     const frontG = new THREE.Group(); frontG.position.z = -DF; panel.add(frontG);
     const ash = new THREE.Shape(), ar = 6, aw = W / 2;
     ash.moveTo(-aw + ar, 0); ash.lineTo(aw - ar, 0); ash.absarc(aw - ar, ar, ar, -Math.PI / 2, 0);
@@ -649,8 +647,6 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     ash.lineTo(-aw, ar); ash.absarc(-aw + ar, ar, ar, Math.PI, Math.PI * 1.5);
     const hole = (x, y, r) => { const h = new THREE.Path(); h.absarc(x, y, r, 0, Math.PI * 2, true); ash.holes.push(h); };
     for (const [fx, fy] of fans) hole(fx, fy, 58);
-    for (let i = 0; i < N; i++) hole(psuX, 255 - i * 28, 8.1);
-    hole(psuX, 140, 3.1);
     for (const x of [-aw + 10, 0, aw - 10]) for (const y of [10, 290]) hole(x, y, 2.75);
     for (const x of [-aw + 10, aw - 10]) hole(x, 150, 2.75);
     const acr = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(ash, { depth: 3, bevelEnabled: false, curveSegments: 24 }), mat.acrylic), null, frontG);
@@ -661,15 +657,6 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
       B(122, 122, 1, mat.filter, fx, fy, 133.6, 'Lưới lọc bụi 12 cm – bắt chung 4 vít M4 × 40 với quạt', frontG);
       for (const [dx, dy] of [[-52.5, -52.5], [52.5, -52.5], [-52.5, 52.5], [52.5, 52.5]]) C(3.6, 2.5, mat.ihs, 'z', fx + dx, fy + dy, 135.3, 'Vít M4 × 40 xuyên lưới, mica và quạt', frontG, 12);
     }
-    for (let i = 0; i < N; i++) {
-      const y = 255 - i * 28;
-      C(9, 4, mat.btn, 'z', psuX, y, 135, `Nút 16 mm có đèn 5 V – máy ${i + 1} → F_PANEL (PWRBTN + PLED)`, frontG, 24);
-      C(6.5, 0.8, mat.led, 'z', psuX, y, 137.3, `Đèn nút máy ${i + 1} – sáng khi máy chạy`, frontG, 24);
-      const e = engrave(String(i + 1), 9); e.position.set(psuX - 22, y, 133.15); frontG.add(e);
-    }
-    C(6, 4, mat.ihs, 'z', psuX, 140, 135, 'CÔNG TẮC TỔNG MTS‑102 – nối PS_ON ↔ COM của nguồn ATX: gạt lên = bật nguồn cho cả 4 máy', frontG, 16);
-    const lev = C(1.5, 12, mat.ihs, 'z', psuX, 142, 141, 'Công tắc gạt MTS‑102', frontG, 10); lev.rotation.x = Math.PI / 2 - 0.35;
-    const pw = engrave('POWER', 7); pw.position.set(psuX, 275, 133.15); frontG.add(pw);
 
     /* Dust enclosure, all 6 faces: solid 3 mm acrylic; mesh filters only where air moves
        (front: 4 fans in · right side: PSU fan in · rear: 4 exhaust holes out) */
@@ -677,35 +664,57 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     const edge = m => { m.userData.skip = true; m.add(new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry, 30), mat.coverEdge)); return m; };
     const ZR = -D / 2 - DR, DD = ZF - ZR, zc = (ZR + ZF) / 2;
     const filterAt = (rot, x, y, z, label) => { const f = B(122, 122, 1, mat.filter, x, y, z, label, panel); f.rotation.y = rot; return f; };
+    /* Buttons on the top panel, one row front→back above the PSU bay (clear of the switch holder and the top z-bar) */
+    const TX = psuX - 27, BTZ = Array.from({ length: N }, (_, i) => 70 - i * 25), SWZ = 70 - N * 25;
     for (const y of [0, H + 3]) {
       const sh = new THREE.Shape();
       sh.moveTo(-W / 2, ZR); sh.lineTo(W / 2, ZR); sh.lineTo(W / 2, ZF); sh.lineTo(-W / 2, ZF); sh.lineTo(-W / 2, ZR);
       for (const fx of ROW) perf(sh, fx, 0, 42);
+      if (y > 0) { for (const bz of BTZ) { const q = new THREE.Path(); q.absarc(TX, bz, 8.1, 0, Math.PI * 2, true); sh.holes.push(q); }
+                   const q = new THREE.Path(); q.absarc(TX, SWZ, 3.1, 0, Math.PI * 2, true); sh.holes.push(q); }
       const pm = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(sh, { depth: 3, bevelEnabled: false, curveSegments: 6 }), mat.cover), null, panel);
       pm.rotation.x = Math.PI / 2; pm.position.y = y; edge(pm);
     }
+    /* FRONT = left side (C): plain smoked panel; the buttons sit on the top panel above the PSU bay */
     edge(B(3, H, DD, mat.cover, -W / 2 - 1.5, H / 2, zc, null, panel));
+    CAT = 'front';
+    BTZ.forEach((bz, i) => {
+      C(9, 4, mat.btn, 'y', TX, H + 5, bz, `Nút 16 mm có đèn 5 V trên nóc – máy ${i + 1}`, panel, 24);
+      C(6.5, 0.8, mat.led, 'y', TX, H + 7.3, bz, `Đèn nút máy ${i + 1} – sáng khi máy chạy`, panel, 24);
+      C(7, 28, mat.black, 'y', TX, H - 14, bz, `Thân nút máy ${i + 1} (≈ 28 mm, thả xuống khoang nguồn)`, panel, 16);
+      const e = engrave(String(i + 1), 9); e.rotation.set(-Math.PI / 2, 0, Math.PI / 2); e.position.set(TX - 20, H + 3.15, bz); panel.add(e);
+      const hx = slotX[i] + S + 13, wy = 262 - i * 3;
+      for (const [dx, m] of [[-1.5, mat.wireY], [1.5, mat.wireK]])
+        tube([[TX + dx, H - 28, bz], [TX + dx - 4, wy, Math.max(bz, 60)], [TX - 14 + dx, wy, 86], [hx + 6, wy, 86], [hx, 262, 78], [hx, 258, 72 + dx]], m, 0.9, `Dây nút + LED máy ${i + 1} → header F_PANEL (PWRBTN, PLED)`, model);
+    });
+    C(6, 4, mat.ihs, 'y', TX, H + 5, SWZ, 'CÔNG TẮC TỔNG MTS‑102 trên nóc – nối PS_ON ↔ COM của nguồn ATX: gạt = bật/tắt nguồn cả 4 máy', panel, 16);
+    const lev = C(1.5, 12, mat.ihs, 'y', TX, H + 11, SWZ + 2, 'Công tắc gạt MTS‑102', panel, 10); lev.rotation.x = 0.35;
+    const pw = engrave('POWER', 7); pw.rotation.set(-Math.PI / 2, 0, Math.PI / 2); pw.position.set(TX - 20, H + 3.15, SWZ); panel.add(pw);
+    CAT = 'psu';
+    for (const [dx, m] of [[-1.2, mat.wireG], [1.2, mat.wireK]])
+      tube([[TX + dx, H - 10, SWZ], [TX + dx, 240, SWZ + 10], [psuX - 18 + dx, 200, 0], [psuX - 18 + dx, 178, 7]], m, 1, 'Dây PS_ON (xanh lá) + COM (đen): 24‑pin nguồn → công tắc tổng trên nóc', model);
+    CAT = 'cover';
     const fanZ = ZR + 80;
     const rs = new THREE.Shape();
     rs.moveTo(ZR, 0); rs.lineTo(ZF, 0); rs.lineTo(ZF, H); rs.lineTo(ZR, H); rs.lineTo(ZR, 0);
     perf(rs, fanZ, 95, 56);
+    { const q = new THREE.Path(); q.moveTo(-147.4, 231.8); q.lineTo(-147.4, 248.2); q.lineTo(-132.6, 248.2); q.lineTo(-132.6, 231.8); q.lineTo(-147.4, 231.8); rs.holes.push(q); }
     const rside = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(rs, { depth: 3, bevelEnabled: false, curveSegments: 6 }), mat.cover), null, panel);
     rside.rotation.y = -Math.PI / 2; rside.position.x = W / 2 + 3; edge(rside);
-    filterAt(Math.PI / 2, W / 2 - 0.6, 95, fanZ, 'LƯỚI LỌC 12 cm đen, đặt phía trong mica – gió vào quạt nguồn (hông phải)');
+    filterAt(Math.PI / 2, W / 2 - 0.6, 95, fanZ, 'LƯỚI LỌC 12 cm đen, đặt phía trong mica – gió vào quạt nguồn (mặt sau)');
     const rp = new THREE.Shape();
     rp.moveTo(-W / 2, 0); rp.lineTo(W / 2, 0); rp.lineTo(W / 2, H); rp.lineTo(-W / 2, H); rp.lineTo(-W / 2, 0);
     const box = (x0, y0, x1, y1) => { const q = new THREE.Path(); q.moveTo(x0, y0); q.lineTo(x0, y1); q.lineTo(x1, y1); q.lineTo(x1, y0); q.lineTo(x0, y0); rp.holes.push(q); };
     box(psuX - 31, 32, psuX + 31, 158);
-    box(psuX + 14 - 7.4, 240 - 8.2, psuX + 14 + 7.4, 240 + 8.2);
     for (const [fx, fy] of fans) { const q = new THREE.Path(); q.absarc(fx, fy, 58, 0, Math.PI * 2, true); rp.holes.push(q); }
     const rear = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(rp, { depth: 3, bevelEnabled: false, curveSegments: 32 }), mat.cover), null, panel);
     rear.position.z = ZR - 3; edge(rear);
-    for (const [x, y] of [[psuX - 37, 26], [psuX - 37, 164], [psuX + 37, 26], [psuX + 37, 140]]) C(3.2, 2.5, mat.ihs, 'z', x, y, ZR - 4.3, 'Vít 6‑32 bắt nguồn vào mặt sau (4 lỗ chuẩn ATX)', panel, 12);
+    for (const [x, y] of [[psuX - 37, 26], [psuX - 37, 164], [psuX + 37, 26], [psuX + 37, 140]]) C(3.2, 2.5, mat.ihs, 'z', x, y, ZR - 4.3, 'Vít 6‑32 bắt nguồn vào hông trái (4 lỗ chuẩn ATX)', panel, 12);
     for (const [fx, fy] of fans) filterAt(0, fx, fy, ZR - 3.6, 'LƯỚI LỌC 12 cm – lỗ thoát gió mặt sau (vít M4 × 10)');
-    B(14.5, 16, 26, mat.black, psuX + 14, 240, ZR + 10, 'Đầu nối RJ45 keystone Vention – cáp mạng ra router', panel);
-    for (const x of [-W / 2 + 10, W / 2 - 10]) for (const y of [30, 110, 190, 270]) C(5, 3, mat.ihs, 'z', x, y, ZR - 4.5, 'Vít M5 × 10: bắt mặt sau vào cột sau (tháo 8 vít khi rút máy)', panel, 16);
+    B(26, 16, 14.5, mat.black, W / 2 - 10, 240, -140, 'Đầu nối RJ45 keystone Vention ở mặt sau – cáp mạng ra router', panel);
+    for (const x of [-W / 2 + 10, W / 2 - 10]) for (const y of [30, 110, 190, 270]) C(5, 3, mat.ihs, 'z', x, y, ZR - 4.5, 'Vít M5 × 10: bắt hông trái vào cột (tháo 8 vít khi rút máy)', panel, 16);
     CAT = 'net';
-    tube([[swX, swPortY(4), -116], [swX, swPortY(4) + 6, -150], [psuX + 14, 240, ZR + 26]], mat.usb, 2.6, 'Cáp LAN 30 cm: switch cổng 5 → đầu nối RJ45 mặt sau', model);
+    tube([[swX, swPortY(4), -116], [swX + 8, swPortY(4) + 8, -134], [W / 2 - 30, 240, -140], [W / 2 - 23, 240, -140]], mat.usb, 2.6, 'Cáp LAN 30 cm: switch cổng 5 → đầu nối RJ45 mặt sau', model);
 
     /* Dimensions (envelope incl. 20 mm rear ears, acrylic + button heads 9 mm, feet) */
     const lineMat = new THREE.LineBasicMaterial({ color: 0x1f68c8 });
@@ -758,7 +767,6 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     $('c-plate').textContent = MOUNT === 'plate' ? `${N} (+1) × 232 × 296` : `${N} bộ`;
     $('c-comb').textContent = `${4 * N} mảnh`;
     $('c-comb-name').textContent = 'Mảnh lược in PETG (1 mẫu), rãnh 2,6 × 3,5 mm, 72 × 60 × 6 mm, bắt vào thanh trước + chặn sau, trên + dưới';
-    $('c-acr').textContent = `${W} × ${H}`;
     $('e-psu').textContent = `1 × ${psu}`;
     $('e-pico').textContent = `${N}`;
     $('e-fuse').textContent = `1 + ${N}`;
@@ -831,8 +839,8 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
   function viewOf(name) {
     const k = W / 424, p = picoAt;
     return {
-      iso: [[720 * k, 470, 760 * k], [0, 140, 0]], front: [[0, 160, 1150 * k], [0, 150, 0]],
-      rear: [[-180 * k, 260, -1080 * k], [0, 150, 0]], top: [[0, 1250 * k, 40], [0, 120, 0]],
+      iso: [[-760 * k, 470, 700 * k], [0, 140, -20]], front: [[-1150 * k, 160, -20], [0, 150, -20]],
+      rear: [[1100 * k, 260, -180 * k], [0, 150, -20]], top: [[0, 1250 * k, 40], [0, 120, 0]],
       pico: [[p.x + 200, p.y + 140, p.z + 300], [p.x, p.y, p.z]],
     }[name];
   }
