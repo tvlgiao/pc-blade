@@ -27,7 +27,7 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
    hong-trai_mica-3mm_x1.dxf  424 x 300: 6 lỗ vít nguồn 6-32 (chuẩn ATX), ô hở 62 x 126 ổ cắm AC
    hong-phai_mica-3mm_x1.dxf  424 x 300: kín (PDF riêng hong-phai_mica-3mm.pdf)
    PDF: tam-che-bui_mica-3mm.pdf. Lưới lọc màu đen đặt PHÍA TRONG, sau vùng đục lỗ.
-   Vùng đục lỗ nhiều lỗ nhỏ: báo xưởng tính giá theo chiều dài đường cắt.
+   Vùng đục lỗ: Ø6, bước 8,5 mm (gân 2,5 mm); báo xưởng tính giá theo chiều dài đường cắt.
 
 6) Khung nhôm 2020 (cắt sẵn ở shop): 4 x 300 (cột), 4 x 250 (dọc hông),
    4 x 384 (ngang trước + chặn sau, trên + dưới), 2 x 200 (dọc giữa nóc + đáy, thay ray giữa).

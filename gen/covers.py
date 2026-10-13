@@ -19,7 +19,7 @@ PSU_FAN = (80, 95)                          # PSU (160 mm) pushed into the rear 
 # Rear: seen from BEHIND, X from left (= right side of the frame seen from front), Y height.
 REAR = [(x, y) for x in (10, W - 10) for y in (30, 110, 190, 270)]
 EXH = []                                    # rear is solid now (air leaves through the bottom fans)
-ROW = [(68, 180), (164, 180), (260, 180)]   # 3 x 92 mm fans, one row over/under the 4 bays (X = x + 212, Y = z + 180)
+ROW = [(70, 180), (166, 180), (262, 180)]   # 3 x 92 mm fans, one row over/under the 4 bays (X = x + 212, Y = z + 180)
 ZBAR_BOT = [(320, 130), (320, 230)]         # bottom 90-degree bar under the PSU's left edge (x 108)
 ZBAR_TOP = [(372, 130), (372, 230)]         # top 90-degree bar that hangs the switch holder (x 160)
 FEET = [(10, 10), (W - 10, 10), (10, D - 10), (W - 10, D - 10)]   # M5 feet into the post ends
@@ -34,7 +34,7 @@ def outline(msp, w, h, r=6):
     msp.add_lwpolyline([(r, 0, 0), (w - r, 0, b), (w, r, 0), (w, h - r, b), (w - r, h, 0), (r, h, b), (0, h - r, 0), (0, r, b)],
                        format="xyb", close=True, dxfattribs={"layer": "CUT"})
 
-PERF_D, PERF_P = 6.0, 7.5                   # perforation: Ø6 holes on a 7.5 mm hex grid (~58 % open)
+PERF_D, PERF_P = 6.0, 8.5                   # perforation: Ø6 holes on an 8.5 mm hex grid: 2.5 mm webs (laser-safe in 3 mm acrylic), ~45 % open
 def perf(c, r):
     """Hex grid of small round holes filling a circle of radius r (filter sits behind them, inside)."""
     pts, dy = [], PERF_P * 0.8660254
