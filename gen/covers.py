@@ -1,5 +1,5 @@
 """Dust covers, all six faces closed (3 mm acrylic). Mesh filters only where air moves:
-front = 4 fans in (front panel, gen.py), right side = PSU fan in, rear = 4 exhaust holes out.
+top = 3 x 92 mm fans in (blowing down), bottom = 3 x 92 mm fans out, right side = PSU fan in. Front + rear solid.
 Rear posts sit 50 mm behind the old rear bars (kept as ear stops), so the box is 424 x 310 x 300.
 The PSU's rear end passes through a cut-out in the rear panel: AC inlet, switch and PSU exhaust stay outside."""
 import sys, math
@@ -18,7 +18,11 @@ SIDE = [(x, y) for x in (10, D - 10) for y in (60, 240)] + [(x, y) for x in (100
 PSU_FAN = (80, 95)                          # PSU (160 mm) pushed into the rear cut-out -> fan centre 80 mm from rear
 # Rear: seen from BEHIND, X from left (= right side of the frame seen from front), Y height.
 REAR = [(x, y) for x in (10, W - 10) for y in (30, 110, 190, 270)]
-EXH = [(x, y) for x in (198, 318) for y in (85, 205)]       # behind the 4 front fans
+EXH = []                                    # rear is solid now (air leaves through the bottom fans)
+ROW = [(68, 180), (164, 180), (260, 180)]   # 3 x 92 mm fans, one row over/under the 4 bays (X = x + 212, Y = z + 180)
+ZBAR_BOT = [(320, 130), (320, 230)]         # bottom 90-degree bar under the PSU's left edge (x 108)
+ZBAR_TOP = [(372, 130), (372, 230)]         # top 90-degree bar that hangs the switch holder (x 160)
+FEET = [(10, 10), (W - 10, 10), (10, D - 10), (W - 10, D - 10)]   # M5 feet into the post ends
 PSU_CUT = (22, 19, 110, 171)                # 88 x 152 opening for the PSU rear end (PSU 86 x 150)
 KEY = (52, 240, 14.8, 16.4)                 # keystone RJ45 coupler: centre, w, h
 
@@ -27,24 +31,25 @@ def outline(msp, w, h, r=6):
     msp.add_lwpolyline([(r, 0, 0), (w - r, 0, b), (w, r, 0), (w, h - r, b), (w - r, h, 0), (r, h, b), (0, h - r, 0), (0, r, b)],
                        format="xyb", close=True, dxfattribs={"layer": "CUT"})
 
-def filt(msp, c):
-    msp.add_circle(c, 58, dxfattribs={"layer": "CUT"})
-    for dx in (-52.5, 52.5):
-        for dy in (-52.5, 52.5): msp.add_circle((c[0] + dx, c[1] + dy), 2.25, dxfattribs={"layer": "CUT"})
+def filt(msp, c, r=58, sq=52.5):
+    msp.add_circle(c, r, dxfattribs={"layer": "CUT"})
+    for dx in (-sq, sq):
+        for dy in (-sq, sq): msp.add_circle((c[0] + dx, c[1] + dy), 2.25, dxfattribs={"layer": "CUT"})
 
 def rect(msp, x0, y0, x1, y1):
     msp.add_lwpolyline([(x0, y0), (x1, y0), (x1, y1), (x0, y1)], close=True, dxfattribs={"layer": "CUT"})
 
-def dxf(path, w, h, holes, fans=(), rects=()):
+def dxf(path, w, h, holes, fans=(), rects=(), fans92=()):
     doc = ezdxf.new("R2010", setup=True); doc.units = ezdxf.units.MM
     msp = doc.modelspace(); doc.layers.add("CUT", color=7)
     outline(msp, w, h)
     for p in holes: msp.add_circle(p, 2.75, dxfattribs={"layer": "CUT"})
     for c in fans: filt(msp, c)
+    for c in fans92: filt(msp, c, 44, 41.25)
     for r in rects: rect(msp, *r)
     doc.saveas(path)
 
-def page(pdf, title, w, h, holes, notes, fans=(), rects=(), xlab="", ylab=""):
+def page(pdf, title, w, h, holes, notes, fans=(), rects=(), xlab="", ylab="", fans92=()):
     fig = plt.figure(figsize=(11.69, 8.27))
     ax = fig.add_axes([0.03, 0.1, 0.6, 0.82]); ax.set_aspect("equal"); ax.axis("off")
     ax.set_xlim(-30, w + 30); ax.set_ylim(-35, h + 25); ax.set_title(title, fontsize=11, loc="left")
@@ -55,6 +60,10 @@ def page(pdf, title, w, h, holes, notes, fans=(), rects=(), xlab="", ylab=""):
         ax.add_patch(Circle(c, 58, fill=False, lw=0.8, hatch="++", ec="#33475b")); ax.text(*c, f"L{i+1}\nØ116", ha="center", va="center", fontsize=7, backgroundcolor="white")
         for dx in (-52.5, 52.5):
             for dy in (-52.5, 52.5): ax.add_patch(Circle((c[0] + dx, c[1] + dy), 2.25, fill=False, lw=0.6))
+    for i, c in enumerate(fans92):
+        ax.add_patch(Circle(c, 44, fill=False, lw=0.8, hatch="++", ec="#33475b")); ax.text(*c, f"Q{i+1}\nØ88", ha="center", va="center", fontsize=7, backgroundcolor="white")
+        for dx in (-41.25, 41.25):
+            for dy in (-41.25, 41.25): ax.add_patch(Circle((c[0] + dx, c[1] + dy), 2.25, fill=False, lw=0.6))
     for name, (x0, y0, x1, y1) in rects:
         ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fill=False, lw=0.8)); ax.text((x0 + x1) / 2, (y0 + y1) / 2, name, ha="center", va="center", fontsize=6.5)
     kw = dict(arrowstyle="<->", lw=0.6, color="#1f68c8")
@@ -64,6 +73,7 @@ def page(pdf, title, w, h, holes, notes, fans=(), rects=(), xlab="", ylab=""):
     ax2 = fig.add_axes([0.65, 0.1, 0.33, 0.82]); ax2.axis("off")
     rows = [[f"M{i+1}", f"{x:.0f}", f"{y:.0f}", "Ø5,5"] for i, (x, y) in enumerate(holes)]
     rows += [[f"L{i+1}", f"{c[0]}", f"{c[1]}", "Ø116 + 4 lỗ Ø4,5 (vuông 105)"] for i, c in enumerate(fans)]
+    rows += [[f"Q{i+1}", f"{c[0]}", f"{c[1]}", "Ø88 + 4 lỗ Ø4,5 (vuông 82,5)"] for i, c in enumerate(fans92)]
     rows += [[n.split()[0], f"{x0}–{x1}", f"{y0}–{y1}", "khoét chữ nhật"] for n, (x0, y0, x1, y1) in rects]
     t = ax2.table(cellText=rows, colLabels=["Lỗ", "X", "Y", "Kích thước (mm)"], loc="upper left", cellLoc="center", colWidths=[0.14, 0.15, 0.15, 0.56])
     t.auto_set_font_size(False); t.set_fontsize(7); t.scale(1, 1.15)
@@ -72,17 +82,24 @@ def page(pdf, title, w, h, holes, notes, fans=(), rects=(), xlab="", ylab=""):
 
 kx, ky, kw_, kh = KEY
 key_r = (round(kx - kw_ / 2, 1), round(ky - kh / 2, 1), round(kx + kw_ / 2, 1), round(ky + kh / 2, 1))
-dxf(f"{OUT}/nap-tren-duoi_mica-3mm_x2.dxf", W, D, TOP)
+dxf(f"{OUT}/nap-tren_mica-3mm_x1.dxf", W, D, TOP + ZBAR_TOP, fans92=ROW)
+dxf(f"{OUT}/day_mica-3mm_x1.dxf", W, D, TOP + ZBAR_BOT + FEET, fans92=ROW)
 dxf(f"{OUT}/hong-trai_mica-3mm_x1.dxf", D, H, SIDE)
 dxf(f"{OUT}/hong-phai_mica-3mm_x1.dxf", D, H, SIDE, [PSU_FAN])
-dxf(f"{OUT}/mat-sau_mica-3mm_x1.dxf", W, H, REAR, EXH, [PSU_CUT, key_r])
+dxf(f"{OUT}/mat-sau_mica-3mm_x1.dxf", W, H, REAR, rects=[PSU_CUT, key_r])
 common = ["Lớp CUT = cắt xuyên. Bo góc R6. Dung sai ±0,3 mm.", "M: vít M5 × 10 + long đền vào con trượt T (rãnh 2020).",
-          "L (gạch chéo): lỗ có LƯỚI LỌC 12 cm, vít M4 × 10 + đai ốc."]
+          "L / Q (gạch chéo): lỗ có LƯỚI LỌC."]
 with PdfPages(f"{OUT}/tam-che-bui_mica-3mm.pdf") as pdf:
-    page(pdf, "NẮP TRÊN + ĐÁY – mica 3 mm – SL: 2 (cùng một mẫu), kín hoàn toàn", W, D, TOP,
-         ["Gốc: góc trái‑sau. X từ trái (nhìn từ trước), Y từ mép sau.", *common[:2],
-          "Y 300 = thanh trước, Y 60 = thanh chặn tai, X 10/414 = thanh hông.", "Tấm đáy: dán 4 chân cao su ở 4 góc."],
-         xlab="↑ mép TRƯỚC (Y = 310); mép dưới hình = SAU (Y = 0)")
+    page(pdf, "NẮP TRÊN – mica 3 mm – SL: 1 – 3 quạt 92 mm HÚT VÀO", W, D, TOP + ZBAR_TOP,
+         ["Gốc: góc trái‑sau. X từ trái (nhìn từ trước), Y từ mép sau.", *common,
+          "Q1–Q3: quạt 92 mm đặt TRÊN tấm, thổi XUỐNG; lưới 9 cm", "  trên cùng; vít M4 × 40 xuyên lưới + quạt + mica, đai ốc dưới.",
+          "Y 300 = thanh trước, Y 60 = thanh chặn tai, X 10/414 = hông,", "  X 372 = thanh dọc nóc (treo giá switch)."],
+         xlab="↑ mép TRƯỚC (Y = 310); mép dưới hình = SAU (Y = 0)", fans92=ROW)
+    page(pdf, "ĐÁY – mica 3 mm – SL: 1 – 3 quạt 92 mm ĐẨY RA", W, D, TOP + ZBAR_BOT + FEET,
+         ["Gốc: góc trái‑sau, NHÌN TỪ TRÊN XUỐNG. X từ trái, Y từ mép sau.", *common,
+          "Q1–Q3: quạt 92 mm treo DƯỚI tấm, thổi XUỐNG ra ngoài;", "  lưới 9 cm dưới cùng; vít M4 × 40 + đai ốc.",
+          "X 320 = thanh dọc đáy (đỡ nguồn).", "4 lỗ góc: chân cao 60 mm, vít M5 vào lỗ tâm đầu cột", "  (taro M5 đầu cột)."],
+         xlab="↑ mép TRƯỚC (Y = 310); mép dưới hình = SAU (Y = 0)", fans92=ROW)
     page(pdf, "HÔNG TRÁI – mica 3 mm – SL: 1, kín hoàn toàn", D, H, SIDE,
          ["Gốc: góc dưới‑sau. X từ mép sau, Y chiều cao.", *common[:2], "Mica trong 2 mặt như nhau: lật tấm nào cũng được."],
          xlab="← SAU", ylab="TRƯỚC →")
@@ -90,11 +107,11 @@ with PdfPages(f"{OUT}/tam-che-bui_mica-3mm.pdf") as pdf:
          ["Gốc: góc dưới‑sau. X từ mép sau, Y chiều cao.", *common,
           "L1: gió vào quạt nguồn. Nguồn đút đuôi qua lỗ mặt sau,", "  tâm quạt cách mép sau ≈ 80 mm (nguồn dài 140–180",
           "  -> lệch tối đa 10 mm, quạt vẫn hút qua lưới)."], fans=[PSU_FAN], xlab="← SAU", ylab="TRƯỚC →")
-    page(pdf, "MẶT SAU – mica 3 mm – SL: 1 (tháo ra khi rút máy)", W, H, REAR,
+    page(pdf, "MẶT SAU – mica 3 mm – SL: 1, kín (tháo ra khi rút máy)", W, H, REAR,
          ["Gốc: góc dưới‑trái NHÌN TỪ PHÍA SAU. Y chiều cao.", *common,
-          "L1–L4: gió nóng thoát ra (sau 4 khoang máy).", "PSU: lỗ 88 × 152 cho đuôi nguồn: ổ cắm AC, công tắc,",
+"PSU: lỗ 88 × 152 cho đuôi nguồn: ổ cắm AC, công tắc,",
           "  quạt thoát của nguồn lộ ra ngoài. Dán ron xốp quanh khe.", "RJ45: keystone 14,8 × 16,4 – cáp mạng ra router.",
           "  Mica 3 mm dày hơn chuẩn keystone: nếu lẫy không ăn,", "  cố định bằng keo nến/keo 2 thành phần.",
-          "M: bắt vào 2 cột sau (X 10 / 414)."], fans=EXH,
+          "M: bắt vào 2 cột sau (X 10 / 414)."],
          rects=[("PSU đuôi nguồn", PSU_CUT), ("RJ45", key_r)], xlab="← phía NGUỒN (bên phải khi nhìn từ trước)", ylab="")
 print("ok")

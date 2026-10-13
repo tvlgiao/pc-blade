@@ -80,7 +80,7 @@ def plate_dxf(path):
 acr_outline = rrect(0, 0, W, H, 6)
 X0 = -W / 2 + PF; sledW = PITCH * N + 4; cols = max(1, int(sledW // 120))
 fx0 = X0 + sledW / 2 - (cols - 1) * 60
-FANS = [(fx0 + c * 120 + W / 2, cy) for c in range(cols) for cy in (85, 205)]
+FANS = []  # front is solid now: the fans moved to the bottom panel (covers.py), air exits through the rear mesh
 psuX = X0 + 4 + PITCH * N + 46 + W / 2
 BTN = [(psuX, 255 - i * 28) for i in range(N)]
 SW = (psuX, 140)
@@ -192,14 +192,15 @@ def acr_pdf(path):
             "Gốc: góc dưới‑trái, nhìn từ phía trước.",
             "Lớp CUT = cắt xuyên. Lớp ENGRAVE (đỏ) = khắc chữ.",
             "M1–M8: vít M5 × 10 vào con trượt T (thanh 2020).",
-            "F: quạt 120 mm + lưới quạt, vít M4 × 35 + đai ốc.",
+            "Mặt trước kín: quạt nằm ở tấm đáy, hút gió từ dưới lên.",
             "B: nút nhấn 16 mm có LED. S: công tắc gạt mini 6 mm.",
             "Bo góc R6. Dung sai ±0,3 mm.",
         ]), fontsize=8, va="top", transform=ax2.transAxes)
         pdf.savefig(fig); plt.close(fig)
 
 # ---------- part 3: comb STL (3D print, PETG) ----------
-def comb_stl(path):
+def comb_stl(path, hole_y=30.0, lead_both=False):
+    """hole_y: distance of the screw holes from the lead-in edge (30 = rail centre, 10 = edge bar)."""
     L, Dp, T = 72.0, 60.0, 6.0
     body = m3d.Manifold.cube([L, Dp, T])
     groove = m3d.Manifold.cube([2.6, Dp + 2, 3.6]).translate([5 - 1.3, -1, T - 3.5])
@@ -207,9 +208,11 @@ def comb_stl(path):
         m3d.Manifold.cube([4.6, 0.01, 3.6]).translate([5 - 2.3, -0.5, T - 3.5]),
         m3d.Manifold.cube([2.6, 0.01, 3.6]).translate([5 - 1.3, 3, T - 3.5])])
     cut = groove + lead
+    if lead_both:
+        cut = cut + lead.mirror([0, 1, 0]).translate([0, Dp, 0])
     for hx in (30.0, 58.0):
-        cut = cut + m3d.Manifold.cylinder(T + 2, 2.75, 2.75, 48).translate([hx, Dp / 2, -1])
-        cut = cut + m3d.Manifold.cylinder(3.2, 5.25, 5.25, 48).translate([hx, Dp / 2, T - 3])
+        cut = cut + m3d.Manifold.cylinder(T + 2, 2.75, 2.75, 48).translate([hx, hole_y, -1])
+        cut = cut + m3d.Manifold.cylinder(3.2, 5.25, 5.25, 48).translate([hx, hole_y, T - 3])
     part = body - cut
     mesh = part.to_mesh()
     tm = trimesh.Trimesh(vertices=np.asarray(mesh.vert_properties)[:, :3], faces=np.asarray(mesh.tri_verts))
@@ -219,7 +222,7 @@ def comb_stl(path):
 
 plate_dxf(f"{OUT}/tam-do-bo_nhom-2mm_x5.dxf"); plate_pdf(f"{OUT}/tam-do-bo_nhom-2mm.pdf")
 acr_dxf(f"{OUT}/mat-truoc_mica-3mm_x1.dxf"); acr_pdf(f"{OUT}/mat-truoc_mica-3mm.pdf")
-vol = comb_stl(f"{OUT}/luoc_PETG_x8.stl")
+vol = comb_stl(f"{OUT}/luoc_PETG_x16.stl", hole_y=10.0, lead_both=True)  # on the front + ear-stop bars, top and bottom, 2 per bay each
 print("W", W, "fans", FANS, "btn", BTN, "SW", SW)
 print("standoffs", SO)
 print("comb volume cm3", round(vol / 1000, 2), "~g PETG", round(vol / 1000 * 1.27, 1))

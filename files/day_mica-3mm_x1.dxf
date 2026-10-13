@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461327.638576389
+2461327.6464467593
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461327.638576389
+2461327.6464467593
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-99
+AE
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{8609CF24-7CB9-43DD-A550-05D329AE1C71}
+{DEB15442-2474-4792-8504-50922FA052B1}
   9
 $VERSIONGUID
   2
-{C6CCBEDC-6FE9-47F6-AF4D-D0809A05A816}
+{063362F6-ABA8-4823-AE71-B13385B2AC8A}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -3109,7 +3109,7 @@ ACAD
   0
 APPID
   5
-96
+AB
 330
 3
 100
@@ -3123,7 +3123,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-97
+AC
 330
 3
 100
@@ -5489,6 +5489,426 @@ AcDbCircle
  40
 2.75
   0
+CIRCLE
+  5
+96
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+320.0
+ 20
+130.0
+ 30
+0.0
+ 40
+2.75
+  0
+CIRCLE
+  5
+97
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+320.0
+ 20
+230.0
+ 30
+0.0
+ 40
+2.75
+  0
+CIRCLE
+  5
+98
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+10.0
+ 20
+10.0
+ 30
+0.0
+ 40
+2.75
+  0
+CIRCLE
+  5
+99
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+414.0
+ 20
+10.0
+ 30
+0.0
+ 40
+2.75
+  0
+CIRCLE
+  5
+9A
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+10.0
+ 20
+300.0
+ 30
+0.0
+ 40
+2.75
+  0
+CIRCLE
+  5
+9B
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+414.0
+ 20
+300.0
+ 30
+0.0
+ 40
+2.75
+  0
+CIRCLE
+  5
+9C
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+68.0
+ 20
+180.0
+ 30
+0.0
+ 40
+44.0
+  0
+CIRCLE
+  5
+9D
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+26.75
+ 20
+138.75
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+9E
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+26.75
+ 20
+221.25
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+9F
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+109.25
+ 20
+138.75
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+A0
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+109.25
+ 20
+221.25
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+A1
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+164.0
+ 20
+180.0
+ 30
+0.0
+ 40
+44.0
+  0
+CIRCLE
+  5
+A2
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+122.75
+ 20
+138.75
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+A3
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+122.75
+ 20
+221.25
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+A4
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+205.25
+ 20
+138.75
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+A5
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+205.25
+ 20
+221.25
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+A6
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+260.0
+ 20
+180.0
+ 30
+0.0
+ 40
+44.0
+  0
+CIRCLE
+  5
+A7
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+218.75
+ 20
+138.75
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+A8
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+218.75
+ 20
+221.25
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+A9
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+301.25
+ 20
+138.75
+ 30
+0.0
+ 40
+2.25
+  0
+CIRCLE
+  5
+AA
+330
+17
+100
+AcDbEntity
+  8
+CUT
+100
+AcDbCircle
+ 10
+301.25
+ 20
+221.25
+ 30
+0.0
+ 40
+2.25
+  0
 ENDSEC
   0
 SECTION
@@ -6579,7 +6999,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-98
+AD
   0
 DICTIONARYVAR
   5
@@ -6591,7 +7011,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-13T08:19:33.831548+00:00
+1.4.4 @ 2026-10-13T08:30:53.502737+00:00
   0
 VISUALSTYLE
   5
@@ -7295,7 +7715,7 @@ X-Ray
   0
 DICTIONARYVAR
   5
-98
+AD
 330
 2D
 100
@@ -7303,7 +7723,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-13T08:19:33.833539+00:00
+1.4.4 @ 2026-10-13T08:30:53.505336+00:00
   0
 ENDSEC
   0

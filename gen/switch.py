@@ -13,7 +13,7 @@ cut += C(WALL + 4, BOT + 4, LEN - 4, IX - 8, IY - 8, 6)                      # f
 for z in np.arange(14, LEN - 12, 12):                                              # louvres on both side walls (8 mm bridges)
     cut += C(-1, BOT + 10, z, OX + 2, IY - 20, 8)
 cut += C(WALL + 5, -1, 14, IX - 10, BOT + 2, 86)                             # bottom vent
-for x, z in ((-6, 8), (OX + 6, 108)):                                        # M5 holes on bar slot lines: rear bar z-120, centre rail z-20 (100 mm apart in depth)
+for x, z in ((OX / 2, 30), (OX / 2, 100)):                                  # M5 holes on the top 90-degree bar slot (x 160), z -98 / -28
     cut += m3d.Manifold.cylinder(FL + 2, 2.75, 2.75, 40).translate([x, OY - FL - 1, z]).rotate([0, 0, 0]) if False else \
         m3d.Manifold.cylinder(FL + 2, 2.75, 2.75, 40).rotate([-90, 0, 0]).translate([x, OY - FL - 1, z])
 part = body - cut
@@ -26,5 +26,5 @@ fig = plt.figure(figsize=(7, 6)); ax = fig.add_subplot(projection="3d")
 ax.add_collection3d(Poly3DCollection(v[f][:, :, [0, 2, 1]], facecolor="#9fc1e6", edgecolor="#33475b", lw=0.1, alpha=1))
 ax.set_xlim(-20, 90); ax.set_ylim(-5, 115); ax.set_zlim(-5, 110); ax.set_box_aspect((110, 120, 115)); ax.view_init(22, -50)
 ax.set_xlabel("ngang (mm)"); ax.set_ylabel("sâu (mm, 0 = phía sau)"); ax.set_zlabel("cao (mm)")
-ax.set_title("Giá switch in 3D – mặt bích trên bắt vào 2 thanh nhôm trên", fontsize=9)
+ax.set_title("Giá switch in 3D – mặt bích trên treo dưới thanh dọc nóc (2 vít M5)", fontsize=9)
 fig.savefig(f"{OUT}/gia-switch_xem-truoc.png", dpi=130, bbox_inches="tight")
