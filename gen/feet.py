@@ -1,10 +1,10 @@
-"""3D-printed riser foot (PETG, x4): 60 mm tall, bolted M5 x 25 up through the bottom panel into the post end.
-The bolt head sits in a 45 mm deep pocket from below; a stick-on rubber pad closes the pocket."""
+"""3D-printed riser foot (PETG, x4): 25 mm tall, bolted M5 x 30 up through the bottom panel into the post end.
+The bolt head sits in a 12 mm deep pocket from below; a stick-on rubber pad closes the pocket."""
 import sys, manifold3d as m3d, trimesh, numpy as np
 OUT = sys.argv[1]
-Hh, R0, R1 = 60.0, 18.0, 15.0                                   # height, base radius, top radius (post is 20 x 20)
+Hh, R0, R1 = 25.0, 18.0, 15.0                                   # height, base radius, top radius (post is 20 x 20)
 body = m3d.Manifold.cylinder(Hh, R0, R1, 96)
-pocket = m3d.Manifold.cylinder(45.0, 5.5, 5.5, 48).translate([0, 0, -1])     # Ø11 for the M5 head + hex key
+pocket = m3d.Manifold.cylinder(13.0, 5.5, 5.5, 48).translate([0, 0, -1])     # Ø11 pocket for the M5 head (12 mm deep)
 bore = m3d.Manifold.cylinder(Hh + 2, 2.75, 2.75, 48).translate([0, 0, -1])   # Ø5.5 through
 part = body - pocket - bore
 mesh = part.to_mesh()

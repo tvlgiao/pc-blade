@@ -92,13 +92,13 @@ common = ["Lớp CUT = cắt xuyên. Bo góc R6. Dung sai ±0,3 mm.", "M: vít M
 with PdfPages(f"{OUT}/tam-che-bui_mica-3mm.pdf") as pdf:
     page(pdf, "NẮP TRÊN – mica 3 mm – SL: 1 – 3 quạt 92 mm HÚT VÀO", W, D, TOP + ZBAR_TOP,
          ["Gốc: góc trái‑sau. X từ trái (nhìn từ trước), Y từ mép sau.", *common,
-          "Q1–Q3: quạt 92 mm đặt TRÊN tấm, thổi XUỐNG; lưới 9 cm", "  trên cùng; vít M4 × 40 xuyên lưới + quạt + mica, đai ốc dưới.",
+          "Q1–Q3: quạt 92 mm nằm TRONG thùng sát dưới tấm, thổi XUỐNG;", "  lưới 9 cm dán ngoài; vít M4 × 12 + đai ốc (bích ngoài quạt).",
           "Y 300 = thanh trước, Y 60 = thanh chặn tai, X 10/414 = hông,", "  X 372 = thanh dọc nóc (treo giá switch)."],
          xlab="↑ mép TRƯỚC (Y = 310); mép dưới hình = SAU (Y = 0)", fans92=ROW)
     page(pdf, "ĐÁY – mica 3 mm – SL: 1 – 3 quạt 92 mm ĐẨY RA", W, D, TOP + ZBAR_BOT + FEET,
          ["Gốc: góc trái‑sau, NHÌN TỪ TRÊN XUỐNG. X từ trái, Y từ mép sau.", *common,
-          "Q1–Q3: quạt 92 mm treo DƯỚI tấm, thổi XUỐNG ra ngoài;", "  lưới 9 cm dưới cùng; vít M4 × 40 + đai ốc.",
-          "X 320 = thanh dọc đáy (đỡ nguồn).", "4 lỗ góc: chân cao 60 mm, vít M5 vào lỗ tâm đầu cột", "  (taro M5 đầu cột)."],
+          "Q1–Q3: quạt 92 mm nằm TRONG thùng sát trên tấm, thổi ra;", "  lưới 9 cm dán ngoài; vít M4 × 12 + đai ốc.",
+          "X 320 = thanh dọc đáy (đỡ nguồn).", "4 lỗ góc: chân in 25 mm, vít M5 × 30 vào lỗ tâm đầu cột", "  (taro M5 đầu cột)."],
          xlab="↑ mép TRƯỚC (Y = 310); mép dưới hình = SAU (Y = 0)", fans92=ROW)
     page(pdf, "HÔNG TRÁI – mica 3 mm – SL: 1, kín hoàn toàn", D, H, SIDE,
          ["Gốc: góc dưới‑sau. X từ mép sau, Y chiều cao.", *common[:2], "Mica trong 2 mặt như nhau: lật tấm nào cũng được."],
