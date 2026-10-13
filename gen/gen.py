@@ -63,23 +63,22 @@ def obround(cx, cy, L, Wd):
 MATX = [(80.01, 10.16), (34.29, 10.16), (237.49, 33.02), (237.49, 165.10), (80.01, 165.10), (34.29, 165.10), (13.97, 165.10)]
 SO = [(round(28 + y, 2), round(271.84 - x, 2)) for x, y in MATX]
 # Notches (X 100-200) clear the top + bottom fans that sit inside the box: bottom edge Y 28.5, top edge Y 271.5 there.
-# Rear: two 14 mm tabs (X 6-20, flat) bent 90 deg toward the component side along X 20; they sit on the
-# rear face of the ear-stop bars and take one M5 x 10 + T-nut each -> the plate is screwed to the frame.
-plate_outline = rounded_poly([(6, 2), (20, 2), (20, 22.5), (100, 22.5), (100, 28.5), (200, 28.5), (200, 22.5), (232, 22.5), (232, 276.5),
-                              (200, 276.5), (200, 271.5), (100, 271.5), (100, 276.5), (20, 276.5), (20, 298), (6, 298),
-                              (6, 260), (20, 260), (20, 40), (6, 40)], 2)
+# Rear ear (flat, X 0-20) sits behind the ear-stop bars. Two 2020 corner brackets per plate lock it:
+# one leg on the bar's rear face (M5 + T-nut), the other on the ear (M5 + nut through T1/T2). No bending.
+plate_outline = rounded_poly([(0, 2), (20, 2), (20, 22.5), (100, 22.5), (100, 28.5), (200, 28.5), (200, 22.5), (232, 22.5), (232, 276.5),
+                              (200, 276.5), (200, 271.5), (100, 271.5), (100, 276.5), (20, 276.5), (20, 298), (0, 298)], 2)
 plate_window = rrect(75, 55, 180, 175, 10)
-plate_tab_holes = [(13, 10), (13, 290)]
-plate_bends = [((20, 2), (20, 40)), ((20, 260), (20, 298))]
+plate_slot = obround(10, 150, 44, 12)
+plate_tab_holes = [(10, 10), (10, 290)]
+plate_bends = []
 
 def plate_dxf(path):
     doc = ezdxf.new("R2010", setup=True); doc.units = ezdxf.units.MM
-    msp = doc.modelspace(); doc.layers.add("CUT", color=7); doc.layers.add("BEND", color=1, linetype="DASHED")
-    for pl in (plate_outline, plate_window):
+    msp = doc.modelspace(); doc.layers.add("CUT", color=7)
+    for pl in (plate_outline, plate_window, plate_slot):
         msp.add_lwpolyline(pl, format="xyb", close=True, dxfattribs={"layer": "CUT"})
     for x, y in SO: msp.add_circle((x, y), 1.7, dxfattribs={"layer": "CUT"})
     for x, y in plate_tab_holes: msp.add_circle((x, y), 2.75, dxfattribs={"layer": "CUT"})
-    for a, b in plate_bends: msp.add_line(a, b, dxfattribs={"layer": "BEND"})
     doc.saveas(path)
 
 # ---------- part 2: front acrylic 3 mm ----------
@@ -135,41 +134,39 @@ def plate_pdf(path):
     with PdfPages(path) as pdf:
         fig = plt.figure(figsize=(11.69, 8.27))
         ax = fig.add_axes([0.03, 0.08, 0.55, 0.85]); setup(ax, "TẤM ĐỠ BO – nhôm 2 mm (5052/6061) – SL: 5 (4 + 1 dự phòng)", 232, 300)
-        draw_pl(ax, plate_outline); draw_pl(ax, plate_window)
-        for a, b in plate_bends: ax.plot(*zip(a, b), ls="--", lw=0.8, c="r")
+        draw_pl(ax, plate_outline); draw_pl(ax, plate_window); draw_pl(ax, plate_slot)
         ax.add_patch(Polygon([(28, 28), (229, 28), (229, 271.84), (28, 271.84)], closed=True, fill=False, ls="--", lw=0.5, ec="#2e8b57"))
         ax.text(130, 265, "vị trí bo mạch 201 × 244 (nét đứt)", fontsize=6.5, color="#2e8b57", ha="center")
         for i, (x, y) in enumerate(SO):
             ax.add_patch(Circle((x, y), 1.7, fill=False, lw=0.8)); ax.text(x + 4, y + 3, f"H{i+1}", fontsize=7)
         for i, (x, y) in enumerate(plate_tab_holes):
-            ax.add_patch(Circle((x, y), 2.75, fill=False, lw=0.8)); ax.text(x - 6, y + 12 if y < 150 else y - 16, f"T{i+1}", fontsize=7)
-        ax.text(4, 150, "đường gấp 90° (nét đỏ)", rotation=90, fontsize=6, ha="center", va="center", color="r")
-        dim(ax, (6, 0), (232, 0), -14, "226 (trải phẳng)"); dim(ax, (20, 0), (232, 0), -24, "212")
+            ax.add_patch(Circle((x, y), 2.75, fill=False, lw=0.8)); ax.text(x + 4, y + 3 if y < 150 else y - 8, f"T{i+1}", fontsize=7)
+        ax.text(10, 150, "tay kéo", rotation=90, fontsize=6, ha="center", va="center")
+        dim(ax, (0, 0), (232, 0), -14, "232"); dim(ax, (20, 0), (232, 0), -24, "212")
         dim(ax, (0, 2), (0, 298), -14, "296", vert=True); dim(ax, (232, 22.5), (232, 276.5), 14, "254", vert=True)
-        ax.text(0, 306, "← SAU (phía cổng I/O; 2 tai gấp bắt vít vào thanh chặn sau)", fontsize=7)
+        ax.text(0, 306, "← SAU (phía cổng I/O; tai bắt ke góc vào thanh chặn sau)", fontsize=7)
         ax.text(232, 306, "TRƯỚC →", fontsize=7, ha="right")
         ax2 = fig.add_axes([0.6, 0.08, 0.38, 0.85])
         rows = [[f"H{i+1}", f"{x:.2f}", f"{y:.2f}", "Ø3,4", "M3 cột đồng 6 mm"] for i, (x, y) in enumerate(SO)]
-        rows += [[f"T{i+1}", f"{x:.1f}", f"{y:.1f}", "Ø5,5", "vít M5 × 10 vào thanh chặn"] for i, (x, y) in enumerate(plate_tab_holes)]
-        rows += [["Cửa sổ", "75–180", "55–175", "R10", "giảm khối lượng"], ["Gấp", "20", "2–40, 260–298", "90°", "tai 14 mm về mặt linh kiện"]]
+        rows += [[f"T{i+1}", f"{x:.1f}", f"{y:.1f}", "Ø5,5", "M5 + đai ốc bắt ke góc 2020"] for i, (x, y) in enumerate(plate_tab_holes)]
+        rows += [["Cửa sổ", "75–180", "55–175", "R10", "giảm khối lượng"], ["Tay kéo", "10", "128–172", "12 × 44", "rãnh ô van"]]
         table(ax2, rows, ["Lỗ", "X (mm)", "Y (mm)", "Kích thước", "Ghi chú"], [0.12, 0.14, 0.14, 0.17, 0.43])
         ax2.text(0, 0.42, "\n".join([
-            "Gốc toạ độ: X = 0 cách đường gấp 20 mm (X 20 = mặt sau thanh chặn).",
-            "2 TAI GẤP: X 6–20, gấp 90° theo đường X 20 về phía mặt linh kiện,",
-            "  cao ngoài 14 mm sau gấp (xưởng tự trừ hao gấp). Lỗ T1/T2 bắt vít.",
+            "Gốc toạ độ: góc dưới‑trái của tai (X 20 = mặt sau thanh chặn).",
+            "Tấm PHẲNG, không chấn. T1/T2: bắt 2 ke góc 2020 vào thanh chặn.",
             "Dung sai ±0,2 mm. Bo góc ngoài R2. Không vát mép, đánh ba via.",
             "H1–H7 = toạ độ lỗ chuẩn microATX. Bo 24,4 × 20,1 cm chỉ dùng",
             "  một phần các lỗ này; lỗ thừa để trống, không sao.",
             "Mặt linh kiện của bo hướng ra người nhìn (mặt này).",
             "Bản vẽ trang 2 in tỉ lệ 1:1 trên A3 để ướm bo trước khi đặt cắt.",
             "Khoét lõm X 100–200: mép dưới Y 28,5, mép trên Y 271,5 (chừa chỗ quạt).",
-            "Khối lượng ≈ 210 g/tấm.",
+            "Khối lượng ≈ 215 g/tấm.",
         ]), fontsize=8, va="top", transform=ax2.transAxes)
         pdf.savefig(fig); plt.close(fig)
         # 1:1 template on A3 landscape (420 x 297 mm)
         fig = plt.figure(figsize=(420 / 25.4, 297 / 25.4))
         ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(-90, 330); ax.set_ylim(-1, 296); ax.set_aspect("equal"); ax.axis("off")
-        draw_pl(ax, plate_outline); draw_pl(ax, plate_window)
+        draw_pl(ax, plate_outline); draw_pl(ax, plate_window); draw_pl(ax, plate_slot)
         ax.add_patch(Polygon([(28, 28), (229, 28), (229, 271.84), (28, 271.84)], closed=True, fill=False, ls="--", lw=0.5, ec="#2e8b57"))
         for i, (x, y) in enumerate(SO):
             ax.add_patch(Circle((x, y), 1.7, fill=False, lw=0.6)); ax.plot([x - 4, x + 4], [y, y], lw=0.3, c="k"); ax.plot([x, x], [y - 4, y + 4], lw=0.3, c="k")

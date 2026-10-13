@@ -2,7 +2,7 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
 
 1) tam-do-bo_nhom-2mm_x5.dxf  -> xưởng cắt laser/CNC nhôm
    Nhôm tấm 2 mm (5052 hoặc 6061), SL 5. Có khoét lõm mép trên + dưới ở giữa (chỗ quạt).
-   CẮT + CHẤN: 2 tai sau gấp 90° theo nét đỏ (lớp BEND), cao ngoài 14 mm, gấp về phía mặt linh kiện. Lớp CUT = cắt xuyên. Đơn vị mm.
+   Tấm phẳng, chỉ cắt laser (không chấn). Lỗ T1/T2 ở tai để bắt ke góc 2020. Lớp CUT = cắt xuyên. Đơn vị mm.
    PDF kèm: trang 1 có kích thước + bảng toạ độ lỗ; trang 2 là mẫu 1:1 (in A3, 100 %)
    để đặt bo mạch lên kiểm tra lỗ TRƯỚC khi đặt cắt.
 
