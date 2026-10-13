@@ -62,9 +62,9 @@ def obround(cx, cy, L, Wd):
 # Standard microATX holes (x along I/O edge from slot-side edge, y from I/O edge) -> X = 28 + y, Y = 271.84 - x.
 MATX = [(80.01, 10.16), (34.29, 10.16), (237.49, 33.02), (237.49, 165.10), (80.01, 165.10), (34.29, 165.10), (13.97, 165.10)]
 SO = [(round(28 + y, 2), round(271.84 - x, 2)) for x, y in MATX]
-# Notches (X 100-200) clear the top + bottom fans that sit inside the box: bottom edge Y 27, top edge Y 272.5 there.
-plate_outline = rounded_poly([(0, 2), (20, 2), (20, 22.5), (100, 22.5), (100, 27), (200, 27), (200, 22.5), (232, 22.5), (232, 276.5),
-                              (200, 276.5), (200, 272.5), (100, 272.5), (100, 276.5), (20, 276.5), (20, 298), (0, 298)], 2)
+# Notches (X 100-200) clear the top + bottom fans that sit inside the box: bottom edge Y 28.5, top edge Y 271.5 there.
+plate_outline = rounded_poly([(0, 2), (20, 2), (20, 22.5), (100, 22.5), (100, 28.5), (200, 28.5), (200, 22.5), (232, 22.5), (232, 276.5),
+                              (200, 276.5), (200, 271.5), (100, 271.5), (100, 276.5), (20, 276.5), (20, 298), (0, 298)], 2)
 plate_window = rrect(75, 55, 180, 175, 10)
 plate_slot = obround(10, 150, 44, 12)
 plate_zip = [(10, 10), (10, 290)]
@@ -155,7 +155,7 @@ def plate_pdf(path):
             "  một phần các lỗ này; lỗ thừa để trống, không sao.",
             "Mặt linh kiện của bo hướng ra người nhìn (mặt này).",
             "Bản vẽ trang 2 in tỉ lệ 1:1 trên A3 để ướm bo trước khi đặt cắt.",
-            "Khoét lõm X 100–200: mép dưới Y 27, mép trên Y 272,5 (chừa chỗ quạt).",
+            "Khoét lõm X 100–200: mép dưới Y 28,5, mép trên Y 271,5 (chừa chỗ quạt).",
             "Khối lượng ≈ 215 g/tấm.",
         ]), fontsize=8, va="top", transform=ax2.transAxes)
         pdf.savefig(fig); plt.close(fig)
@@ -174,7 +174,7 @@ def plate_pdf(path):
 def acr_pdf(path):
     with PdfPages(path) as pdf:
         fig = plt.figure(figsize=(11.69, 8.27))
-        ax = fig.add_axes([0.03, 0.1, 0.6, 0.82]); setup(ax, f"MẶT TRƯỚC – mica trong 3 mm – SL: 1 (bản {N} máy, nhôm 2020)", W, H)
+        ax = fig.add_axes([0.03, 0.1, 0.6, 0.82]); setup(ax, f"MẶT TRƯỚC – mica đen trong 3 mm – SL: 1 (bản {N} máy, nhôm 2020)", W, H)
         draw_pl(ax, acr_outline)
         for x, y in MOUNT: ax.add_patch(Circle((x, y), 2.75, fill=False, lw=0.8))
         for i, (x, y) in enumerate(FANS):
