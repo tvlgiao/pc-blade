@@ -1,0 +1,17 @@
+BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
+
+1) tam-do-bo_nhom-2mm_x5.dxf  -> xưởng cắt laser/CNC nhôm
+   Nhôm tấm 2 mm (5052 hoặc 6061), SL 5. Lớp CUT = cắt xuyên. Đơn vị mm.
+   PDF kèm: trang 1 có kích thước + bảng toạ độ lỗ; trang 2 là mẫu 1:1 (in A3, 100 %)
+   để đặt bo mạch lên kiểm tra lỗ TRƯỚC khi đặt cắt.
+
+2) mat-truoc_mica-3mm_x1.dxf  -> xưởng cắt laser mica
+   Mica trong 3 mm, SL 1. Lớp CUT = cắt xuyên, lớp ENGRAVE = khắc chữ (số 1–4, POWER).
+
+3) luoc_PETG_x8.stl  -> dịch vụ in 3D
+   SL 8 (4 trên + 4 dưới, cùng một mẫu). PETG, 3 vách, 40 % infill, in mặt phẳng úp xuống bàn.
+   ~31 g/cái. Rãnh 2,6 mm cho tấm nhôm 2 mm, có vát dẫn hướng ở đầu sau.
+
+4) gia-switch_PETG_x1.stl  -> dịch vụ in 3D
+   SL 1. PETG, in úp mặt bích xuống bàn, 3 vách, 30 % infill, ~82 g. Dài 114 mm, 2 lỗ M5 cách nhau 100 mm theo chiều sâu.
+   Ôm vừa switch TP-Link TL-SG105 (99,8 x 98 x 25 mm). Switch khác cỡ: báo lại để chỉnh.

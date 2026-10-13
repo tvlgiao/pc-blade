@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Khung 2020 ghép 4 PC i3-12100 dạng blade: mô hình 3D, danh sách mua, file gia công.">
+<title>Khung PC Blade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: header + bay selector → 3D viewer full width with overlay toolbar → spec sections in an auto-fit grid */
+:root {
+  --bg: #eceff3;
+  --surface: #f8f9fb;
+  --fg: #17202b;
+  --muted: #5b6674;
+  --line: #cfd6de;
+  --accent: #1f68c8;
+  --accent-ink: #ffffff;
+  --viewer: #dde3ea;
+  --viewer-hi: #f3f5f8;
+  --chip: rgba(255,255,255,.84);
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e131a; --surface: #151c25; --fg: #e5eaf0; --muted: #96a2b1; --line: #29333f;
+    --accent: #5d9df0; --accent-ink: #0b1220; --viewer: #111821; --viewer-hi: #1d2733; --chip: rgba(21,28,37,.88);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e131a; --surface: #151c25; --fg: #e5eaf0; --muted: #96a2b1; --line: #29333f;
+  --accent: #5d9df0; --accent-ink: #0b1220; --viewer: #111821; --viewer-hi: #1d2733; --chip: rgba(21,28,37,.88);
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 48px; display: grid; gap: 18px; }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 5vw, 44px); line-height: 1; margin: 0; letter-spacing: .01em; text-wrap: balance; }
+.sub { color: var(--muted); margin: 6px 0 0; max-width: 62ch; }
+
+.config { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.config label { font: 600 12px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.seg { display: flex; gap: 4px; }
+.seg button { font: 600 15px/1 var(--font-mono); min-width: 40px; padding: 9px 0; border-radius: 6px; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.seg button:focus-visible, .toolbar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.stats { display: flex; flex-wrap: wrap; gap: 6px 20px; font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stats b { color: var(--fg); font-weight: 600; }
+
+.viewer { position: relative; height: clamp(400px, 70vh, 760px); border-radius: 10px; overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 30%, var(--viewer-hi), var(--viewer)); border: 1px solid var(--line); }
+.viewer canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.viewer canvas:active { cursor: grabbing; }
+.toolbar { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; pointer-events: none; }
+.toolbar .grp { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 8px; background: var(--chip); backdrop-filter: blur(6px); border: 1px solid var(--line); pointer-events: auto; }
+.toolbar button { font: 600 13px/1 var(--font-body); color: var(--fg); background: transparent; border: 0; border-radius: 5px; padding: 8px 10px; cursor: pointer; }
+.toolbar button:hover { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.toolbar button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.hint { position: absolute; top: 12px; left: 12px; right: 12px; width: fit-content; font: 500 12px var(--font-mono); color: var(--muted); background: var(--chip); padding: 6px 9px; border-radius: 6px; border: 1px solid var(--line); }
+.tip { position: absolute; pointer-events: none; font: 600 12.5px/1.35 var(--font-body); color: var(--accent-ink); background: var(--accent); padding: 6px 9px; border-radius: 6px; max-width: 260px; transform: translate(12px, 12px); }
+
+.controls { display: grid; gap: 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); margin-top: -8px; }
+.controls .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.controls .lab { font: 600 12px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); min-width: 84px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 600 13px/1 var(--font-body); padding: 8px 11px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.chip.ghost { color: var(--accent); border-color: transparent; }
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mchip { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.mchip .chip { border: 0; border-radius: 0; }
+.mchip .chip + .chip { border-left: 1px solid var(--line); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px 28px; }
+section { min-width: 0; }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0 0 8px; padding-bottom: 6px; border-bottom: 2px solid var(--fg); letter-spacing: .02em; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+td, th { padding: 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+th { font: 600 11px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+th.r { text-align: right; }
+td.n { font-family: var(--font-mono); font-size: 13px; text-align: right; white-space: nowrap; padding-left: 12px; font-variant-numeric: tabular-nums; }
+ol, ul { margin: 0; padding-left: 20px; display: grid; gap: 5px; }
+.warn { margin: 10px 0 0; padding: 10px 12px; border-left: 3px solid var(--accent); background: var(--surface); font-size: 14px; }
+code { font-family: var(--font-mono); font-size: 12.5px; }
+.wide { grid-column: 1 / -1; }
+a { color: var(--accent); text-underline-offset: 2px; }
+tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 14px; }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Khung PC Blade</h1>
+      <p class="sub">Bo ASRock B760M‑HDV/M.2 D4 (i3‑12100, 16 GB) dựng đứng như sách trên giá. Nguồn ATX đang có cấp 12 V cho từng bộ DC‑ATX qua hộp cầu chì. Mỗi máy là một khoang 72 mm, thêm hoặc bớt được. Switch mạng 5 cổng treo trên nguồn, ăn gió từ quạt trước.</p>
+    </div>
+  </header>
+
+  <div class="config">
+    <label for="n4">Số máy</label>
+    <div class="seg" role="group" aria-label="Số máy">
+      <button id="n2">2</button><button id="n3">3</button><button id="n4">4</button><button id="n5">5</button><button id="n6">6</button>
+    </div>
+    <div class="stats" aria-live="polite">
+      <span>Phủ bì <b id="st-env">424 × 289 × 310 mm</b></span>
+      <span>Khung <b id="st-frame">424 × 260 × 300 mm</b></span>
+      <span>Thể tích <b id="st-vol">35 L</b></span>
+      <span>Nguồn <b id="st-psu">≥ 550 W</b></span>
+      <span>Nặng <b id="st-kg">≈ 11,6 kg</b></span>
+    </div>
+  </div>
+
+  <div class="viewer" id="viewer">
+    <canvas id="c" aria-label="Mô hình 3D khung PC blade"></canvas>
+    <div class="hint">Kéo để xoay · cuộn/chụm để phóng · rê lên chi tiết để xem tên</div>
+    <div class="tip" id="tip" hidden></div>
+    <div class="toolbar">
+      <div class="grp" role="group" aria-label="Góc nhìn">
+        <button id="v-iso" aria-pressed="true">Phối cảnh</button>
+        <button id="v-front">Trước</button>
+        <button id="v-rear">Sau</button>
+        <button id="v-top">Trên</button>
+      </div>
+      <div class="grp" role="group" aria-label="Cận cảnh">
+        <button id="v-pico">Cận cảnh DC‑ATX</button>
+        <button id="t-fan" aria-pressed="false">Quạt quay</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="row">
+      <span class="lab">Cấu hình</span>
+      <div class="chips" role="group" aria-label="Kiểu đỡ bo">
+        <button class="chip" id="o-plate" aria-pressed="true">Tấm nhôm 2 mm</button>
+        <button class="chip" id="o-ladder" aria-pressed="false">Khung thang 20×3 (bỏ tấm)</button>
+      </div>
+      <div class="chips" role="group" aria-label="Loại nhôm khung">
+        <button class="chip" id="o-std" aria-pressed="false">2020 · 4 ray</button>
+        <button class="chip" id="o-std2" aria-pressed="true">2020 · 2 ray (đã chốt)</button>
+        <button class="chip" id="o-light" aria-pressed="false">1515 · 2 ray</button>
+      </div>
+    </div>
+    <div class="row">
+      <span class="lab">Hiện / ẩn</span>
+      <div class="chips" id="catBtns" role="group" aria-label="Hiện hoặc ẩn từng loại chi tiết"></div>
+      <button class="chip ghost" id="allOn">Hiện tất cả</button>
+    </div>
+    <div class="row">
+      <span class="lab">Từng máy</span>
+      <div class="chips" id="mBtns" role="group" aria-label="Hiện, ẩn hoặc rút từng máy"></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <section class="wide">
+      <h2>Mô‑đun hóa: thêm hoặc bớt máy</h2>
+      <table>
+        <tr><th>Phần</th><th>Khi đổi số máy</th></tr>
+        <tr><td>Khoang máy 72 mm: tấm đỡ, mảnh lược 72 mm (trên + dưới), 1 nhánh cầu chì, 1 nút có đèn, 1 cáp LAN</td><td>Thêm/bớt nguyên khoang. Lược in rời từng khoang, trượt trên ray 2020.</td></tr>
+        <tr><td>4 cột 300 mm, 4 thanh dọc 220 mm, khoang nguồn 92 mm, nguồn ATX</td><td>Giữ nguyên.</td></tr>
+        <tr><td>8 thanh ngang (dài <code>96 + 72 × số máy</code>) và tấm mica mặt trước</td><td>Thay bộ mới. Chỉ 8 thanh nhôm thẳng, cắt sẵn ở tiệm.</td></tr>
+        <tr><td>Thu hẹp không muốn cắt lại</td><td>Giữ khung cũ, để trống khoang, che bằng tấm nhôm trơn.</td></tr>
+        <tr><td>Trên 6 máy</td><td>Lắp khung thứ hai với nguồn riêng. Đặt cạnh nhau hoặc chồng lên nhau, nối cột bằng tấm nối 2020.</td></tr>
+      </table>
+      <p class="warn">Tôi khuyên đặt cắt sẵn 2 bộ thanh ngang: bộ 4 máy (384 mm) và bộ 6 máy (528 mm). Đổi cấu hình chỉ mất khoảng 20 phút tháo lắp.</p>
+    </section>
+
+    <section>
+      <h2>Cắt nhôm và tấm</h2>
+      <table>
+        <tr><th>Chi tiết</th><th class="r">SL × dài</th></tr>
+        <tr><td>Nhôm <span class="prof">2020</span>, cột góc</td><td class="n">4 × 300 mm</td></tr>
+        <tr><td>Nhôm <span class="prof">2020</span>, <span id="c-wbar-name">thanh ngang (4 viền + 4 ray đỡ lược)</span></td><td class="n" id="c-wbar">8 × 384 mm</td></tr>
+        <tr><td>Nhôm <span class="prof">2020</span>, thanh dọc hông</td><td class="n" id="c-dbar">4 × 220 mm</td></tr>
+        <tr><td>Ke góc <span class="prof">2020</span> + T‑nut</td><td class="n" id="c-ke">≈ 32 bộ</td></tr>
+        <tr><td id="c-plate-name">Tấm đỡ bo, nhôm 2 mm (khoan theo lỗ của bo)</td><td class="n" id="c-plate">4 × 210 × 255</td></tr>
+        <tr><td id="c-comb-name">Mảnh lược in 3D, khe 3,5 mm, dài 72 mm</td><td class="n" id="c-comb">16 mảnh</td></tr>
+        <tr><td>Mica 3 mm bắt ngoài mặt trước, cắt theo file DXF (lỗ quạt Ø116, nút Ø16,2, công tắc Ø6,2, 8 lỗ M5)</td><td class="n" id="c-acr">384 × 260</td></tr>
+        <tr><td>Chân cao su 10 mm</td><td class="n">4</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Điện và quạt</h2>
+      <table>
+        <tr><th>Chi tiết</th><th class="r">SL</th></tr>
+        <tr><td>Nguồn ATX 12 V single‑rail</td><td class="n" id="e-psu">1 × ≥ 550 W</td></tr>
+        <tr><td>DC‑ATX 160 W, vào 12 V, đường 12 V ra 8 A (nên đặt PL2 ≈ 80 W trong BIOS)</td><td class="n" id="e-pico">4</td></tr>
+        <tr><td>Hộp cầu chì ô tô 6 ngả + cầu chì 15 A</td><td class="n" id="e-fuse">1 + 4</td></tr>
+        <tr><td>Dây 12 V chính AWG 10, nhánh AWG 14</td><td class="n">—</td></tr>
+        <tr><td>Jumper PS_ON: chân 16 (xanh lá) nối COM (đen) trên 24‑pin</td><td class="n">1</td></tr>
+        <tr><td>Nút nhấn nhả 16 mm có đèn 5 V (dây tới F_PANEL) + công tắc gạt MTS‑102</td><td class="n" id="e-btn">4 + 1</td></tr>
+        <tr><td>Switch TP‑Link TL‑SG105 (5 V) trong giá in PETG, điện 5 V từ cáp Molex → SATA nối jack DC</td><td class="n">1</td></tr>
+        <tr><td>Quạt 120 mm PWM + hub quạt (PWM từ SYS_FAN máy 1)</td><td class="n" id="e-fan">4 + 1</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Ngân sách điện</h2>
+      <table>
+        <tr><th>Trạng thái</th><th class="r">1 máy</th><th class="r" id="p-head">4 máy</th></tr>
+        <tr><td>Rảnh</td><td class="n">15–20 W</td><td class="n" id="p-idle">60–80 W</td></tr>
+        <tr><td>Tải nặng (PL2 89 W + bo, RAM, SSD)</td><td class="n">≈ 110 W</td><td class="n" id="p-peak">≈ 440 W</td></tr>
+        <tr><td>Dòng 12 V đỉnh</td><td class="n">≈ 9 A</td><td class="n" id="p-amp">≈ 37 A</td></tr>
+      </table>
+      <p class="warn">Phủ bì đã gồm tai chặn sau 20 mm, mica + đầu nút trước 9 mm và chân 10 mm. Để chừa thêm khoảng 80 mm phía sau cho dây LAN, HDMI và dây nguồn AC. Vỏ nguồn giữ nguyên zin, khung nối đất qua vít vỏ nguồn.</p>
+    </section>
+
+    <section>
+      <h2>Trọng lượng</h2>
+      <table>
+        <tr><th>Phần</th><th class="r">kg</th></tr>
+        <tr><td id="w-sled-desc">Máy: bo ≈ 500 g, CPU 30 g, tản RM1 350 g, RAM 70 g, SSD 10 g, DC‑ATX 91 g, tấm nhôm 290 g, lược và nút 80 g</td><td class="n" id="w-sled">4 × 1,42</td></tr>
+        <tr><td id="w-alu-desc">Nhôm 2020 (0,5 kg/m)</td><td class="n" id="w-alu">2,58</td></tr>
+        <tr><td>Ke góc, T‑nut, ốc</td><td class="n" id="w-ke">0,64</td></tr>
+        <tr><td>Mica mặt trước, quạt 120 mm (≈ 130 g/cái), hub</td><td class="n" id="w-front">0,78</td></tr>
+        <tr><td>Nguồn ATX</td><td class="n" id="w-psu">1,60</td></tr>
+        <tr><td>Hộp cầu chì, dây 12 V, chân cao su, switch + giá in</td><td class="n">0,65</td></tr>
+        <tr><td><b>Tổng</b></td><td class="n"><b id="w-total">≈ 11,6</b></td></tr>
+      </table>
+      <p class="warn">Sai số khoảng ±10%. Số đo từ nguồn: tản RM1 347–350 g, picoPSU‑160‑XT 91 g, nhôm 2020 0,5 kg/m. Bo, RAM, nguồn ATX và ke là ước tính, cân thực tế để chốt.</p>
+    </section>
+
+    <section>
+      <h2>Thứ tự lắp</h2>
+      <ol>
+        <li>Bắt 7 cột đồng 6 mm vào tấm nhôm đã cắt sẵn lỗ (lót long đền M3 dưới đầu vít), đặt bo lên, bắt vít M3 × 5.</li>
+        <li>Cắm DC‑ATX vào 24‑pin, dây 4‑pin vào nửa cổng CPU 8‑pin.</li>
+        <li>Ráp khung 2020, bắt ray giữa trên và dưới, bắt mảnh lược vào ray bằng vít M5 × 10 + long đền.</li>
+        <li>Đặt nguồn ATX dựng đứng vào khoang phải, quạt nguồn ra hông, giữ bằng băng dán gai. Cắm jumper PS_ON. Treo giá switch lên thanh sau và ray giữa phía trên, luồn switch vào từ phía sau.</li>
+        <li>Đi dây 12 V: nguồn → hộp cầu chì → từng nhánh, dọc mép trên phía trước.</li>
+        <li>Trượt từng tấm bo vào lược từ phía sau đến khi tai chặn chạm thanh sau, cổng I/O ra sau, buộc dây rút qua 2 lỗ ở tai. Cắm cáp LAN 30 cm vào switch.</li>
+        <li>Bắt mica ra ngoài mặt trước bằng 8 vít M5. Quạt + lưới lọc bắt xuyên mica bằng vít M4 × 40. Nối nút có đèn vào F_PANEL từng máy.</li>
+        <li>BIOS từng máy: <code>Restore on AC Power Loss = Power On</code>, bật Wake‑on‑LAN.</li>
+      </ol>
+    </section>
+
+    <section class="wide" id="mua">
+      <h2>Danh sách mua (Shopee, đã chọn shop)</h2>
+      <table>
+        <tr><th>Món (bấm để mở Shopee)</th><th>Mua</th><th class="r">Giá</th></tr>
+        <tr class="grp"><td colspan="3">Nhôm khung (shop PStore Linh Kiện CNC, TP.HCM)</td></tr>
+        <tr><td><a href="https://shopee.vn/product/370915692/18582419413" target="_blank" rel="noopener">Nhôm 2020 EU, cắt theo yêu cầu</a></td><td>5 m; nhắn shop cắt 4×300, 4×220, 6×384 mm</td><td class="n">135k/m</td></tr>
+        <tr><td><a href="https://shopee.vn/product/370915692/21982369902" target="_blank" rel="noopener">Ke góc ngoài 2020</a></td><td>30 cái</td><td class="n">từ 5,5k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/370915692/19991324646" target="_blank" rel="noopener">Con trượt T xoay (lắp sau khi ráp khung)</a></td><td>≈ 90 con</td><td class="n">21k/gói</td></tr>
+        <tr class="grp"><td colspan="3">Ốc vít inox (shop SaGo Tool)</td></tr>
+        <tr><td><a href="https://shopee.vn/product/59961430/18526140511" target="_blank" rel="noopener">Vít đầu dù M5 × 10</a></td><td>9 gói (90 con)</td><td class="n">—</td></tr>
+        <tr><td><a href="https://shopee.vn/product/59961430/21167497169" target="_blank" rel="noopener">Long đền phẳng M5, kèm M3</a></td><td>≈ 90 M5 + 30 M3</td><td class="n">—</td></tr>
+        <tr><td><a href="https://shopee.vn/product/59961430/18076698796" target="_blank" rel="noopener">Vít pake M4 × 40 (bắt quạt)</a></td><td>2 gói</td><td class="n">—</td></tr>
+        <tr><td><a href="https://shopee.vn/product/59961430/22909947653" target="_blank" rel="noopener">Đai ốc M4</a></td><td>2 gói</td><td class="n">—</td></tr>
+        <tr><td><a href="https://shopee.vn/product/1536794906/41226017692" target="_blank" rel="noopener">Cột đồng M3 cái–cái 6 mm + gói vít M3 × 5</a></td><td>3 gói cột + 6 gói vít</td><td class="n">11,9k</td></tr>
+        <tr class="grp"><td colspan="3">Điện</td></tr>
+        <tr><td><a href="https://shopee.vn/product/951399259/27202373150" target="_blank" rel="noopener">DC‑ATX 160 W (thegioimodule, TP.HCM)</a></td><td>4</td><td class="n">385k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/1572344148/44010994681" target="_blank" rel="noopener">Hộp cầu chì 6 ngả có đèn báo</a></td><td>1, chọn 6 ngả</td><td class="n">theo loại</td></tr>
+        <tr><td><a href="https://shopee.vn/product/1236595039/26786094388" target="_blank" rel="noopener">Hộp cầu chì lưỡi 50 cái 2–35 A</a></td><td>1 (dùng 15 A)</td><td class="n">35k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/65877537/27985190123" target="_blank" rel="noopener">Dây silicone mềm theo mét</a></td><td>10 AWG: 1 m đỏ + 1 m đen; 14 AWG: 3 m đỏ + 3 m đen</td><td class="n">từ 11,5k/m</td></tr>
+        <tr><td><a href="https://shopee.vn/product/94701448/15351869899" target="_blank" rel="noopener">Cáp nối dài CPU 8‑pin 20 cm</a></td><td>1</td><td class="n">27,5k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/94701448/11571929527" target="_blank" rel="noopener">Cáp nối dài 24‑pin 30 cm</a></td><td>1</td><td class="n">42,9k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/94701448/8062317661" target="_blank" rel="noopener">Cáp Molex → 2 SATA (lấy 5 V cho switch)</a></td><td>1</td><td class="n">18k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/120139494/44424996827" target="_blank" rel="noopener">Cáp nối dài PCIe 8‑pin 25 cm</a></td><td>1, chọn 8‑pin VGA</td><td class="n">59k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/1033330712/19490785453" target="_blank" rel="noopener">Jack DC 5,5 × 2,1 đực có dây</a></td><td>1</td><td class="n">12k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/238879861/4548917504" target="_blank" rel="noopener">Cos pin rỗng, túi 100</a></td><td>1</td><td class="n">15k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/333151953/18513528585" target="_blank" rel="noopener">Công tắc gạt MTS‑102, gói 5</a></td><td>1 gói</td><td class="n">15k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/68721481/17389446702" target="_blank" rel="noopener">Nút nhấn nhả 16 mm có đèn</a></td><td>4, chọn 5 V nhấn nhả</td><td class="n">35k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/494330825/9381418486" target="_blank" rel="noopener">Dây dupont 40 sợi</a></td><td>1 bó, cái–cái 40 cm</td><td class="n">25k</td></tr>
+        <tr class="grp"><td colspan="3">Quạt và mạng</td></tr>
+        <tr><td><a href="https://shopee.vn/product/83109123/23283879160" target="_blank" rel="noopener">Quạt Starlink KF120 PWM 4‑pin</a></td><td>4</td><td class="n">60k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/113877878/20093258607" target="_blank" rel="noopener">Lưới lọc bụi 12 cm kèm ốc</a></td><td>4</td><td class="n">12,9k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/110272203/18669823642" target="_blank" rel="noopener">Hub quạt PWM 10 cổng (kiểm tra có đầu SATA)</a></td><td>1</td><td class="n">77k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/110272203/20950360510" target="_blank" rel="noopener">Cáp nối dài quạt 4‑pin PWM</a></td><td>1, loại 40 cm</td><td class="n">30k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/1007310093/24602052203" target="_blank" rel="noopener">Switch TP‑Link TL‑SG105 (5 V)</a></td><td>1</td><td class="n">349k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/177448719/29857473563" target="_blank" rel="noopener">Cáp LAN Cat6 đúc sẵn 30 cm</a></td><td>4</td><td class="n">31k</td></tr>
+        <tr><td><a href="https://shopee.vn/product/847761192/19740502842" target="_blank" rel="noopener">Cáp LAN Cat6 dài ra router</a></td><td>1, chọn độ dài</td><td class="n">từ 102k</td></tr>
+        <tr class="grp"><td colspan="3">Linh tinh</td></tr>
+        <tr><td><a href="https://shopee.vn/product/36387091/43561265978" target="_blank" rel="noopener">Chân cao su dán</a></td><td>4</td><td class="n">—</td></tr>
+        <tr><td><a href="https://shopee.vn/product/49207665/23475983346" target="_blank" rel="noopener">Nắp bịt đầu nhôm combo 10</a></td><td>1, cỡ 20×20</td><td class="n">—</td></tr>
+        <tr><td><a href="https://shopee.vn/product/120746030/55414655516" target="_blank" rel="noopener">Băng dán gai 5 m × 12 mm (giữ nguồn)</a></td><td>1</td><td class="n">—</td></tr>
+        <tr class="grp"><td colspan="3">Dịch vụ gia công</td></tr>
+        <tr><td><a href="https://shopee.vn/product/961147852/22676249970" target="_blank" rel="noopener">Cắt laser mica theo file (gửi mat-truoc_mica-3mm_x1.dxf)</a></td><td>1 tấm mica trong 3 mm</td><td class="n">báo giá</td></tr>
+        <tr><td><a href="https://shopee.vn/product/66748910/17164097346" target="_blank" rel="noopener">In 3D PETG (gửi luoc_PETG_x8.stl + gia-switch_PETG_x1.stl)</a></td><td>8 lược + 1 giá</td><td class="n">báo giá</td></tr>
+        <tr><td>Cắt laser nhôm 2 mm (gửi tam-do-bo_nhom-2mm_x5.dxf)</td><td>5 tấm; Shopee không có, tìm xưởng gần nhà: “gia công cắt laser nhôm tấm”</td><td class="n">báo giá</td></tr>
+      </table>
+      <p class="warn">Giá là giá thấp nhất hiển thị ngày 13/10/2026, chọn phân loại có thể khác. Tổng ước tính ≈ 4,2 triệu đồng (chưa gồm cắt nhôm, cắt mica, in 3D). Trước khi đặt: xem nguồn ATX còn trống đầu CPU 8‑pin hay PCIe 8‑pin và còn đầu Molex. DC‑ATX ra 12 V 8 A (≈ 96 W): đặt PL2 ≈ 80 W trong BIOS cho dư.</p>
+    </section>
+
+    <section class="wide" id="file">
+      <h2>File gia công</h2>
+      <table>
+        <tr><th>File</th><th>Gửi cho</th><th class="r">SL</th></tr>
+        <tr><td><a href="files/khung-4pc-gia-cong.zip" download><b>khung-4pc-gia-cong.zip</b></a></td><td>Tải trọn bộ: DXF, STL, PDF, hướng dẫn.</td><td class="n">—</td></tr>
+        <tr><td><a href="files/tam-do-bo_nhom-2mm_x5.dxf" download>tam-do-bo_nhom-2mm_x5.dxf</a> · <a href="files/tam-do-bo_nhom-2mm.pdf" target="_blank">PDF</a></td><td>Xưởng cắt laser nhôm 2 mm (5052/6061). PDF trang 2 là mẫu 1:1: in A3 100 %, đặt bo lên kiểm lỗ trước khi cắt.</td><td class="n">5</td></tr>
+        <tr><td><a href="files/mat-truoc_mica-3mm_x1.dxf" download>mat-truoc_mica-3mm_x1.dxf</a> · <a href="files/mat-truoc_mica-3mm.pdf" target="_blank">PDF</a></td><td>Cắt laser mica trong 3 mm. Lớp CUT cắt xuyên, ENGRAVE khắc chữ.</td><td class="n">1</td></tr>
+        <tr><td><a href="files/luoc_PETG_x8.stl" download>luoc_PETG_x8.stl</a></td><td>In 3D PETG, 3 vách, 40 % infill, mặt phẳng úp xuống.</td><td class="n">8</td></tr>
+        <tr><td><a href="files/gia-switch_PETG_x1.stl" download>gia-switch_PETG_x1.stl</a> · <a href="files/gia-switch_xem-truoc.png" target="_blank">ảnh</a></td><td>In 3D PETG, mặt bích úp xuống, 30 % infill. Dài 114 mm, 2 lỗ M5 cách 100 mm (bản sửa 13/10).</td><td class="n">1</td></tr>
+        <tr><td><a href="files/DOC-TRUOC.txt" target="_blank">DOC-TRUOC.txt</a></td><td>Hướng dẫn gửi kèm cho xưởng.</td><td class="n">—</td></tr>
+      </table>
+    </section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js" integrity="sha384-vV17nr/rMaJqmeZkFUzXLpHdQ+ME5QHKdydaqqN+3Ga39RJlNrTatJxHwGV4ml2C" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js" integrity="sha384-I0DMsfimAPIqWT8lF+oA997gRgdUi3jhidoTq3fN0zmn35smXZukD01FLnsPRU9i" crossorigin="anonymous"></script>
+<script>
+(() => {
+  const H = 300, D = 260, PITCH = 72, BAY = 92, FEET = 10;
+  const viewer = document.getElementById('viewer');
+  const canvas = document.getElementById('c');
+  const tip = document.getElementById('tip');
+  const $ = id => document.getElementById(id);
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(32, 1, 5, 8000);
+  const controls = new THREE.OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x6b7380, 0.75));
+  const key = new THREE.DirectionalLight(0xffffff, 0.85); key.position.set(500, 800, 600); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xdfe8ff, 0.35); fill.position.set(-600, 300, -500); scene.add(fill);
+
+  const M = (color, o = {}) => new THREE.MeshStandardMaterial({ color, roughness: o.r ?? 0.55, metalness: o.m ?? 0.1, transparent: !!o.t, opacity: o.t ?? 1, side: o.side ?? THREE.FrontSide });
+  const mat = {
+    alu: M(0xb9c0c8, { r: 0.35, m: 0.75 }), plate: M(0xcfd5db, { r: 0.4, m: 0.6 }),
+    pcb: M(0x1d2228, { r: 0.7 }), black: M(0x141518, { r: 0.6 }), socket: M(0x4a4f57, { r: 0.5, m: 0.3 }),
+    ihs: M(0xd8dde2, { r: 0.25, m: 0.9 }), heatsink: M(0x9aa3ad, { r: 0.35, m: 0.8 }), fanDark: M(0x22252a, { r: 0.7 }),
+    hub: M(0x2f6fd0, { r: 0.4 }), ram: M(0x1a1b1f, { r: 0.45, m: 0.4 }), ramTop: M(0xb02a2a, { r: 0.5 }),
+    pico: M(0x1e6b3a, { r: 0.6 }), term: M(0x2a8b3b, { r: 0.5 }), io: M(0x8c949d, { r: 0.4, m: 0.6 }),
+    usb: M(0x2560c9, { r: 0.5 }), ssd: M(0x26343f, { r: 0.6 }), comb: M(0xf1f1ec, { r: 0.8 }),
+    psu: M(0x2b2e33, { r: 0.75 }), grille: M(0x3a3e45, { r: 0.4, m: 0.6 }), fuse: M(0xd99a1d, { r: 0.55 }),
+    wireY: M(0xe0b81f, { r: 0.6 }), wireK: M(0x111111, { r: 0.6 }), wireG: M(0x2ea043, { r: 0.6 }),
+    acrylic: M(0x9fc1e6, { t: 0.16, r: 0.1, side: THREE.DoubleSide }), btn: M(0xe6e8eb, { r: 0.4, m: 0.3 }),
+    led: new THREE.MeshStandardMaterial({ color: 0x3fb950, emissive: 0x3fb950, emissiveIntensity: 0.9 }),
+    blade: M(0x2a2d33, { r: 0.6 }), shroud: M(0x1b1d21, { r: 0.7, side: THREE.DoubleSide }), foot: M(0x2a2a2a, { r: 0.9 }),
+    plug: M(0xe8c21a, { r: 0.6 }), cap: M(0xc9ccd4, { r: 0.3, m: 0.7 }), capBand: M(0x6a3d9e, { r: 0.5 }),
+    inductor: M(0x9da2a8, { r: 0.45, m: 0.5 }), filter: M(0x30343a, { t: 0.55, r: 0.8, side: THREE.DoubleSide }),
+  };
+
+  /* Every mesh is tagged with the category (CAT) and machine index (MI) current at creation time */
+  let CAT = 'frame', MI = -1;
+  function tag(mesh, label, parent) {
+    if (label) mesh.userData.label = label;
+    mesh.userData.cat = CAT; mesh.userData.m = MI;
+    parent.add(mesh);
+    return mesh;
+  }
+  function B(w, h, d, m, x, y, z, label, parent) {
+    const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m);
+    mesh.position.set(x, y, z);
+    return tag(mesh, label, parent);
+  }
+  function C(r, len, m, axis, x, y, z, label, parent, seg = 40, open = false) {
+    const mesh = new THREE.Mesh(new THREE.CylinderGeometry(r, r, len, seg, 1, open), m);
+    if (axis === 'x') mesh.rotation.z = Math.PI / 2;
+    if (axis === 'z') mesh.rotation.x = Math.PI / 2;
+    mesh.position.set(x, y, z);
+    return tag(mesh, label, parent);
+  }
+  function tube(points, m, r, label, parent) {
+    const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(...p)));
+    return tag(new THREE.Mesh(new THREE.TubeGeometry(curve, 80, r, 10, false), m), label, parent);
+  }
+
+  const CATS = [
+    ['frame', 'Khung nhôm'], ['comb', 'Lược'], ['plate', 'Tấm đỡ'], ['board', 'Bo mạch'],
+    ['cpu', 'CPU + tản'], ['ram', 'RAM'], ['dcatx', 'DC‑ATX'], ['cable', 'Dây 12 V'],
+    ['psu', 'Nguồn + cầu chì'], ['fan', 'Quạt'], ['net', 'Switch + LAN'], ['front', 'Mica + nút'], ['dim', 'Kích thước'],
+  ];
+  const vis = { cat: Object.fromEntries(CATS.map(([k]) => [k, true])), m: [true, true, true, true, true, true] };
+  function applyVis() {
+    if (!model) return;
+    model.traverse(o => {
+      if (!o.isMesh) return;
+      o.visible = vis.cat[o.userData.cat] !== false && (o.userData.m < 0 || vis.m[o.userData.m]);
+    });
+    dims.visible = vis.cat.dim;
+    for (const [k] of CATS) { const b = $('cat-' + k); if (b) b.setAttribute('aria-pressed', vis.cat[k]); }
+    document.querySelectorAll('[data-mshow]').forEach(b => b.setAttribute('aria-pressed', vis.m[+b.dataset.mshow]));
+  }
+  function textSprite(text, k = 0.75) {
+    const size = 30, c = document.createElement('canvas'), ctx = c.getContext('2d');
+    const font = `600 ${size}px "JetBrains Mono", ui-monospace, monospace`;
+    ctx.font = font;
+    const w = Math.ceil(ctx.measureText(text).width) + size, h = Math.round(size * 1.6);
+    c.width = w * 2; c.height = h * 2; ctx.scale(2, 2); ctx.font = font;
+    ctx.fillStyle = '#1f68c8';
+    if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(0, 0, w, h, 8); ctx.fill(); } else ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = '#ffffff'; ctx.textBaseline = 'middle'; ctx.fillText(text, size / 2, h / 2 + 1);
+    const tex = new THREE.CanvasTexture(c); tex.encoding = THREE.sRGBEncoding;
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, depthTest: false }));
+    sp.scale.set(w * k, h * k, 1); sp.renderOrder = 10;
+    return sp;
+  }
+
+  /* Laser-engraved text on the acrylic: flat plane, frosted white */
+  function engrave(text, hmm) {
+    const px = 64, c = document.createElement('canvas'), ctx = c.getContext('2d');
+    const font = `700 ${px}px "Barlow Condensed", sans-serif`;
+    ctx.font = font; const w = Math.ceil(ctx.measureText(text).width) + 8;
+    c.width = w; c.height = px * 1.2; ctx.font = font;
+    ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.textBaseline = 'middle'; ctx.fillText(text, 4, c.height / 2);
+    const tex = new THREE.CanvasTexture(c); tex.encoding = THREE.sRGBEncoding;
+    const h = hmm * 1.2, m = new THREE.Mesh(new THREE.PlaneGeometry(h * w / c.height, h), new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false }));
+    m.userData.cat = 'front'; m.userData.m = -1;
+    return m;
+  }
+
+  /* Model state, rebuilt whenever the bay count changes */
+  let model = null, frame, panel, dims, sleds = [], fanBlades = [], W = 424;
+  const picoAt = new THREE.Vector3();
+  let MOUNT = 'plate', FRAME = 'std2';
+  let spin = false;
+
+  function build(N) {
+    if (model) {
+      scene.remove(model);
+      model.traverse(o => { if (o.geometry) o.geometry.dispose(); if (o.isMesh && o.material.map) { o.material.map.dispose(); o.material.dispose(); } if (o.isSprite) { o.material.map.dispose(); o.material.dispose(); } });
+    }
+    model = new THREE.Group(); scene.add(model);
+    frame = new THREE.Group(); panel = new THREE.Group(); dims = new THREE.Group();
+    model.add(frame, panel, dims);
+    sleds = []; fanBlades = [];
+
+    const PF = FRAME === 'light' ? 15 : 20;      // extrusion size
+    const prof = PF === 15 ? '1515' : '2020';
+    const rails = FRAME === 'std' ? [-90, 50] : [-20];
+    const combD = rails.length === 1 ? 60 : 16;
+    W = 96 + 2 * PF + PITCH * N;                 // 2 posts + 4 lead + 72N bays + 92 PSU bay
+    const X0 = -W / 2 + PF;
+    const slotX = Array.from({ length: N }, (_, i) => X0 + 4 + i * PITCH);
+    const bayStart = X0 + 4 + PITCH * N;
+    const psuX = bayStart + BAY / 2;
+    /* Switch holder (gen/switch.py): sleeve 30.6 × 107.1 × 114, flange on top, Z = 0 at rear z −128 */
+    const HX = psuX - 1.3, HY = H - PF - 107.1, swX = HX + 2.5 + 0.3 + 12.5;
+    const swPortY = k => HY + 2.5 + 0.4 + 99.8 - 12 - k * 16;
+
+    /* Frame */
+    MI = -1; CAT = 'frame';
+    const px = W / 2 - PF / 2, pz = D / 2 - PF / 2;
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      B(PF, H, PF, mat.alu, sx * px, H / 2, sz * pz, `Nhôm ${prof} – cột góc 300 mm`, frame);
+      C(12, FEET, mat.foot, 'y', sx * px, -FEET / 2, sz * pz, 'Chân cao su 10 mm', model, 20);
+    }
+    for (const y of [PF / 2, H - PF / 2]) {
+      for (const sz of [-1, 1]) B(W - 2 * PF, PF, PF, mat.alu, 0, y, sz * pz, `Nhôm ${prof} – thanh ngang ${W - 2 * PF} mm (đổi theo số máy)`, frame);
+      for (const sx of [-1, 1]) B(PF, PF, D - 2 * PF, mat.alu, sx * px, y, 0, `Nhôm ${prof} – thanh dọc ${D - 2 * PF} mm (cố định)`, frame);
+      for (const z of rails) B(W - 2 * PF, PF, PF, mat.alu, 0, y, z, `Nhôm ${prof} – ray đỡ lược ${W - 2 * PF} mm`, frame);
+    }
+    /* Combs: one printed 72 × 6 mm piece per bay per rail; 2.6 × 3.5 mm groove 5 mm from the piece's left end */
+    CAT = 'comb';
+    for (const [yb, dir, where] of [[PF, 1, 'dưới'], [H - PF, -1, 'trên']]) {
+      for (const z of rails) {
+        slotX.forEach((sx, i) => {
+          const lab = `Mảnh lược ${where} khoang ${i + 1} – in PETG, 72 × ${combD} × 6 mm, rãnh 2,6 mm`;
+          const x0 = sx - 4, gL = 5 - 1.3, gR = 72 - 5 - 1.3;   // groove centred on the plate (sx + 1)
+          B(72, 2.5, combD, mat.comb, x0 + 36, yb + dir * 1.25, z, lab, model);
+          B(gL, 3.5, combD, mat.comb, x0 + gL / 2, yb + dir * 4.25, z, lab, model);
+          B(gR, 3.5, combD, mat.comb, x0 + 72 - gR / 2, yb + dir * 4.25, z, lab, model);
+        });
+      }
+    }
+
+    /* Sleds */
+    /* Board: component side +x, I/O edge at the rear, CPU low and PCIe slots high (as in the CNC drawing) */
+    const S = 9.6, Z = u => -122 + u, Yv = v => 28 + v;
+    const P = (g, thick, u0, v0, du, dv, m, label, xoff = 0) =>
+      B(thick, dv, du, m, S + xoff + thick / 2, Yv(v0 + dv / 2), Z(u0 + du / 2), label, g);
+    /* Plate drawing coords (X from rear ear, Y above frame bottom) → world z = X − 150, y = Y */
+    const holes = [[38.16, 191.83], [38.16, 237.55], [61.02, 34.35], [193.10, 34.35], [193.10, 191.83], [193.10, 237.55], [193.10, 257.87]];
+    const plateShape = (() => {
+      const s = new THREE.Shape();
+      [[0, 2], [20, 2], [20, 22.5], [232, 22.5], [232, 276.5], [20, 276.5], [20, 298], [0, 298]].forEach(([a, b], k) => k ? s.lineTo(a, b) : s.moveTo(a, b));
+      const win = new THREE.Path(), r = 10;
+      win.moveTo(75 + r, 55); win.lineTo(180 - r, 55); win.absarc(180 - r, 55 + r, r, -Math.PI / 2, 0);
+      win.lineTo(180, 175 - r); win.absarc(180 - r, 175 - r, r, 0, Math.PI / 2);
+      win.lineTo(75 + r, 175); win.absarc(75 + r, 175 - r, r, Math.PI / 2, Math.PI);
+      win.lineTo(75, 55 + r); win.absarc(75 + r, 55 + r, r, Math.PI, Math.PI * 1.5);
+      const slot = new THREE.Path();
+      slot.moveTo(4, 128); slot.absarc(10, 128, 6, Math.PI, 0); slot.lineTo(16, 172); slot.absarc(10, 172, 6, 0, Math.PI); slot.lineTo(4, 128);
+      s.holes.push(win, slot);
+      for (const y of [10, 290]) { const h = new THREE.Path(); h.absarc(10, y, 2.5, 0, Math.PI * 2, true); s.holes.push(h); }
+      return s;
+    })();
+    const plateGeo = new THREE.ExtrudeGeometry(plateShape, { depth: 2, bevelEnabled: false, curveSegments: 16 });
+    slotX.forEach((x, i) => {
+      const g = new THREE.Group(); g.position.x = x; model.add(g);
+      const n = i + 1;
+      MI = i;
+
+      CAT = 'plate';
+      if (MOUNT === 'plate') {
+        const pm = tag(new THREE.Mesh(plateGeo, mat.plate), `Tấm đỡ nhôm 2 mm, 232 × 296 mm có tai chặn + lỗ tay kéo – máy ${n}`, g);
+        pm.rotation.y = -Math.PI / 2; pm.position.set(2, 0, -150);
+      } else {
+        const lab = `Khung thang nhôm dẹt 20×3 mm – máy ${n}`;
+        B(3, 20, 210, mat.plate, 1.5, 267.5, -23, lab, g);
+        B(3, 20, 210, mat.plate, 1.5, 32.5, -23, lab, g);
+        for (const z of [-118, -2, 72]) B(3, 215, 20, mat.plate, 1.5, 150, z, lab, g);
+      }
+      const sh = MOUNT === 'plate' ? 2 : 3;
+      for (const [X, Y] of holes) C(2.75, 8 - sh, mat.fuse, 'x', sh + (8 - sh) / 2, Y, X - 150, `Cột đồng M3 cái–cái ${8 - sh} mm + vít M3×5 (lót long đền phía tấm)`, g, 6);
+
+      CAT = 'board';
+      B(1.6, 244, 201, mat.pcb, 8.8, 150, -21.5, `Bo ASRock B760M‑HDV/M.2 D4 (244 × 201 mm) – máy ${n}`, g);
+      P(g, 4, 45, 40, 50, 50, mat.socket, 'Socket LGA1700');
+      for (const u of [133, 143]) P(g, 7, u, 25, 6, 140, mat.black, 'Khe DIMM DDR4');
+      P(g, 13, 185, 95, 12, 55, mat.black, 'Cổng nguồn 24‑pin trên bo');
+      P(g, 14, 12, 4, 18, 10, mat.black, 'Cổng CPU 8‑pin (dùng 4‑pin từ DC‑ATX)');
+      P(g, 34, -4, 15, 42, 150, mat.io, 'Cổng sau: HDMI, DisplayPort, USB, LAN, audio');
+      for (const [xo, v] of [[6, 40], [6, 60], [20, 40], [20, 60]]) B(9, 14, 2, mat.usb, S + xo + 4.5, Yv(v), Z(-5), 'Cổng USB phía sau', g);
+      P(g, 11, 0, 178, 89, 8, mat.black, 'Khe PCIe x16 (để trống)');
+      P(g, 11, 0, 205, 40, 8, mat.black, 'Khe PCIe x1 (để trống)');
+      P(g, 3, 25, 140, 80, 22, mat.ssd, 'SSD NVMe M.2');
+      P(g, 8, 130, 190, 35, 35, mat.heatsink, 'Tản chipset Intel B760');
+      P(g, 8, 188, 222, 8, 20, mat.black, 'Header F_PANEL – nút nguồn + LED');
+
+      CAT = 'cpu';
+      P(g, 3, 52.5, 46, 45, 37.5, mat.ihs, 'CPU Intel Core i3‑12100', 4);
+      C(46, 30, mat.heatsink, 'x', S + 22, Yv(65), Z(70), 'Tản Intel Laminar RM1 – cao 47 mm, 350 g', g, 48);
+      C(46, 17, mat.fanDark, 'x', S + 45.5, Yv(65), Z(70), 'Quạt tản RM1', g, 48);
+      C(17, 1.2, mat.hub, 'x', S + 54.6, Yv(65), Z(70), 'Quạt tản RM1', g, 32);
+
+      CAT = 'ram';
+      for (const u of [133, 143]) {
+        P(g, 31, u + 1, 29, 4, 132, mat.ram, 'RAM Kingston Fury 8 GB DDR4‑3200', 7);
+        P(g, 2, u + 1, 29, 4, 132, mat.ramTop, 'RAM Kingston Fury 8 GB DDR4‑3200', 38);
+      }
+
+      /* DC-ATX (picoPSU-160-XT): yellow 24-pin plug, upright PCB, 4 caps + 2 inductors facing front */
+      CAT = 'dcatx';
+      const pl = 'DC‑ATX picoPSU‑160‑XT – 160 W, 91 g, cắm thẳng 24‑pin';
+      P(g, 6, 186, 96, 10, 53, mat.plug, 'Đầu cắm 24‑pin (vàng) của DC‑ATX', 13);
+      P(g, 27, 190.2, 96, 1.6, 53, mat.pico, pl, 19);
+      for (const xo of [26, 38]) for (const v of [116, 131]) {
+        C(4.5, 9, mat.cap, 'z', S + xo, Yv(v), Z(196.3), 'Tụ hóa của DC‑ATX', g, 20);
+        C(4.6, 2.5, mat.capBand, 'z', S + xo, Yv(v), Z(195), 'Tụ hóa của DC‑ATX', g, 20);
+      }
+      for (const v of [97, 137]) P(g, 13, 191.8, v, 6, 14, mat.inductor, 'Cuộn cảm DC‑ATX', 25);
+      P(g, 6, 189, 140, 6, 9, mat.term, 'Đầu vào 12 V (VIN) của DC‑ATX', 46);
+      P(g, 5, 189, 98, 5, 10, mat.btn, 'Cổng ra 4‑pin CPU (P4)', 46);
+      const p4 = [[S + 49, Yv(103), Z(191)], [S + 60, Yv(80), Z(150)], [S + 30, Yv(10), Z(40)], [S + 14, Yv(9), Z(21)]];
+      tube(p4, mat.wireY, 1.6, 'Dây 4‑pin CPU từ DC‑ATX → cổng 8‑pin', g);
+      tube(p4.map(([a, b, c]) => [a, b + 3, c]), mat.wireK, 1.6, 'Dây 4‑pin CPU từ DC‑ATX → cổng 8‑pin', g);
+      if (i === 0) picoAt.set(x + S + 30, Yv(122), Z(192));
+
+      CAT = 'cable';
+      const cable = new THREE.Group(); model.add(cable);
+      const xw = x + S + 55;
+      for (const [dx, m] of [[-2.5, mat.wireY], [2.5, mat.wireK]]) {
+        tube([[psuX - 28, 210 + i * 2, 30 + i * 8 + dx], [bayStart - 4, 255, 70 + dx], [bayStart - 40, 266 - i * 2, 90 + dx * 0.3], [xw + dx, 266 - i * 2, 90], [xw + dx, 230, 84], [xw + dx, 200, 78], [xw + dx * 0.4, Yv(146), 72]], m, 1.8, `Nhánh 12 V AWG 14 → DC‑ATX máy ${n} (cầu chì 15 A)`, cable);
+      }
+      CAT = 'net';
+      const lz = -158 - i * 4, ly = Yv(8) - i * 4, lx = x + S + 16;
+      const lan = [[swX, swPortY(i), -116], [swX, swPortY(i), lz + 6], [swX, swPortY(i) - 8, lz], [swX, ly + 10, lz], [swX - 10, ly, lz], [lx + 10, ly, lz], [lx, ly + 8, lz + 4], [lx, Yv(28), -128]];
+      tube(lan, mat.usb, 2.6, `Cáp LAN Cat6 30 cm: switch cổng ${i + 1} → máy ${n}`, cable);
+      sleds.push({ g, cable, target: 0 });
+    });
+    MI = -1;
+
+    /* PSU bay */
+    CAT = 'psu';
+    B(86, 150, 140, mat.psu, psuX, 95, -55, 'Nguồn ATX đang có – dựng đứng, hút gió từ hông', model);
+    C(55, 1.5, mat.grille, 'x', psuX + 43.8, 95, -55, 'Quạt nguồn ATX – hút gió từ hông khung', model, 48);
+    B(28, 20, 2, mat.black, psuX - 10, 140, -126, 'Ổ cắm AC 220 V của nguồn', model);
+    B(10, 14, 2, mat.ramTop, psuX + 22, 140, -126, 'Công tắc nguồn tổng', model);
+    B(24, 10, 34, mat.black, psuX - 18, 175, -10, '24‑pin của nguồn + jumper PS_ON (chân 16 ↔ COM)', model);
+    C(3, 12, mat.wireG, 'x', psuX - 18, 182, 2, 'Jumper PS_ON – nguồn luôn bật', model, 12);
+    B(56, 26, 70, mat.fuse, psuX, 215, 50, `Hộp cầu chì 12 V 6 ngả có đèn – dùng ${N} nhánh × 15 A`, model);
+    CAT = 'cable';
+    for (const [dx, m] of [[-6, mat.wireY], [6, mat.wireK]]) tube([[psuX + 20 + dx, 160, 16], [psuX + 20 + dx, 185, 26], [psuX + 20 + dx, 203, 40]], m, 3.2, 'Dây 12 V chính AWG 10 (nguồn → hộp cầu chì)', model);
+    for (const [dx, m] of [[-1.5, mat.ramTop], [1.5, mat.wireK]]) tube([[psuX - 30 + dx, 168, 10], [psuX - 34 + dx, 172, -60], [swX - 14 + dx, HY + 30, -118], [swX + dx, HY + 30, -116.5]], m, 1.2, 'Điện 5 V cho switch: cáp Molex → SATA (dây đỏ + đen) nối jack DC 5,5 × 2,1', model);
+
+    /* Network switch in its printed sleeve, hung from the top rear bar and the top centre rail */
+    CAT = 'net';
+    const hl = 'Giá switch in PETG – bắt 2 vít M5 vào thanh sau trên (z −120) và ray giữa trên (z −20)';
+    const hz = -128 + 57;
+    B(2.5, 103.1, 114, mat.comb, HX + 1.25, HY + 51.55, hz, hl, model);
+    B(2.5, 103.1, 114, mat.comb, HX + 30.6 - 1.25, HY + 51.55, hz, hl, model);
+    B(25.6, 2.5, 114, mat.comb, HX + 15.3, HY + 1.25, hz, hl, model);
+    B(54.6, 4, 114, mat.comb, HX + 15.3, H - PF - 2, hz, hl, model);
+    for (const y of [HY + 4.75, HY + 103.1 - 2]) B(25.6, y === HY + 4.75 ? 4.5 : 4, 3, mat.comb, HX + 15.3, y, -128 + 112.5, hl, model);
+    for (const [x, z] of [[HX - 6, -120], [HX + 36.6, -20]]) C(4.5, 3, mat.ihs, 'y', x, H - PF - 5.5, z, 'Vít M5 bắt giá switch vào rãnh nhôm', model, 16);
+    B(25, 99.8, 98, mat.ihs, swX, HY + 2.9 + 49.9, -17 - 49, 'Switch TP‑Link TL‑SG105 – 5 cổng gigabit, 5 V 0,6 A, cổng hướng ra sau', model);
+    for (let k = 0; k < 5; k++) B(14, 12, 1, mat.black, swX, swPortY(k), -115.6, `Cổng LAN ${k + 1}${k === 4 ? ' – nối ra router' : ''}`, model);
+
+    /* Front: fans behind the acrylic, acrylic mounted on the outside face of the frame (z 130–133) */
+    const sledW = bayStart - X0, cols = Math.max(1, Math.floor(sledW / 120));
+    const fx0 = X0 + sledW / 2 - (cols - 1) * 60;
+    CAT = 'fan';
+    const fans = [];
+    for (let c = 0; c < cols; c++) for (const cy of [85, 205]) { makeFan(fx0 + c * 120, cy); fans.push([fx0 + c * 120, cy]); }
+    CAT = 'front';
+    const ash = new THREE.Shape(), ar = 6, aw = W / 2;
+    ash.moveTo(-aw + ar, 0); ash.lineTo(aw - ar, 0); ash.absarc(aw - ar, ar, ar, -Math.PI / 2, 0);
+    ash.lineTo(aw, H - ar); ash.absarc(aw - ar, H - ar, ar, 0, Math.PI / 2);
+    ash.lineTo(-aw + ar, H); ash.absarc(-aw + ar, H - ar, ar, Math.PI / 2, Math.PI);
+    ash.lineTo(-aw, ar); ash.absarc(-aw + ar, ar, ar, Math.PI, Math.PI * 1.5);
+    const hole = (x, y, r) => { const h = new THREE.Path(); h.absarc(x, y, r, 0, Math.PI * 2, true); ash.holes.push(h); };
+    for (const [fx, fy] of fans) hole(fx, fy, 58);
+    for (let i = 0; i < N; i++) hole(psuX, 255 - i * 28, 8.1);
+    hole(psuX, 140, 3.1);
+    for (const x of [-aw + 10, 0, aw - 10]) for (const y of [10, 290]) hole(x, y, 2.75);
+    for (const x of [-aw + 10, aw - 10]) hole(x, 150, 2.75);
+    const acr = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(ash, { depth: 3, bevelEnabled: false, curveSegments: 24 }), mat.acrylic), null, panel);
+    acr.position.z = 130; acr.userData.skip = true;
+    for (const x of [-aw + 10, 0, aw - 10]) for (const y of [10, 290]) C(5, 3, mat.ihs, 'z', x, y, 134.5, 'Vít M5 × 10 + long đền: bắt mica vào rãnh nhôm', panel, 16);
+    for (const x of [-aw + 10, aw - 10]) C(5, 3, mat.ihs, 'z', x, 150, 134.5, 'Vít M5 × 10 + long đền: bắt mica vào rãnh nhôm', panel, 16);
+    for (const [fx, fy] of fans) {
+      B(122, 122, 1, mat.filter, fx, fy, 133.6, 'Lưới lọc bụi 12 cm – bắt chung 4 vít M4 × 40 với quạt', panel);
+      for (const [dx, dy] of [[-52.5, -52.5], [52.5, -52.5], [-52.5, 52.5], [52.5, 52.5]]) C(3.6, 2.5, mat.ihs, 'z', fx + dx, fy + dy, 135.3, 'Vít M4 × 40 xuyên lưới, mica và quạt', panel, 12);
+    }
+    for (let i = 0; i < N; i++) {
+      const y = 255 - i * 28;
+      C(9, 4, mat.btn, 'z', psuX, y, 135, `Nút 16 mm có đèn 5 V – máy ${i + 1} → F_PANEL (PWRBTN + PLED)`, panel, 24);
+      C(6.5, 0.8, mat.led, 'z', psuX, y, 137.3, `Đèn nút máy ${i + 1} – sáng khi máy chạy`, panel, 24);
+      const e = engrave(String(i + 1), 9); e.position.set(psuX - 22, y, 133.15); panel.add(e);
+    }
+    C(6, 4, mat.ihs, 'z', psuX, 140, 135, 'Công tắc gạt MTS‑102 (lỗ S Ø6,2 trên mica)', panel, 16);
+    const lev = C(1.5, 12, mat.ihs, 'z', psuX, 142, 141, 'Công tắc gạt MTS‑102', panel, 10); lev.rotation.x = Math.PI / 2 - 0.35;
+    const pw = engrave('POWER', 7); pw.position.set(psuX, 275, 133.15); panel.add(pw);
+
+    /* Dimensions (envelope incl. 20 mm rear ears, acrylic + button heads 9 mm, feet) */
+    const lineMat = new THREE.LineBasicMaterial({ color: 0x1f68c8 });
+    const dimLine = (a, b, tick, text) => {
+      const A = new THREE.Vector3(...a), Bv = new THREE.Vector3(...b), t = new THREE.Vector3(...tick).multiplyScalar(8);
+      dims.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([A, Bv, A.clone().add(t), A.clone().sub(t), Bv.clone().add(t), Bv.clone().sub(t)]), lineMat));
+      const s = textSprite(text, text === '72 mm' ? 0.5 : 0.75); s.position.copy(A).lerp(Bv, 0.5); dims.add(s);
+    };
+    dimLine([-W / 2, -34, D / 2 + 10], [W / 2, -34, D / 2 + 10], [0, 1, 0], `R ${W} mm`);
+    dimLine([-W / 2 - 24, -FEET, D / 2 + 9], [-W / 2 - 24, H, D / 2 + 9], [1, 0, 0], `C ${H + FEET} mm`);
+    dimLine([W / 2 + 24, -34, -D / 2 - 20], [W / 2 + 24, -34, D / 2 + 9], [0, 1, 0], `S ${D + 29} mm`);
+    dimLine([slotX[0], H + 20, D / 2], [slotX[0] + PITCH, H + 20, D / 2], [0, 1, 0], '72 mm');
+    slotX.forEach((x, i) => { const sp = textSprite(`PC${i + 1}`, 0.42); sp.position.set(x + 36, H + 40, -60); dims.add(sp); });
+    const sp = textSprite('Nguồn', 0.42); sp.position.set(psuX, H + 40, -60); dims.add(sp);
+
+    applyVis();
+    updateText(N, PF, rails.length);
+    buildMachineControls();
+  }
+
+  function makeFan(cx, cy) {
+    const g = new THREE.Group(); g.position.set(cx, cy, 117.5); model.add(g);
+    const label = 'Quạt 120 mm PWM – hút gió mát vào';
+    B(120, 7, 25, mat.fanDark, 0, 56.5, 0, label, g); B(120, 7, 25, mat.fanDark, 0, -56.5, 0, label, g);
+    B(7, 120, 25, mat.fanDark, 56.5, 0, 0, label, g); B(7, 120, 25, mat.fanDark, -56.5, 0, 0, label, g);
+    C(57, 25, mat.shroud, 'z', 0, 0, 0, label, g, 48, true);
+    C(20, 24, mat.fanDark, 'z', 0, 0, 0, label, g, 32);
+    const rotor = new THREE.Group(); g.add(rotor);
+    for (let k = 0; k < 7; k++) {
+      const pivot = new THREE.Group(); pivot.rotation.z = (k / 7) * Math.PI * 2; rotor.add(pivot);
+      const b = B(24, 36, 1.6, mat.blade, 0, 38, 0, label, pivot); b.rotation.y = 0.55;
+    }
+    fanBlades.push(rotor);
+  }
+
+  function updateText(N, PF, R) {
+    const envD = D + 29, envH = H + FEET, prof = PF === 15 ? '1515' : '2020';
+    $('st-env').textContent = `${W} × ${envD} × ${envH} mm`;
+    $('st-frame').textContent = `${W} × ${D} × ${H} mm`;
+    $('st-vol').textContent = `${Math.round(W * envD * envH / 1e6)} L`;
+    const psu = N <= 4 ? '≥ 550 W' : '≥ 750 W';
+    $('st-psu').textContent = psu;
+    document.querySelectorAll('.prof').forEach(e => { e.textContent = prof; });
+    $('c-wbar-name').textContent = `thanh ngang (4 viền + ${2 * R} ray đỡ lược)`;
+    $('c-wbar').textContent = `${4 + 2 * R} × ${W - 2 * PF} mm`;
+    $('c-dbar').textContent = `4 × ${D - 2 * PF} mm`;
+    $('c-ke').textContent = `≈ ${24 + 4 * R} bộ`;
+    $('c-plate-name').textContent = MOUNT === 'plate' ? 'Tấm đỡ bo, nhôm 2 mm, cắt laser theo file DXF (có tai chặn, lỗ tay kéo, cửa sổ giảm nặng)' : 'Khung thang nhôm dẹt 20×3 mm: 2 thanh 210 + 3 thanh 215 mm, khoan đúng 6 lỗ của bo';
+    $('c-plate').textContent = MOUNT === 'plate' ? `${N} (+1) × 232 × 296` : `${N} bộ`;
+    $('c-comb').textContent = `${2 * R * N} mảnh`;
+    $('c-comb-name').textContent = `Mảnh lược in PETG, rãnh 2,6 × 3,5 mm, 72 × ${R === 1 ? 60 : 16} × 6 mm`;
+    $('c-acr').textContent = `${W} × ${H}`;
+    $('e-psu').textContent = `1 × ${psu}`;
+    $('e-pico').textContent = `${N}`;
+    $('e-fuse').textContent = `1 + ${N}`;
+    $('e-btn').textContent = `${N} + 1`;
+    const cols = Math.max(1, Math.floor((4 + PITCH * N) / 120));
+    $('e-fan').textContent = `${cols * 2} + 1`;
+    $('p-head').textContent = `${N} máy`;
+    $('p-idle').textContent = `${N * 15}–${N * 20} W`;
+    $('p-peak').textContent = `≈ ${N * 110} W`;
+    $('p-amp').textContent = `≈ ${Math.round(N * 110 / 12)} A`;
+
+    const f2 = x => x.toFixed(2).replace('.', ','), f1 = x => x.toFixed(1).replace('.', ',');
+    const sledKg = MOUNT === 'plate' ? 1.35 : 1.31;
+    const kgm = PF === 20 ? 0.5 : 0.23;
+    const aluKg = kgm * (4 * H / 1000 + 4 * (D - 2 * PF) / 1000 + (4 + 2 * R) * (W - 2 * PF) / 1000);
+    const keKg = (24 + 4 * R) * (PF === 20 ? 0.02 : 0.012);
+    const acrKg = (W / 1000 * H / 1000 - cols * 2 * Math.PI * 0.0575 ** 2) * 0.003 * 1190;
+    const frontKg = acrKg + cols * 2 * 0.13 + 0.05;
+    const psuKg = N <= 4 ? 1.6 : 1.9;
+    const total = N * sledKg + aluKg + keKg + frontKg + psuKg + 0.65;
+    $('w-sled-desc').textContent = `Máy: bo ≈ 500 g, CPU 30 g, tản RM1 350 g, RAM 70 g, SSD 10 g, DC‑ATX 91 g, ${MOUNT === 'plate' ? 'tấm nhôm 2 mm 220 g, cột đồng' : 'khung thang 180 g'}, lược và nút 80 g`;
+    $('w-sled').textContent = `${N} × ${f2(sledKg)}`;
+    $('w-alu-desc').textContent = `Nhôm ${prof} (${String(kgm).replace('.', ',')} kg/m${PF === 15 ? ', ước tính theo tiết diện' : ''})`;
+    $('w-alu').textContent = f2(aluKg);
+    $('w-ke').textContent = f2(keKg);
+    $('w-front').textContent = f2(frontKg);
+    $('w-psu').textContent = f2(psuKg);
+    $('w-total').textContent = `≈ ${f1(total)}`;
+    $('st-kg').textContent = `≈ ${f1(total)} kg`;
+  }
+
+  function buildMachineControls() {
+    const box = $('mBtns'); box.textContent = '';
+    sleds.forEach((s, i) => {
+      const wrap = document.createElement('span'); wrap.className = 'mchip';
+      const show = document.createElement('button');
+      show.className = 'chip'; show.dataset.mshow = i; show.textContent = `Máy ${i + 1}`;
+      show.setAttribute('aria-pressed', vis.m[i]); show.title = `Hiện hoặc ẩn máy ${i + 1}`;
+      show.addEventListener('click', () => { vis.m[i] = !vis.m[i]; applyVis(); });
+      const pull = document.createElement('button');
+      pull.className = 'chip'; pull.textContent = 'Rút'; pull.setAttribute('aria-pressed', 'false');
+      pull.title = `Rút máy ${i + 1} ra phía sau`;
+      pull.addEventListener('click', () => {
+        s.target = s.target === 0 ? -260 : 0;
+        pull.setAttribute('aria-pressed', s.target !== 0);
+        pull.textContent = s.target ? 'Lắp' : 'Rút';
+      });
+      wrap.append(show, pull);
+      box.appendChild(wrap);
+    });
+  }
+
+  /* Category chips */
+  for (const [k, name] of CATS) {
+    const b = document.createElement('button');
+    b.className = 'chip'; b.id = 'cat-' + k; b.textContent = name; b.setAttribute('aria-pressed', 'true');
+    b.addEventListener('click', () => { vis.cat[k] = !vis.cat[k]; applyVis(); });
+    $('catBtns').appendChild(b);
+  }
+  $('allOn').addEventListener('click', () => {
+    for (const [k] of CATS) vis.cat[k] = true;
+    vis.m = vis.m.map(() => true);
+    applyVis();
+  });
+
+  /* View presets scale with frame width */
+  let tween = null, currentView = 'iso';
+  const VIEWS = ['iso', 'front', 'rear', 'top', 'pico'];
+  function viewOf(name) {
+    const k = W / 424, p = picoAt;
+    return {
+      iso: [[720 * k, 470, 760 * k], [0, 140, 0]], front: [[0, 160, 1150 * k], [0, 150, 0]],
+      rear: [[-180 * k, 260, -1080 * k], [0, 150, 0]], top: [[0, 1250 * k, 40], [0, 120, 0]],
+      pico: [[p.x + 200, p.y + 140, p.z + 300], [p.x, p.y, p.z]],
+    }[name];
+  }
+  function go(name, instant) {
+    const [p, t] = viewOf(name);
+    currentView = name;
+    tween = { p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(...p), t1: new THREE.Vector3(...t), k: instant || reduceMotion ? 1 : 0 };
+    for (const v of VIEWS) $('v-' + v).setAttribute('aria-pressed', v === name);
+  }
+  for (const v of ['iso', 'front', 'rear', 'top']) $('v-' + v).addEventListener('click', () => go(v));
+  $('v-pico').addEventListener('click', () => { vis.cat.fan = false; vis.cat.front = false; vis.cat.dim = false; applyVis(); go('pico'); });
+  controls.addEventListener('start', () => { tween = null; });
+
+  $('t-fan').addEventListener('click', e => { spin = !spin; e.currentTarget.setAttribute('aria-pressed', spin); });
+
+  /* Build options: bay count, board mount, frame profile */
+  let curN = 4;
+  function save() { try { localStorage.setItem('pcblade2', JSON.stringify({ n: curN, mount: MOUNT, frame: FRAME })); } catch (e) {} }
+  function syncOpts() {
+    for (let k = 2; k <= 6; k++) $('n' + k).setAttribute('aria-pressed', k === curN);
+    $('o-plate').setAttribute('aria-pressed', MOUNT === 'plate'); $('o-ladder').setAttribute('aria-pressed', MOUNT === 'ladder');
+    $('o-std').setAttribute('aria-pressed', FRAME === 'std'); $('o-std2').setAttribute('aria-pressed', FRAME === 'std2'); $('o-light').setAttribute('aria-pressed', FRAME === 'light');
+  }
+  function setN(N, first) {
+    curN = N;
+    syncOpts();
+    build(N);
+    go(currentView, first);
+    save();
+  }
+  for (let k = 2; k <= 6; k++) $('n' + k).addEventListener('click', () => setN(k));
+  $('o-plate').addEventListener('click', () => { MOUNT = 'plate'; setN(curN); });
+  $('o-ladder').addEventListener('click', () => { MOUNT = 'ladder'; setN(curN); });
+  $('o-std').addEventListener('click', () => { FRAME = 'std'; setN(curN); });
+  $('o-std2').addEventListener('click', () => { FRAME = 'std2'; setN(curN); });
+  $('o-light').addEventListener('click', () => { FRAME = 'light'; setN(curN); });
+
+  /* Hover labels */
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  function labelOf(o) { while (o) { if (o.userData.skip) return null; if (o.userData.label) return o.userData.label; o = o.parent; } return null; }
+  function visible(o) { while (o) { if (!o.visible) return false; o = o.parent; } return true; }
+  function pick(ev) {
+    const r = canvas.getBoundingClientRect();
+    ndc.set(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    let label = null;
+    for (const h of ray.intersectObject(model, true)) {
+      if (h.object.isSprite || h.object.isLineSegments || !visible(h.object)) continue;
+      label = labelOf(h.object); if (label) break;
+    }
+    if (label) {
+      tip.textContent = label; tip.hidden = false;
+      tip.style.left = Math.min(ev.clientX - r.left, r.width - 280) + 'px';
+      tip.style.top = (ev.clientY - r.top) + 'px';
+    } else tip.hidden = true;
+  }
+  canvas.addEventListener('pointermove', e => { if (e.buttons === 0) pick(e); else tip.hidden = true; });
+  canvas.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') pick(e); });
+  canvas.addEventListener('pointerleave', () => { tip.hidden = true; });
+
+  function resize() {
+    const w = viewer.clientWidth, h = viewer.clientHeight;
+    renderer.setSize(w, h, false); camera.aspect = w / h;
+    camera.fov = w < 600 ? 46 : 32;
+    camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(viewer); resize();
+
+  function loop() {
+    requestAnimationFrame(loop);
+    if (tween) {
+      tween.k = Math.min(1, tween.k + 0.045);
+      const e = 1 - Math.pow(1 - tween.k, 3);
+      camera.position.lerpVectors(tween.p0, tween.p1, e);
+      controls.target.lerpVectors(tween.t0, tween.t1, e);
+      if (tween.k >= 1) tween = null;
+    }
+    for (const s of sleds) {
+      const z = s.g.position.z;
+      s.g.position.z = reduceMotion ? s.target : z + (s.target - z) * 0.12;
+      s.cable.visible = Math.abs(s.g.position.z) < 4;
+    }
+    if (spin) for (const r of fanBlades) r.rotation.z -= 0.25;
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  let startN = 4;
+  try {
+    const s = JSON.parse(localStorage.getItem('pcblade2') || '{}');
+    if (s.n >= 2 && s.n <= 6) startN = s.n;
+    if (s.mount === 'ladder') MOUNT = 'ladder';
+    if (['std', 'std2', 'light'].includes(s.frame)) FRAME = s.frame;
+  } catch (e) {}
+  const start = () => { setN(startN, true); loop(); };
+  (document.fonts ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1500))]) : Promise.resolve()).then(start);
+})();
+</script>
+
+</body>
+</html>
