@@ -27,4 +27,8 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
 
 6) Khung nhôm 2020 (cắt sẵn ở shop): 4 x 300 (cột), 4 x 270 (dọc hông),
    4 x 384 (ngang trước + chặn sau, trên + dưới), 2 x 220 (dọc giữa nóc + đáy, thay ray giữa).
-   KHÔNG còn ray giữa. Taro M5 lỗ tâm 4 đầu cột dưới để vặn chân.
+   KHÔNG còn ray giữa. Taro M5 lỗ tâm 4 đầu cột dưới để bắt chân.
+
+7) chan-cao_PETG_x4.stl  -> dịch vụ in 3D (gửi cùng lược)
+   SL 4. PETG, 4 vách, 40 % infill, in đứng. Cao 60 mm, ~60 g/cái.
+   Vít M5 x 25 từ dưới lên xuyên chân + tấm đáy vào đầu cột; dán chân cao su dưới đáy.
