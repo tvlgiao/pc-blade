@@ -19,18 +19,18 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
    treo dưới thanh dọc nóc bằng 2 vít M5 trên đường tâm. Ôm vừa TP-Link TL-SG105.
 
 5) Hộp kín 6 mặt (mica đen trong / mica khói 3 mm) -> cùng xưởng cắt mica mặt trước
-   nap-tren_mica-3mm_x1.dxf   424 x 310, 3 vùng đục lỗ Ø6 (tổ ong) cho quạt 92 mm HÚT VÀO
-   day_mica-3mm_x1.dxf        424 x 310, 3 vùng đục lỗ Ø6 cho quạt 92 mm ĐẨY RA, 4 lỗ chân
-   hong-trai_mica-3mm_x1.dxf  310 x 300, kín
-   hong-phai_mica-3mm_x1.dxf  310 x 300, 1 vùng đục lỗ Ø6 cho quạt nguồn
+   nap-tren_mica-3mm_x1.dxf   424 x 290, 3 vùng đục lỗ Ø6 (tổ ong) cho quạt 92 mm HÚT VÀO
+   day_mica-3mm_x1.dxf        424 x 290, 3 vùng đục lỗ Ø6 cho quạt 92 mm ĐẨY RA, 4 lỗ chân
+   hong-trai_mica-3mm_x1.dxf  290 x 300, kín
+   hong-phai_mica-3mm_x1.dxf  290 x 300, 1 vùng đục lỗ Ø6 cho quạt nguồn
    mat-sau_mica-3mm_x1.dxf    424 x 300, kín: 6 lỗ vít nguồn 6-32 (chuẩn ATX), ô hở 62 x 126
                               cho ổ cắm AC/công tắc nguồn, lỗ RJ45 keystone
    mat-truoc_mica-3mm_x1.dxf  424 x 300, kín: chỉ lỗ nút bấm + công tắc
    PDF: tam-che-bui_mica-3mm.pdf. Lưới lọc màu đen đặt PHÍA TRONG, sau vùng đục lỗ.
    Vùng đục lỗ nhiều lỗ nhỏ: báo xưởng tính giá theo chiều dài đường cắt.
 
-6) Khung nhôm 2020 (cắt sẵn ở shop): 4 x 300 (cột), 4 x 270 (dọc hông),
-   4 x 384 (ngang trước + chặn sau, trên + dưới), 2 x 220 (dọc giữa nóc + đáy, thay ray giữa).
+6) Khung nhôm 2020 (cắt sẵn ở shop): 4 x 300 (cột), 4 x 250 (dọc hông),
+   4 x 384 (ngang trước + chặn sau, trên + dưới), 2 x 200 (dọc giữa nóc + đáy, thay ray giữa).
    KHÔNG còn ray giữa. Taro M5 lỗ tâm 4 đầu cột dưới để bắt chân.
 
 7) chan-cao_PETG_x4.stl  -> dịch vụ in 3D (gửi cùng lược)

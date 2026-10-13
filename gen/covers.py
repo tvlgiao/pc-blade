@@ -1,6 +1,6 @@
 """Dust covers, all six faces closed (3 mm acrylic). Mesh filters only where air moves:
 top = 3 x 92 mm fans in (blowing down), bottom = 3 x 92 mm fans out, right side = PSU fan in. Front + rear solid.
-Rear posts sit 50 mm behind the old rear bars (kept as ear stops), so the box is 424 x 310 x 300.
+Rear posts sit 50 mm behind the old rear bars (kept as ear stops), so the box is 424 x 290 x 300 (front trimmed 20 mm).
 The PSU's rear end passes through a cut-out in the rear panel: AC inlet, switch and PSU exhaust stay outside."""
 import sys, math
 import ezdxf
@@ -10,9 +10,9 @@ from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib.patches import Circle, Rectangle
 
 OUT = sys.argv[1]
-W, H, D = 424, 300, 310                     # box: frame 260 + 50 mm rear bay
+W, H, D = 424, 300, 290                     # box: frame 240 (front trimmed 20 mm) + 50 mm rear bay
 # Top/bottom: X from left (seen from front), Y from rear edge. Front bar Y 300, ear-stop bar Y 60, side bars X 10/414.
-TOP = [(x, y) for x in (62, 212, 362) for y in (60, 300)] + [(x, y) for x in (10, W - 10) for y in (100, 220)]
+TOP = [(x, y) for x in (62, 212, 362) for y in (60, D - 10)] + [(x, y) for x in (10, W - 10) for y in (100, 220)]
 # Sides: X from rear edge, Y height. Rear post X 10, front post X 300, side bars Y 10 / 290.
 SIDE = [(x, y) for x in (10, D - 10) for y in (60, 240)] + [(x, y) for x in (100, 210) for y in (10, H - 10)]
 PSU_FAN = (80, 95)                          # PSU (160 mm) pushed into the rear cut-out -> fan centre 80 mm from rear
@@ -112,7 +112,7 @@ with PdfPages(f"{OUT}/tam-che-bui_mica-3mm.pdf") as pdf:
     page(pdf, "NẮP TRÊN – mica đen trong 3 mm – SL: 1 – 3 quạt 92 mm HÚT VÀO", W, D, TOP + ZBAR_TOP,
          ["Gốc: góc trái‑sau. X từ trái (nhìn từ trước), Y từ mép sau.", *common,
           "Q1–Q3: quạt 92 mm nằm TRONG thùng sát dưới tấm, thổi XUỐNG;", "  lưới 9 cm dán ngoài; vít M4 × 12 + đai ốc (bích ngoài quạt).",
-          "Y 300 = thanh trước, Y 60 = thanh chặn tai, X 10/414 = hông,", "  X 372 = thanh dọc nóc (treo giá switch)."],
+          "Y 280 = thanh trước, Y 60 = thanh chặn tai, X 10/414 = hông,", "  X 372 = thanh dọc nóc (treo giá switch)."],
          xlab="↑ mép TRƯỚC (Y = 310); mép dưới hình = SAU (Y = 0)", fans92=ROW)
     page(pdf, "ĐÁY – mica đen trong 3 mm – SL: 1 – 3 quạt 92 mm ĐẨY RA", W, D, TOP + ZBAR_BOT + FEET,
          ["Gốc: góc trái‑sau, NHÌN TỪ TRÊN XUỐNG. X từ trái, Y từ mép sau.", *common,
