@@ -15,3 +15,10 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
 4) gia-switch_PETG_x1.stl  -> dịch vụ in 3D
    SL 1. PETG, in úp mặt bích xuống bàn, 3 vách, 30 % infill, ~82 g. Dài 114 mm, 2 lỗ M5 cách nhau 100 mm theo chiều sâu.
    Ôm vừa switch TP-Link TL-SG105 (99,8 x 98 x 25 mm). Switch khác cỡ: báo lại để chỉnh.
+
+5) Tấm che bụi (mica trong 3 mm) -> cùng xưởng cắt mica mặt trước
+   nap-tren-duoi_mica-3mm_x2.dxf  SL 2 (nắp trên + đáy, cùng mẫu), 424 x 260
+   hong-trai_mica-3mm_x1.dxf      SL 1, 260 x 300
+   hong-phai_mica-3mm_x1.dxf      SL 1, 260 x 300, có lỗ Ø116 cho quạt nguồn + lưới lọc
+   PDF: tam-che-bui_mica-3mm.pdf. Đo tâm quạt nguồn thật trước khi cắt hông phải
+   (mặc định X 80 từ mép sau, Y 95 từ đáy).

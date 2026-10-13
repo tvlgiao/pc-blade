@@ -109,7 +109,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
       <button id="n2">2</button><button id="n3">3</button><button id="n4">4</button><button id="n5">5</button><button id="n6">6</button>
     </div>
     <div class="stats" aria-live="polite">
-      <span>Phủ bì <b id="st-env">424 × 289 × 310 mm</b></span>
+      <span>Phủ bì <b id="st-env">430 × 289 × 316 mm</b></span>
       <span>Khung <b id="st-frame">424 × 260 × 300 mm</b></span>
       <span>Thể tích <b id="st-vol">35 L</b></span>
       <span>Nguồn <b id="st-psu">≥ 550 W</b></span>
@@ -184,7 +184,8 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td id="c-plate-name">Tấm đỡ bo, nhôm 2 mm (khoan theo lỗ của bo)</td><td class="n" id="c-plate">4 × 210 × 255</td></tr>
         <tr><td id="c-comb-name">Mảnh lược in 3D, khe 3,5 mm, dài 72 mm</td><td class="n" id="c-comb">16 mảnh</td></tr>
         <tr><td>Mica 3 mm bắt ngoài mặt trước, cắt theo file DXF (lỗ quạt Ø116, nút Ø16,2, công tắc Ø6,2, 8 lỗ M5)</td><td class="n" id="c-acr">384 × 260</td></tr>
-        <tr><td>Chân cao su 10 mm</td><td class="n">4</td></tr>
+        <tr><td>Tấm che bụi mica 3 mm: nắp + đáy, 2 hông (hông phải có lỗ quạt nguồn + lưới lọc)</td><td class="n" id="c-cov">2 × 424 × 260, 2 × 260 × 300</td></tr>
+        <tr><td>Chân cao su 10 mm (dán dưới tấm đáy)</td><td class="n">4</td></tr>
       </table>
     </section>
 
@@ -211,7 +212,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td>Tải nặng (PL2 89 W + bo, RAM, SSD)</td><td class="n">≈ 110 W</td><td class="n" id="p-peak">≈ 440 W</td></tr>
         <tr><td>Dòng 12 V đỉnh</td><td class="n">≈ 9 A</td><td class="n" id="p-amp">≈ 37 A</td></tr>
       </table>
-      <p class="warn">Phủ bì đã gồm tai chặn sau 20 mm, mica + đầu nút trước 9 mm và chân 10 mm. Để chừa thêm khoảng 80 mm phía sau cho dây LAN, HDMI và dây nguồn AC. Vỏ nguồn giữ nguyên zin, khung nối đất qua vít vỏ nguồn.</p>
+      <p class="warn">Phủ bì đã gồm tai chặn sau 20 mm, mica + đầu nút trước 9 mm, tấm che bụi 3 mm và chân 10 mm. Chống bụi: gió chỉ vào qua lưới lọc (4 quạt trước + quạt nguồn), nắp/đáy/2 hông kín, chỉ mặt sau hở để gió thoát → áp suất dương nhẹ, bụi không lọt qua khe. Vệ sinh lưới lọc 1 lần/tháng. Để chừa thêm khoảng 80 mm phía sau cho dây LAN, HDMI và dây nguồn AC. Vỏ nguồn giữ nguyên zin, khung nối đất qua vít vỏ nguồn.</p>
     </section>
 
     <section>
@@ -224,6 +225,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td>Mica mặt trước, quạt 120 mm (≈ 130 g/cái), hub</td><td class="n" id="w-front">0,78</td></tr>
         <tr><td>Nguồn ATX</td><td class="n" id="w-psu">1,60</td></tr>
         <tr><td>Hộp cầu chì, dây 12 V, chân cao su, switch + giá in</td><td class="n">0,65</td></tr>
+        <tr><td>Tấm che bụi mica 3 mm (nắp, đáy, 2 hông)</td><td class="n" id="w-cov">1,34</td></tr>
         <tr><td><b>Tổng</b></td><td class="n"><b id="w-total">≈ 11,6</b></td></tr>
       </table>
       <p class="warn">Sai số khoảng ±10%. Số đo từ nguồn: tản RM1 347–350 g, picoPSU‑160‑XT 91 g, nhôm 2020 0,5 kg/m. Bo, RAM, nguồn ATX và ke là ước tính, cân thực tế để chốt.</p>
@@ -239,6 +241,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <li>Đi dây 12 V: nguồn → hộp cầu chì → từng nhánh, dọc mép trên phía trước.</li>
         <li>Trượt từng tấm bo vào lược từ phía sau đến khi tai chặn chạm thanh sau, cổng I/O ra sau, buộc dây rút qua 2 lỗ ở tai. Cắm cáp LAN 30 cm vào switch.</li>
         <li>Bắt mica ra ngoài mặt trước bằng 8 vít M5. Quạt + lưới lọc bắt xuyên mica bằng vít M4 × 40. Nối nút có đèn vào F_PANEL từng máy.</li>
+        <li>Bắt tấm đáy (dán chân cao su trước), 2 tấm hông, nắp trên: vít M5 × 10 + long đền. Lưới lọc 12 cm ở lỗ quạt nguồn, vít M4 × 10 + đai ốc.</li>
         <li>BIOS từng máy: <code>Restore on AC Power Loss = Power On</code>, bật Wake‑on‑LAN.</li>
       </ol>
     </section>
@@ -249,46 +252,46 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><th>Ảnh</th><th>Món (bấm để mở Shopee)</th><th>Mua</th><th class="r">Giá</th></tr>
         <tr class="grp"><td colspan="4">Nhôm khung (shop PStore Linh Kiện CNC, TP.HCM)</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/370915692/18582419413" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lm5r12l7oyxr42_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/370915692/18582419413" target="_blank" rel="noopener">Nhôm 2020 EU, cắt theo yêu cầu</a></td><td>5 m; nhắn shop cắt 4×300, 4×220, 6×384 mm</td><td class="n">135k/m</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/370915692/21982369902" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/370915692/21982369902" target="_blank" rel="noopener">Ke góc ngoài 2020</a></td><td>30 cái</td><td class="n">từ 5,5k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/370915692/19991324646" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lm5r12l830m79d_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/370915692/19991324646" target="_blank" rel="noopener">Con trượt T xoay (lắp sau khi ráp khung)</a></td><td>≈ 90 con</td><td class="n">21k/gói</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/370915692/21982369902" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lm5thnp31zvj28_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/370915692/21982369902" target="_blank" rel="noopener">Ke góc ngoài 2020</a></td><td>30 cái</td><td class="n">từ 5,5k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/370915692/19991324646" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lm5r12l830m79d_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/370915692/19991324646" target="_blank" rel="noopener">Con trượt T xoay (lắp sau khi ráp khung)</a></td><td>≈ 130 con</td><td class="n">21k/gói</td></tr>
         <tr class="grp"><td colspan="4">Ốc vít inox (shop SaGo Tool)</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/59961430/18526140511" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/sg-11134201-824ga-mptw6jqo0sg2c4_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/59961430/18526140511" target="_blank" rel="noopener">Vít đầu dù M5 × 10</a></td><td>9 gói (90 con)</td><td class="n">—</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/59961430/21167497169" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m81rlklvkghz18_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/59961430/21167497169" target="_blank" rel="noopener">Long đền phẳng M5, kèm M3</a></td><td>≈ 90 M5 + 30 M3</td><td class="n">—</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/59961430/18076698796" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/sg-11134201-824gq-mptwibbvk1lbfc_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/59961430/18076698796" target="_blank" rel="noopener">Vít pake M4 × 40 (bắt quạt)</a></td><td>2 gói</td><td class="n">—</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/59961430/18526140511" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/sg-11134201-824ga-mptw6jqo0sg2c4_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/59961430/18526140511" target="_blank" rel="noopener">Vít đầu dù M5 × 10</a></td><td>13 gói (130 con, gồm 36 con cho tấm che bụi)</td><td class="n">—</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/59961430/21167497169" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m81rlklvkghz18_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/59961430/21167497169" target="_blank" rel="noopener">Long đền phẳng M5, kèm M3</a></td><td>≈ 130 M5 + 30 M3</td><td class="n">—</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/59961430/18076698796" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/sg-11134201-824gq-mptwibbvk1lbfc_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/59961430/18076698796" target="_blank" rel="noopener">Vít pake M4 × 40 (bắt quạt)</a></td><td>2 gói; thêm 4 vít M4 × 10 cho lưới lọc hông phải nếu shop có phân loại này</td><td class="n">—</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/59961430/22909947653" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m81hewfefl9q86_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/59961430/22909947653" target="_blank" rel="noopener">Đai ốc M4</a></td><td>2 gói</td><td class="n">—</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/1536794906/41226017692" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/1536794906/41226017692" target="_blank" rel="noopener">Cột đồng M3 cái–cái 6 mm + gói vít M3 × 5</a></td><td>3 gói cột + 6 gói vít</td><td class="n">11,9k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/1536794906/41226017692" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/sg-11134201-821d7-mghfl2ecqubsc8_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/1536794906/41226017692" target="_blank" rel="noopener">Cột đồng M3 cái–cái 6 mm + gói vít M3 × 5</a></td><td>3 gói cột + 6 gói vít</td><td class="n">11,9k</td></tr>
         <tr class="grp"><td colspan="4">Điện</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/951399259/27202373150" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/951399259/27202373150" target="_blank" rel="noopener">DC‑ATX 160 W (thegioimodule, TP.HCM)</a></td><td>4</td><td class="n">385k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/951399259/27202373150" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rd4x-lwdq26icbb0s21_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/951399259/27202373150" target="_blank" rel="noopener">DC‑ATX 160 W (thegioimodule, TP.HCM)</a></td><td>4</td><td class="n">385k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/1572344148/44010994681" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mcub1a0e1uwd19_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/1572344148/44010994681" target="_blank" rel="noopener">Hộp cầu chì 6 ngả có đèn báo</a></td><td>1, chọn 6 ngả</td><td class="n">theo loại</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/1236595039/26786094388" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m9enhmi0rxqa1d_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/1236595039/26786094388" target="_blank" rel="noopener">Hộp cầu chì lưỡi 50 cái 2–35 A</a></td><td>1 (dùng 15 A)</td><td class="n">35k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/65877537/27985190123" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mp9cqa4q8f0v8f_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/65877537/27985190123" target="_blank" rel="noopener">Dây silicone mềm theo mét</a></td><td>10 AWG: 1 m đỏ + 1 m đen; 14 AWG: 3 m đỏ + 3 m đen</td><td class="n">từ 11,5k/m</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/94701448/15351869899" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/342503842050066124b717bd4223176e_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/94701448/15351869899" target="_blank" rel="noopener">Cáp nối dài CPU 8‑pin 20 cm</a></td><td>1</td><td class="n">27,5k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/94701448/11571929527" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/f22b3ca50d5c5a38000eb3039d58ce35_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/94701448/11571929527" target="_blank" rel="noopener">Cáp nối dài 24‑pin 30 cm</a></td><td>1</td><td class="n">42,9k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/94701448/8062317661" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/94701448/8062317661" target="_blank" rel="noopener">Cáp Molex → 2 SATA (lấy 5 V cho switch)</a></td><td>1</td><td class="n">18k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/120139494/44424996827" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/120139494/44424996827" target="_blank" rel="noopener">Cáp nối dài PCIe 8‑pin 25 cm</a></td><td>1, chọn 8‑pin VGA</td><td class="n">59k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/1033330712/19490785453" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/1033330712/19490785453" target="_blank" rel="noopener">Jack DC 5,5 × 2,1 đực có dây</a></td><td>1</td><td class="n">12k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/238879861/4548917504" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/238879861/4548917504" target="_blank" rel="noopener">Cos pin rỗng, túi 100</a></td><td>1</td><td class="n">15k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/333151953/18513528585" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/333151953/18513528585" target="_blank" rel="noopener">Công tắc gạt MTS‑102, gói 5</a></td><td>1 gói</td><td class="n">15k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/94701448/8062317661" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lzyzpdv7m0y5a8_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/94701448/8062317661" target="_blank" rel="noopener">Cáp Molex → 2 SATA (lấy 5 V cho switch)</a></td><td>1</td><td class="n">18k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/120139494/44424996827" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mh23y88slfym31_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/120139494/44424996827" target="_blank" rel="noopener">Cáp nối dài PCIe 8‑pin 25 cm</a></td><td>1, chọn 8‑pin VGA</td><td class="n">59k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/1033330712/19490785453" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134201-7qukw-lj7xaaby21akf8_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/1033330712/19490785453" target="_blank" rel="noopener">Jack DC 5,5 × 2,1 đực có dây</a></td><td>1</td><td class="n">12k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/238879861/4548917504" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/8e5d28d71bf02dda88f9d82b69aac8e4_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/238879861/4548917504" target="_blank" rel="noopener">Cos pin rỗng, túi 100</a></td><td>1</td><td class="n">15k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/333151953/18513528585" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/18e50cfeac0478474e3015313eedfc20_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/333151953/18513528585" target="_blank" rel="noopener">Công tắc gạt MTS‑102, gói 5</a></td><td>1 gói</td><td class="n">15k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/68721481/17389446702" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/sg-11134201-22110-7jckqpdm6ojvbd_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/68721481/17389446702" target="_blank" rel="noopener">Nút nhấn nhả 16 mm có đèn</a></td><td>4, chọn 5 V nhấn nhả</td><td class="n">35k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/494330825/9381418486" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/6a982955d694b6ad62579d768713ab92_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/494330825/9381418486" target="_blank" rel="noopener">Dây dupont 40 sợi</a></td><td>1 bó, cái–cái 40 cm</td><td class="n">25k</td></tr>
         <tr class="grp"><td colspan="4">Quạt và mạng</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/83109123/23283879160" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mlt1lj0rev4373_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/83109123/23283879160" target="_blank" rel="noopener">Quạt Starlink KF120 PWM 4‑pin</a></td><td>4</td><td class="n">60k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/113877878/20093258607" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/113877878/20093258607" target="_blank" rel="noopener">Lưới lọc bụi 12 cm kèm ốc</a></td><td>4</td><td class="n">12,9k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/110272203/18669823642" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/110272203/18669823642" target="_blank" rel="noopener">Hub quạt PWM 10 cổng (kiểm tra có đầu SATA)</a></td><td>1</td><td class="n">77k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/110272203/20950360510" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/110272203/20950360510" target="_blank" rel="noopener">Cáp nối dài quạt 4‑pin PWM</a></td><td>1, loại 40 cm</td><td class="n">30k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/113877878/20093258607" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llul2wf2aqjj6d_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/113877878/20093258607" target="_blank" rel="noopener">Lưới lọc bụi 12 cm kèm ốc</a></td><td>5 (4 quạt trước + 1 quạt nguồn)</td><td class="n">12,9k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/110272203/18669823642" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/sg-11134201-22120-4anboq3z7jlvbe_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/110272203/18669823642" target="_blank" rel="noopener">Hub quạt PWM 10 cổng (kiểm tra có đầu SATA)</a></td><td>1</td><td class="n">77k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/110272203/20950360510" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m4zyya113o6ub3_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/110272203/20950360510" target="_blank" rel="noopener">Cáp nối dài quạt 4‑pin PWM</a></td><td>1, loại 40 cm</td><td class="n">30k</td></tr>
         <tr><td class="thumb"><a href="https://shopee.vn/product/1007310093/24602052203" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lolbb0c7320j3b_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/1007310093/24602052203" target="_blank" rel="noopener">Switch TP‑Link TL‑SG105 (5 V)</a></td><td>1</td><td class="n">349k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/177448719/29857473563" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/177448719/29857473563" target="_blank" rel="noopener">Cáp LAN Cat6 đúc sẵn 30 cm</a></td><td>4</td><td class="n">31k</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/847761192/19740502842" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/847761192/19740502842" target="_blank" rel="noopener">Cáp LAN Cat6 dài ra router</a></td><td>1, chọn độ dài</td><td class="n">từ 102k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/177448719/29857473563" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m93zhqo9o28485_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/177448719/29857473563" target="_blank" rel="noopener">Cáp LAN Cat6 đúc sẵn 30 cm</a></td><td>4</td><td class="n">31k</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/847761192/19740502842" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/cn-11134207-820l4-mqr1cz3ggm4i2d_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/847761192/19740502842" target="_blank" rel="noopener">Cáp LAN Cat6 dài ra router</a></td><td>1, chọn độ dài</td><td class="n">từ 102k</td></tr>
         <tr class="grp"><td colspan="4">Linh tinh</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/36387091/43561265978" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/36387091/43561265978" target="_blank" rel="noopener">Chân cao su dán</a></td><td>4</td><td class="n">—</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/49207665/23475983346" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/49207665/23475983346" target="_blank" rel="noopener">Nắp bịt đầu nhôm combo 10</a></td><td>1, cỡ 20×20</td><td class="n">—</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/120746030/55414655516" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/120746030/55414655516" target="_blank" rel="noopener">Băng dán gai 5 m × 12 mm (giữ nguồn)</a></td><td>1</td><td class="n">—</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/36387091/43561265978" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mlzayb9gnuvj7b_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/36387091/43561265978" target="_blank" rel="noopener">Chân cao su dán</a></td><td>4</td><td class="n">—</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/49207665/23475983346" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lrgm7m8j14n8f4_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/49207665/23475983346" target="_blank" rel="noopener">Nắp bịt đầu nhôm combo 10</a></td><td>1, cỡ 20×20</td><td class="n">—</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/120746030/55414655516" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mqzzom3fiolo74_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/120746030/55414655516" target="_blank" rel="noopener">Băng dán gai 5 m × 12 mm (giữ nguồn)</a></td><td>1</td><td class="n">—</td></tr>
         <tr class="grp"><td colspan="4">Dịch vụ gia công</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/961147852/22676249970" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/961147852/22676249970" target="_blank" rel="noopener">Cắt laser mica theo file (gửi mat-truoc_mica-3mm_x1.dxf)</a></td><td>1 tấm mica trong 3 mm</td><td class="n">báo giá</td></tr>
-        <tr><td class="thumb"><a href="https://shopee.vn/product/66748910/17164097346" target="_blank" rel="noopener"><span>Xem ảnh trên Shopee</span></a></td><td><a href="https://shopee.vn/product/66748910/17164097346" target="_blank" rel="noopener">In 3D PETG (gửi luoc_PETG_x8.stl + gia-switch_PETG_x1.stl)</a></td><td>8 lược + 1 giá</td><td class="n">báo giá</td></tr>
-        <tr><td class="thumb"><span>—</span></td><td>Cắt laser nhôm 2 mm (gửi tam-do-bo_nhom-2mm_x5.dxf)</td><td>5 tấm; Shopee không có, tìm xưởng gần nhà: “gia công cắt laser nhôm tấm”</td><td class="n">báo giá</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/961147852/22676249970" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/vn-11110105-7r98o-lujiu7k2tuez42_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/961147852/22676249970" target="_blank" rel="noopener">Cắt laser mica theo file (gửi mat-truoc + nap-tren-duoi + hong-trai + hong-phai)</a></td><td>5 tấm mica trong 3 mm</td><td class="n">báo giá</td></tr>
+        <tr><td class="thumb"><a href="https://shopee.vn/product/66748910/17164097346" target="_blank" rel="noopener"><img src="https://down-vn.img.susercontent.com/file/bbf87dbfcd0a2cc8ddfe7afedc07bd69_tn" alt="" loading="lazy" width="56" height="56"></a></td><td><a href="https://shopee.vn/product/66748910/17164097346" target="_blank" rel="noopener">In 3D PETG (gửi luoc_PETG_x8.stl + gia-switch_PETG_x1.stl)</a></td><td>8 lược + 1 giá</td><td class="n">báo giá</td></tr>
+        <tr><td class="thumb"><img src="files/tam-do-bo_xem-truoc.png" alt="" width="56" height="56"></td><td>Cắt laser nhôm 2 mm (gửi tam-do-bo_nhom-2mm_x5.dxf)</td><td>5 tấm; Shopee không có, tìm xưởng gần nhà: “gia công cắt laser nhôm tấm”</td><td class="n">báo giá</td></tr>
       </table>
-      <p class="warn">Giá là giá thấp nhất hiển thị ngày 13/10/2026, chọn phân loại có thể khác. Tổng ước tính ≈ 4,2 triệu đồng (chưa gồm cắt nhôm, cắt mica, in 3D). Trước khi đặt: xem nguồn ATX còn trống đầu CPU 8‑pin hay PCIe 8‑pin và còn đầu Molex. DC‑ATX ra 12 V 8 A (≈ 96 W): đặt PL2 ≈ 80 W trong BIOS cho dư.</p>
+      <p class="warn">Giá là giá thấp nhất hiển thị ngày 13/10/2026, chọn phân loại có thể khác. Tổng ước tính ≈ 4,3 triệu đồng (chưa gồm cắt nhôm, cắt mica, in 3D). Trước khi đặt: xem nguồn ATX còn trống đầu CPU 8‑pin hay PCIe 8‑pin và còn đầu Molex. DC‑ATX ra 12 V 8 A (≈ 96 W): đặt PL2 ≈ 80 W trong BIOS cho dư.</p>
     </section>
 
     <section class="wide" id="file">
@@ -298,6 +301,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
         <tr><td><a href="files/khung-4pc-gia-cong.zip" download><b>khung-4pc-gia-cong.zip</b></a></td><td>Tải trọn bộ: DXF, STL, PDF, hướng dẫn.</td><td class="n">—</td></tr>
         <tr><td><a href="files/tam-do-bo_nhom-2mm_x5.dxf" download>tam-do-bo_nhom-2mm_x5.dxf</a> · <a href="files/tam-do-bo_nhom-2mm.pdf" target="_blank">PDF</a></td><td>Xưởng cắt laser nhôm 2 mm (5052/6061). PDF trang 2 là mẫu 1:1: in A3 100 %, đặt bo lên kiểm lỗ trước khi cắt.</td><td class="n">5</td></tr>
         <tr><td><a href="files/mat-truoc_mica-3mm_x1.dxf" download>mat-truoc_mica-3mm_x1.dxf</a> · <a href="files/mat-truoc_mica-3mm.pdf" target="_blank">PDF</a></td><td>Cắt laser mica trong 3 mm. Lớp CUT cắt xuyên, ENGRAVE khắc chữ.</td><td class="n">1</td></tr>
+        <tr><td><a href="files/nap-tren-duoi_mica-3mm_x2.dxf" download>nap-tren-duoi_mica-3mm_x2.dxf</a>, <a href="files/hong-trai_mica-3mm_x1.dxf" download>hong-trai_mica-3mm_x1.dxf</a>, <a href="files/hong-phai_mica-3mm_x1.dxf" download>hong-phai_mica-3mm_x1.dxf</a> · <a href="files/tam-che-bui_mica-3mm.pdf" target="_blank">PDF</a></td><td>Tấm che bụi, mica trong 3 mm, cùng tiệm cắt mặt trước. Hông phải có lỗ quạt nguồn: đo tâm quạt nguồn thật trước khi cắt.</td><td class="n">2 + 1 + 1</td></tr>
         <tr><td><a href="files/luoc_PETG_x8.stl" download>luoc_PETG_x8.stl</a></td><td>In 3D PETG, 3 vách, 40 % infill, mặt phẳng úp xuống.</td><td class="n">8</td></tr>
         <tr><td><a href="files/gia-switch_PETG_x1.stl" download>gia-switch_PETG_x1.stl</a> · <a href="files/gia-switch_xem-truoc.png" target="_blank">ảnh</a></td><td>In 3D PETG, mặt bích úp xuống, 30 % infill. Dài 114 mm, 2 lỗ M5 cách 100 mm (bản sửa 13/10).</td><td class="n">1</td></tr>
         <tr><td><a href="files/DOC-TRUOC.txt" target="_blank">DOC-TRUOC.txt</a></td><td>Hướng dẫn gửi kèm cho xưởng.</td><td class="n">—</td></tr>
@@ -374,7 +378,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
   const CATS = [
     ['frame', 'Khung nhôm'], ['comb', 'Lược'], ['plate', 'Tấm đỡ'], ['board', 'Bo mạch'],
     ['cpu', 'CPU + tản'], ['ram', 'RAM'], ['dcatx', 'DC‑ATX'], ['cable', 'Dây 12 V'],
-    ['psu', 'Nguồn + cầu chì'], ['fan', 'Quạt'], ['net', 'Switch + LAN'], ['front', 'Mica + nút'], ['dim', 'Kích thước'],
+    ['psu', 'Nguồn + cầu chì'], ['fan', 'Quạt'], ['net', 'Switch + LAN'], ['front', 'Mica + nút'], ['cover', 'Tấm che bụi'], ['dim', 'Kích thước'],
   ];
   const vis = { cat: Object.fromEntries(CATS.map(([k]) => [k, true])), m: [true, true, true, true, true, true] };
   function applyVis() {
@@ -449,7 +453,7 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     const px = W / 2 - PF / 2, pz = D / 2 - PF / 2;
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
       B(PF, H, PF, mat.alu, sx * px, H / 2, sz * pz, `Nhôm ${prof} – cột góc 300 mm`, frame);
-      C(12, FEET, mat.foot, 'y', sx * px, -FEET / 2, sz * pz, 'Chân cao su 10 mm', model, 20);
+      C(12, FEET, mat.foot, 'y', sx * px, -3 - FEET / 2, sz * pz, 'Chân cao su 10 mm', model, 20);
     }
     for (const y of [PF / 2, H - PF / 2]) {
       for (const sz of [-1, 1]) B(W - 2 * PF, PF, PF, mat.alu, 0, y, sz * pz, `Nhôm ${prof} – thanh ngang ${W - 2 * PF} mm (đổi theo số máy)`, frame);
@@ -569,8 +573,8 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
 
     /* PSU bay */
     CAT = 'psu';
-    B(86, 150, 140, mat.psu, psuX, 95, -55, 'Nguồn ATX đang có – dựng đứng, hút gió từ hông', model);
-    C(55, 1.5, mat.grille, 'x', psuX + 43.8, 95, -55, 'Quạt nguồn ATX – hút gió từ hông khung', model, 48);
+    B(86, 150, 140, mat.psu, psuX, 95, -50, 'Nguồn ATX đang có – dựng đứng, hút gió từ hông', model);
+    C(55, 1.5, mat.grille, 'x', psuX + 43.8, 95, -50, 'Quạt nguồn ATX – hút gió từ hông khung', model, 48);
     B(28, 20, 2, mat.black, psuX - 10, 140, -126, 'Ổ cắm AC 220 V của nguồn', model);
     B(10, 14, 2, mat.ramTop, psuX + 22, 140, -126, 'Công tắc nguồn tổng', model);
     B(24, 10, 34, mat.black, psuX - 18, 175, -10, '24‑pin của nguồn + jumper PS_ON (chân 16 ↔ COM)', model);
@@ -629,6 +633,17 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     const lev = C(1.5, 12, mat.ihs, 'z', psuX, 142, 141, 'Công tắc gạt MTS‑102', panel, 10); lev.rotation.x = Math.PI / 2 - 0.35;
     const pw = engrave('POWER', 7); pw.position.set(psuX, 275, 133.15); panel.add(pw);
 
+    /* Dust covers: 3 mm acrylic top, bottom, both sides; rear stays open as the exhaust */
+    CAT = 'cover';
+    for (const y of [-1.5, H + 1.5]) B(W, 3, D, mat.acrylic, 0, y, 0, null, panel).userData.skip = true;
+    B(3, H, D, mat.acrylic, -W / 2 - 1.5, H / 2, 0, null, panel).userData.skip = true;
+    const rs = new THREE.Shape();
+    rs.moveTo(-D / 2, 0); rs.lineTo(D / 2, 0); rs.lineTo(D / 2, H); rs.lineTo(-D / 2, H); rs.lineTo(-D / 2, 0);
+    const fh = new THREE.Path(); fh.absarc(-50, 95, 58, 0, Math.PI * 2, true); rs.holes.push(fh);
+    const rside = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(rs, { depth: 3, bevelEnabled: false, curveSegments: 32 }), mat.acrylic), null, panel);
+    rside.rotation.y = -Math.PI / 2; rside.position.x = W / 2 + 3; rside.userData.skip = true;
+    B(1, 122, 122, mat.filter, W / 2 + 3.6, 95, -50, 'Lưới lọc 12 cm cho quạt nguồn – tấm hông phải', panel);
+
     /* Dimensions (envelope incl. 20 mm rear ears, acrylic + button heads 9 mm, feet) */
     const lineMat = new THREE.LineBasicMaterial({ color: 0x1f68c8 });
     const dimLine = (a, b, tick, text) => {
@@ -636,8 +651,8 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
       dims.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([A, Bv, A.clone().add(t), A.clone().sub(t), Bv.clone().add(t), Bv.clone().sub(t)]), lineMat));
       const s = textSprite(text, text === '72 mm' ? 0.5 : 0.75); s.position.copy(A).lerp(Bv, 0.5); dims.add(s);
     };
-    dimLine([-W / 2, -34, D / 2 + 10], [W / 2, -34, D / 2 + 10], [0, 1, 0], `R ${W} mm`);
-    dimLine([-W / 2 - 24, -FEET, D / 2 + 9], [-W / 2 - 24, H, D / 2 + 9], [1, 0, 0], `C ${H + FEET} mm`);
+    dimLine([-W / 2 - 3, -34, D / 2 + 10], [W / 2 + 3, -34, D / 2 + 10], [0, 1, 0], `R ${W + 6} mm`);
+    dimLine([-W / 2 - 24, -FEET - 3, D / 2 + 9], [-W / 2 - 24, H + 3, D / 2 + 9], [1, 0, 0], `C ${H + FEET + 6} mm`);
     dimLine([W / 2 + 24, -34, -D / 2 - 20], [W / 2 + 24, -34, D / 2 + 9], [0, 1, 0], `S ${D + 29} mm`);
     dimLine([slotX[0], H + 20, D / 2], [slotX[0] + PITCH, H + 20, D / 2], [0, 1, 0], '72 mm');
     slotX.forEach((x, i) => { const sp = textSprite(`PC${i + 1}`, 0.42); sp.position.set(x + 36, H + 40, -60); dims.add(sp); });
@@ -664,10 +679,10 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
   }
 
   function updateText(N, PF, R) {
-    const envD = D + 29, envH = H + FEET, prof = PF === 15 ? '1515' : '2020';
-    $('st-env').textContent = `${W} × ${envD} × ${envH} mm`;
+    const envD = D + 29, envH = H + FEET + 6, prof = PF === 15 ? '1515' : '2020';
+    $('st-env').textContent = `${W + 6} × ${envD} × ${envH} mm`;
     $('st-frame').textContent = `${W} × ${D} × ${H} mm`;
-    $('st-vol').textContent = `${Math.round(W * envD * envH / 1e6)} L`;
+    $('st-vol').textContent = `${Math.round((W + 6) * envD * envH / 1e6)} L`;
     const psu = N <= 4 ? '≥ 550 W' : '≥ 750 W';
     $('st-psu').textContent = psu;
     document.querySelectorAll('.prof').forEach(e => { e.textContent = prof; });
@@ -699,7 +714,9 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     const acrKg = (W / 1000 * H / 1000 - cols * 2 * Math.PI * 0.0575 ** 2) * 0.003 * 1190;
     const frontKg = acrKg + cols * 2 * 0.13 + 0.05;
     const psuKg = N <= 4 ? 1.6 : 1.9;
-    const total = N * sledKg + aluKg + keKg + frontKg + psuKg + 0.65;
+    const covKg = (2 * W * D + 2 * D * H - Math.PI * 58 ** 2) / 1e6 * 0.003 * 1190;
+    $('w-cov').textContent = f2(covKg); $('c-cov').textContent = `2 × ${W} × ${D}, 2 × ${D} × ${H}`;
+    const total = N * sledKg + aluKg + keKg + frontKg + psuKg + 0.65 + covKg;
     $('w-sled-desc').textContent = `Máy: bo ≈ 500 g, CPU 30 g, tản RM1 350 g, RAM 70 g, SSD 10 g, DC‑ATX 91 g, ${MOUNT === 'plate' ? 'tấm nhôm 2 mm 220 g, cột đồng' : 'khung thang 180 g'}, lược và nút 80 g`;
     $('w-sled').textContent = `${N} × ${f2(sledKg)}`;
     $('w-alu-desc').textContent = `Nhôm ${prof} (${String(kgm).replace('.', ',')} kg/m${PF === 15 ? ', ước tính theo tiết diện' : ''})`;
