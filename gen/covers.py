@@ -14,7 +14,7 @@ W, H, D = 424, 300, 260
 TOP = [(x, y) for x in (62, 212, 362) for y in (10, 250)] + [(x, y) for x in (10, W - 10) for y in (70, 190)]
 # Sides: X = from rear edge, Y = height. Holes on the posts (X 10 / 250) and the side bars (Y 10 / 290).
 SIDE = [(x, y) for x in (10, D - 10) for y in (60, 240)] + [(x, y) for x in (70, 190) for y in (10, H - 10)]
-PSU_FAN = (80, 95)  # PSU fan centre, 120 mm fan: measure your PSU and move this before cutting
+PSU_FAN = (80, 95)  # PSU on the bottom bars -> fan centre Y 95; the PSU slides along Z on velcro to meet the hole
 
 def rect(msp, w, h, r=6):
     import math
@@ -73,6 +73,6 @@ with PdfPages(f"{OUT}/tam-che-bui_mica-3mm.pdf") as pdf:
     page(pdf, "HÔNG PHẢI (phía nguồn) – mica 3 mm – SL: 1", D, H, SIDE,
          ["Gốc: góc dưới‑sau. X = từ mép sau, Y = chiều cao.", *common,
           "F: lỗ cho quạt hút của nguồn ATX + lưới lọc 12 cm,", "  bắt vít M4 × 10 + đai ốc.",
-          "QUAN TRỌNG: đo tâm quạt nguồn thật (dựng đứng, quạt ra hông)", "  rồi sửa toạ độ F trước khi đặt cắt. Mặc định X 80, Y 95."],
+          "Không cần đo nguồn: nguồn ATX cao 150 mm, đặt trên 2 thanh đáy", "  -> tâm quạt luôn ở Y ≈ 95. Khi lắp, trượt nguồn tới/lui", "  (dán gai) cho quạt trùng lỗ F, nhìn qua mica. Hợp nguồn", "  dài 140–180 mm, quạt 120/135/140 mm."],
          fan_at=PSU_FAN, xlab="← SAU", ylab="TRƯỚC →")
 print("ok")

@@ -20,5 +20,5 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
    nap-tren-duoi_mica-3mm_x2.dxf  SL 2 (nắp trên + đáy, cùng mẫu), 424 x 260
    hong-trai_mica-3mm_x1.dxf      SL 1, 260 x 300
    hong-phai_mica-3mm_x1.dxf      SL 1, 260 x 300, có lỗ Ø116 cho quạt nguồn + lưới lọc
-   PDF: tam-che-bui_mica-3mm.pdf. Đo tâm quạt nguồn thật trước khi cắt hông phải
-   (mặc định X 80 từ mép sau, Y 95 từ đáy).
+   PDF: tam-che-bui_mica-3mm.pdf. Lỗ quạt nguồn cố định X 80, Y 95: khi lắp, trượt nguồn
+   tới/lui cho quạt trùng lỗ (không cần đo trước).
