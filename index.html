@@ -347,7 +347,8 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
     led: new THREE.MeshStandardMaterial({ color: 0x3fb950, emissive: 0x3fb950, emissiveIntensity: 0.9 }),
     blade: M(0x2a2d33, { r: 0.6 }), shroud: M(0x1b1d21, { r: 0.7, side: THREE.DoubleSide }), foot: M(0x2a2a2a, { r: 0.9 }),
     plug: M(0xe8c21a, { r: 0.6 }), cap: M(0xc9ccd4, { r: 0.3, m: 0.7 }), capBand: M(0x6a3d9e, { r: 0.5 }),
-    inductor: M(0x9da2a8, { r: 0.45, m: 0.5 }), filter: M(0x30343a, { t: 0.55, r: 0.8, side: THREE.DoubleSide }),
+    inductor: M(0x9da2a8, { r: 0.45, m: 0.5 }), cover: M(0x7fb3e6, { t: 0.3, r: 0.1, side: THREE.DoubleSide }), coverEdge: new THREE.LineBasicMaterial({ color: 0x1f68c8 }),
+    filter: M(0x30343a, { t: 0.55, r: 0.8, side: THREE.DoubleSide }),
   };
 
   /* Every mesh is tagged with the category (CAT) and machine index (MI) current at creation time */
@@ -635,13 +636,14 @@ tr.grp td { font: 600 12px var(--font-mono); text-transform: uppercase; letter-s
 
     /* Dust covers: 3 mm acrylic top, bottom, both sides; rear stays open as the exhaust */
     CAT = 'cover';
-    for (const y of [-1.5, H + 1.5]) B(W, 3, D, mat.acrylic, 0, y, 0, null, panel).userData.skip = true;
-    B(3, H, D, mat.acrylic, -W / 2 - 1.5, H / 2, 0, null, panel).userData.skip = true;
+    const edge = m => { m.userData.skip = true; m.add(new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry, 30), mat.coverEdge)); return m; };
+    for (const y of [-1.5, H + 1.5]) edge(B(W, 3, D, mat.cover, 0, y, 0, null, panel));
+    edge(B(3, H, D, mat.cover, -W / 2 - 1.5, H / 2, 0, null, panel));
     const rs = new THREE.Shape();
     rs.moveTo(-D / 2, 0); rs.lineTo(D / 2, 0); rs.lineTo(D / 2, H); rs.lineTo(-D / 2, H); rs.lineTo(-D / 2, 0);
     const fh = new THREE.Path(); fh.absarc(-50, 95, 58, 0, Math.PI * 2, true); rs.holes.push(fh);
-    const rside = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(rs, { depth: 3, bevelEnabled: false, curveSegments: 32 }), mat.acrylic), null, panel);
-    rside.rotation.y = -Math.PI / 2; rside.position.x = W / 2 + 3; rside.userData.skip = true;
+    const rside = tag(new THREE.Mesh(new THREE.ExtrudeGeometry(rs, { depth: 3, bevelEnabled: false, curveSegments: 32 }), mat.cover), null, panel);
+    rside.rotation.y = -Math.PI / 2; rside.position.x = W / 2 + 3; edge(rside);
     B(1, 122, 122, mat.filter, W / 2 + 3.6, 95, -50, 'Lưới lọc 12 cm cho quạt nguồn – tấm hông phải', panel);
 
     /* Dimensions (envelope incl. 20 mm rear ears, acrylic + button heads 9 mm, feet) */
