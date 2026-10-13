@@ -200,7 +200,7 @@ def acr_pdf(path):
             "Lớp CUT = cắt xuyên. Lớp ENGRAVE (đỏ) = khắc chữ.",
             "M1–M8: vít M5 × 10 vào con trượt T (thanh 2020).",
             "Mặt trước kín: quạt nằm ở tấm đáy, hút gió từ dưới lên.",
-            "B: nút nhấn 16 mm có LED. S: công tắc gạt mini 6 mm.",
+            "B: nút nhấn 16 mm có LED. S: CÔNG TẮC TỔNG (gạt, nối PS_ON nguồn).",
             "Bo góc R6. Dung sai ±0,3 mm.",
         ]), fontsize=8, va="top", transform=ax2.transAxes)
         pdf.savefig(fig); plt.close(fig)

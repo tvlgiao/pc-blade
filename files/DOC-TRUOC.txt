@@ -8,6 +8,7 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
 
 2) mat-truoc_mica-3mm_x1.dxf  -> xưởng cắt laser mica
    Mica đen trong (mica khói) 3 mm, SL 1. Lớp CUT = cắt xuyên, lớp ENGRAVE = khắc chữ (số 1–4, POWER).
+   Lỗ S Ø6,2 = công tắc tổng (gạt MTS-102 nối PS_ON + COM của nguồn).
 
 3) luoc_PETG_x16.stl  -> dịch vụ in 3D
    SL 16 (cùng một mẫu: trước + sau, trên + dưới, 4 khoang). PETG, 3 vách, 40 % infill,
