@@ -146,7 +146,8 @@ def plate_pdf(path):
         ax.text(0, 306, "← SAU (phía cổng I/O; tai bắt ke góc vào thanh chặn sau)", fontsize=7)
         ax.text(232, 306, "TRƯỚC →", fontsize=7, ha="right")
         ax2 = fig.add_axes([0.6, 0.08, 0.38, 0.85])
-        rows = [[f"H{i+1}", f"{x:.2f}", f"{y:.2f}", "Ø3,4", "M3 cột đồng 6 mm"] for i, (x, y) in enumerate(SO)]
+        use = ["mATX + ITX", "mATX", "mATX + ITX", "mATX + ITX", "mATX + ITX", "mATX", "mATX"]
+        rows = [[f"H{i+1}", f"{x:.2f}", f"{y:.2f}", "Ø3,4", f"cột M3 6 mm – {use[i]}"] for i, (x, y) in enumerate(SO)]
         rows += [[f"T{i+1}", f"{x:.1f}", f"{y:.1f}", "Ø5,5", "M5 + đai ốc bắt ke góc 2020"] for i, (x, y) in enumerate(plate_tab_holes)]
         rows += [["Cửa sổ", "75–180", "55–175", "R10", "giảm khối lượng"], ["Tay kéo", "10", "128–172", "12 × 44", "rãnh ô van"]]
         table(ax2, rows, ["Lỗ", "X (mm)", "Y (mm)", "Kích thước", "Ghi chú"], [0.12, 0.14, 0.14, 0.17, 0.43])
@@ -154,8 +155,10 @@ def plate_pdf(path):
             "Gốc toạ độ: góc dưới‑trái của tai (X 20 = mặt sau thanh chặn).",
             "Tấm PHẲNG, không chấn. T1/T2: bắt 2 ke góc 2020 vào thanh chặn.",
             "Dung sai ±0,2 mm. Bo góc ngoài R2. Không vát mép, đánh ba via.",
-            "H1–H7 = toạ độ lỗ chuẩn microATX. Bo 24,4 × 20,1 cm chỉ dùng",
-            "  một phần các lỗ này; lỗ thừa để trống, không sao.",
+            "H1–H7 = TOÀN BỘ lỗ chuẩn microATX trong bo sâu ≤ 201 mm",
+            "  (mATX 244 × ≤201, FlexATX). Mini‑ITX / Mini‑DTX dùng H1, H3, H4, H5",
+            "  (bo đặt sát phía cổng I/O). Mỗi bo dùng 4–7 lỗ, lỗ thừa để trống.",
+            "  Không vừa: ATX 305 mm, mATX sâu đủ 244 mm (lớn hơn khung).",
             "Mặt linh kiện của bo hướng ra người nhìn (mặt này).",
             "Bản vẽ trang 2 in tỉ lệ 1:1 trên A3 để ướm bo trước khi đặt cắt.",
             "Khoét lõm X 100–200: mép dưới Y 28,5, mép trên Y 271,5 (chừa chỗ quạt).",
