@@ -16,9 +16,11 @@ BỘ FILE GIA CÔNG – KHUNG 4 PC (nhôm 2020 · 2 ray)
    SL 1. PETG, in úp mặt bích xuống bàn, 3 vách, 30 % infill, ~82 g. Dài 114 mm, 2 lỗ M5 cách nhau 100 mm theo chiều sâu.
    Ôm vừa switch TP-Link TL-SG105 (99,8 x 98 x 25 mm). Switch khác cỡ: báo lại để chỉnh.
 
-5) Tấm che bụi (mica trong 3 mm) -> cùng xưởng cắt mica mặt trước
-   nap-tren-duoi_mica-3mm_x2.dxf  SL 2 (nắp trên + đáy, cùng mẫu), 424 x 260
-   hong-trai_mica-3mm_x1.dxf      SL 1, 260 x 300
-   hong-phai_mica-3mm_x1.dxf      SL 1, 260 x 300, có lỗ Ø116 cho quạt nguồn + lưới lọc
-   PDF: tam-che-bui_mica-3mm.pdf. Lỗ quạt nguồn cố định X 80, Y 95: khi lắp, trượt nguồn
-   tới/lui cho quạt trùng lỗ (không cần đo trước).
+5) Hộp kín 6 mặt (mica trong 3 mm) -> cùng xưởng cắt mica mặt trước
+   nap-tren-duoi_mica-3mm_x2.dxf  SL 2 (nắp trên + đáy, cùng mẫu), 424 x 310, kín
+   hong-trai_mica-3mm_x1.dxf      SL 1, 310 x 300, kín
+   hong-phai_mica-3mm_x1.dxf      SL 1, 310 x 300, lỗ Ø116 + lưới lọc cho quạt nguồn
+   mat-sau_mica-3mm_x1.dxf        SL 1, 424 x 300: 4 lỗ thoát gió Ø116 + lưới lọc,
+                                  lỗ 88 x 152 cho đuôi nguồn, lỗ RJ45 keystone
+   PDF: tam-che-bui_mica-3mm.pdf (lỗ có lưới vẽ gạch chéo).
+   Khung nhôm: 2 cột sau lùi 50 mm -> 4 thanh dọc hông dài 270 mm (không phải 220).

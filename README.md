@@ -1,6 +1,6 @@
 # Khung PC Blade – 4 máy i3‑12100
 
-Khung nhôm 2020 ghép 4 bo ASRock B760M‑HDV/M.2 D4 dựng đứng, một nguồn ATX cấp 12 V cho từng DC‑ATX qua hộp cầu chì, switch 5 cổng treo trên nguồn.
+Hộp kín 6 mặt (khung nhôm 2020 + mica, lưới lọc ở chỗ có gió) ghép 4 bo ASRock B760M‑HDV/M.2 D4 dựng đứng, một nguồn ATX cấp 12 V cho từng DC‑ATX qua hộp cầu chì, switch 5 cổng treo trên nguồn.
 
 - Trang xem mô hình 3D, danh sách mua, file gia công: https://tvlgiao.github.io/pc-blade/
 - `files/` – file gửi xưởng: tấm đỡ nhôm 2 mm (DXF + PDF), mặt mica 3 mm (DXF + PDF), lược và giá switch in PETG (STL), `khung-4pc-gia-cong.zip` trọn bộ.
